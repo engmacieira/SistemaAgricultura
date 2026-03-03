@@ -1,42 +1,53 @@
-const API_URL = "/configuracoes";
+import { apiFetch } from "../../../core/api";
+
+const ADMIN_PATH = "/admin";
+const CONFIG_PATH = "/admin/configuracoes";
 
 class SettingsRepository {
   async getUnits(): Promise<string[]> {
-    const response = await fetch(`${API_URL}/unidades`);
-    if (!response.ok) throw new Error("Failed to fetch units");
-    return response.json();
+    try {
+      const config = await apiFetch(CONFIG_PATH);
+      return config.unidades_medida || [];
+    } catch (error) {
+      console.error("Failed to fetch units:", error);
+      return [];
+    }
   }
 
   async addUnit(unit: string): Promise<string[]> {
-    const response = await fetch(`${API_URL}/unidades`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ unit }),
-    });
-    if (!response.ok) throw new Error("Failed to add unit");
-    return response.json();
+    const config = await apiFetch(CONFIG_PATH);
+    const units = config.unidades_medida || [];
+    if (!units.includes(unit)) {
+      units.push(unit);
+      await apiFetch(CONFIG_PATH, {
+        method: "PUT",
+        body: JSON.stringify({ ...config, unidades_medida: units }),
+      });
+    }
+    return units;
   }
 
   async removeUnit(unit: string): Promise<string[]> {
-    const response = await fetch(`${API_URL}/unidades/${unit}`, {
-      method: "DELETE",
+    const config = await apiFetch(CONFIG_PATH);
+    const units = (config.unidades_medida || []).filter((u: string) => u !== unit);
+    await apiFetch(CONFIG_PATH, {
+      method: "PUT",
+      body: JSON.stringify({ ...config, unidades_medida: units }),
     });
-    if (!response.ok) throw new Error("Failed to remove unit");
-    return response.json();
+    return units;
   }
 
   async performBackup(): Promise<void> {
-    const response = await fetch(`${API_URL}/backup`, {
+    await apiFetch(`${ADMIN_PATH}/backup`, {
       method: "POST",
     });
-    if (!response.ok) throw new Error("Failed to perform backup");
   }
 
   async performRestore(): Promise<void> {
-    const response = await fetch(`${API_URL}/restore`, {
+    await apiFetch(`${ADMIN_PATH}/restaurar`, {
       method: "POST",
+      body: JSON.stringify({ file_url: "" }),
     });
-    if (!response.ok) throw new Error("Failed to perform restore");
   }
 }
 

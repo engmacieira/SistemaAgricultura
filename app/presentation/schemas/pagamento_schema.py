@@ -1,21 +1,21 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
-from datetime import date
+import datetime
 
 class PagamentoBase(BaseModel):
     executionId: str
     producerName: str
     serviceName: str
-    dueDate: date
+    dueDate: datetime.date
     amount: float
     status: str
 
 class PagamentoCreate(PagamentoBase):
-    paymentDate: Optional[date] = None
+    paymentDate: Optional[datetime.date] = None
 
 class PagamentoUpdate(BaseModel):
-    dueDate: Optional[date] = None
-    paymentDate: Optional[date] = None
+    dueDate: Optional[datetime.date] = None
+    paymentDate: Optional[datetime.date] = None
     amount: Optional[float] = None
     status: Optional[str] = None
 
@@ -23,5 +23,4 @@ class PagamentoResponse(PagamentoBase):
     id: str
     paymentDate: Optional[date] = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

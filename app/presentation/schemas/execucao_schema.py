@@ -1,13 +1,13 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
-from datetime import date
+import datetime
 
 class ExecucaoBase(BaseModel):
     producerId: str
     producerName: str
     serviceId: str
     serviceName: str
-    date: date
+    date: datetime.date
     quantity: float
     unit: str
     totalValue: float
@@ -21,7 +21,7 @@ class ExecucaoUpdate(BaseModel):
     producerName: Optional[str] = None
     serviceId: Optional[str] = None
     serviceName: Optional[str] = None
-    date: Optional[date] = None
+    date: Optional[datetime.date] = None
     quantity: Optional[float] = None
     unit: Optional[str] = None
     totalValue: Optional[float] = None
@@ -30,5 +30,4 @@ class ExecucaoUpdate(BaseModel):
 class ExecucaoResponse(ExecucaoBase):
     id: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

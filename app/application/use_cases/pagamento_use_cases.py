@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from datetime import date
 
 class PagamentoUseCases:
@@ -21,16 +21,19 @@ class PagamentoUseCases:
         self.obter_pagamento(pagamento_id)
         return self.pagamento_repository.update(pagamento_id, data)
 
-    def registrar_pagamento(self, pagamento_id: str, data_pagamento: date) -> Any:
+    def registrar_pagamento(self, pagamento_id: str, data_pagamento: Optional[date] = None) -> Any:
         """Caso de uso específico para a ação de 'Registrar Pagamento' do frontend"""
         pagamento = self.obter_pagamento(pagamento_id)
         
         if pagamento.status == "Pago":
             raise ValueError("Este pagamento já foi realizado.")
             
+        # Use data_pagamento if provided, otherwise use today's date
+        final_data_pagamento = data_pagamento if data_pagamento is not None else date.today()
+
         dados_atualizados = {
             "status": "Pago",
-            "paymentDate": data_pagamento
+            "paymentDate": final_data_pagamento
         }
         return self.pagamento_repository.update(pagamento_id, dados_atualizados)
 

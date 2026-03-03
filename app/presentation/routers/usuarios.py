@@ -23,9 +23,9 @@ def criar_usuario(data: dict, uc: UsuarioUseCases = Depends(get_use_case)):
 @router.post("/login")
 def login(data: dict, uc: UsuarioUseCases = Depends(get_use_case)):
     email = data.get("email")
-    senha = data.get("password")
+    password = data.get("password")
     try:
-        return uc.autenticar_usuario(email, senha)
+        return uc.autenticar_usuario(email, password)
     except ValueError as e:
         raise HTTPException(status_code=401, detail=str(e))
         

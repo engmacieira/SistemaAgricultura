@@ -1,22 +1,23 @@
 import { User } from "../domain/User";
+import { apiFetch } from "../../../core/api";
 
-const API_URL = "/auth";
+const AUTH_PATH = "/usuarios";
 
 export class AuthRepository {
   async login(email: string, password: string): Promise<User | null> {
-    const response = await fetch(`${API_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!response.ok) return null;
-    return response.json();
+    try {
+      return await apiFetch(`${AUTH_PATH}/login`, {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+      });
+    } catch (error) {
+      console.error("Login error:", error);
+      return null;
+    }
   }
 
   async logout(): Promise<void> {
-    await fetch(`${API_URL}/logout`, {
-      method: "POST",
-    });
+    // Backend logout not implemented or not needed for now
   }
 }
 

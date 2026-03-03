@@ -1,5 +1,5 @@
 from typing import List, Dict, Any
-from datetime import datetime
+from datetime import datetime, timezone
 
 class LogUseCases:
     def __init__(self, log_repository):
@@ -19,6 +19,6 @@ class LogUseCases:
             "action": action,
             "entity": entity,
             "details": details,
-            "timestamp": datetime.utcnow()
+            "timestamp": datetime.now(timezone.utc)
         }
         return self.log_repository.create(dados_log)

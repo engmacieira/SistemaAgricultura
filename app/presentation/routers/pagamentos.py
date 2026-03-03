@@ -20,6 +20,15 @@ def obter_pagamento(pagamento_id: str, uc: PagamentoUseCases = Depends(get_use_c
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
+from app.presentation.schemas.pagamento_schema import PagamentoUpdate
+
+@router.put("/{pagamento_id}")
+def atualizar_pagamento(pagamento_id: str, data: PagamentoUpdate, uc: PagamentoUseCases = Depends(get_use_case)):
+    try:
+        return uc.atualizar_pagamento(pagamento_id, data.model_dump(exclude_unset=True))
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
 @router.post("/{pagamento_id}/pagar")
 def registrar_pagamento(pagamento_id: str, uc: PagamentoUseCases = Depends(get_use_case)):
     try:

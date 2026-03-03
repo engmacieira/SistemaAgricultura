@@ -2,12 +2,16 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.infrastructure.repositories.execucao_repository import ExecucaoRepository
+from app.infrastructure.repositories.pagamento_repository import PagamentoRepository
 from app.application.use_cases.execucao_use_cases import ExecucaoUseCases
+from app.presentation.schemas.execucao_schema import ExecucaoCreate, ExecucaoUpdate
 
 router = APIRouter(prefix="/execucoes", tags=["Execuções"])
 
 def get_use_case(db: Session = Depends(get_db)):
-    return ExecucaoUseCases(ExecucaoRepository(db))
+    repo = ExecucaoRepository(db)
+    pag_repo = PagamentoRepository(db)
+    return ExecucaoUseCases(repo, pag_repo)
 
 @router.get("/")
 def listar_execucoes(uc: ExecucaoUseCases = Depends(get_use_case)):
@@ -21,13 +25,13 @@ def obter_execucao(execucao_id: str, uc: ExecucaoUseCases = Depends(get_use_case
         raise HTTPException(status_code=404, detail=str(e))
 
 @router.post("/")
-def registrar_execucao(data: dict, uc: ExecucaoUseCases = Depends(get_use_case)):
-    return uc.registrar_execucao(data)
+def registrar_execucao(data: ExecucaoCreate, uc: ExecucaoUseCases = Depends(get_use_case)):
+    return uc.criar_execucao(data.model_dump())
 
 @router.put("/{execucao_id}")
-def atualizar_execucao(execucao_id: str, data: dict, uc: ExecucaoUseCases = Depends(get_use_case)):
+def atualizar_execucao(execucao_id: str, data: ExecucaoUpdate, uc: ExecucaoUseCases = Depends(get_use_case)):
     try:
-        return uc.atualizar_execucao(execucao_id, data)
+        return uc.atualizar_execucao(execucao_id, data.model_dump(exclude_unset=True))
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 

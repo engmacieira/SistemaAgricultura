@@ -15,15 +15,20 @@ class ExecucaoUseCases:
         return execucao
 
     def criar_execucao(self, data: Dict[str, Any]) -> Any:
-        # Regra de negócio: Calcular valor total se não vier preenchido
-        if "totalValue" not in data or data["totalValue"] <= 0:
-            # Buscar preço base do serviço e multiplicar pela quantidade
-            pass
-            
         nova_execucao = self.execucao_repository.create(data)
         
-        # Regra de negócio: Se a execução for concluída, gerar o pagamento automaticamente?
-        # Depende da regra de negócio do sistema.
+        # Regra de negócio: Gerar o pagamento automaticamente se houver repositório
+        if self.pagamento_repository:
+            from datetime import date, timedelta
+            pagamento_data = {
+                "executionId": nova_execucao.id,
+                "producerName": nova_execucao.producerName,
+                "serviceName": nova_execucao.serviceName,
+                "amount": nova_execucao.totalValue,
+                "dueDate": date.today() + timedelta(days=30),
+                "status": "Pendente"
+            }
+            self.pagamento_repository.create(pagamento_data)
         
         return nova_execucao
 

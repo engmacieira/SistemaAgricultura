@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 class ProdutorBase(BaseModel):
@@ -21,5 +21,4 @@ class ProdutorUpdate(BaseModel):
 class ProdutorResponse(ProdutorBase):
     id: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
