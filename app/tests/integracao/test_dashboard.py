@@ -1,9 +1,4 @@
-from fastapi.testclient import TestClient
-from app.main import app
-
-client = TestClient(app)
-
-def test_get_dashboard_data():
+def test_get_dashboard_data(client):
     """
     Testa se o endpoint do dashboard retorna a estrutura correta de dados.
     """
@@ -30,7 +25,7 @@ def test_get_dashboard_data():
     assert isinstance(data["serviceDistribution"], list)
     assert isinstance(data["recentActivities"], list)
 
-def test_dashboard_data_integrity():
+def test_dashboard_data_integrity(client):
     """
     Testa a integridade mínima dos dados retornados.
     """

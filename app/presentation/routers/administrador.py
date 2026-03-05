@@ -5,7 +5,9 @@ from app.infrastructure.repositories.administrador_repository import Administrad
 from app.application.use_cases.administrador_use_cases import AdministradorUseCases
 from app.presentation.schemas.administrador_schema import ConfiguracaoSistema, BackupResponse
 
-router = APIRouter(prefix="/admin", tags=["Administração"])
+from app.core.dependencies import get_current_user
+
+router = APIRouter(prefix="/admin", tags=["Administração"], dependencies=[Depends(get_current_user)])
 
 def get_use_case(db: Session = Depends(get_db)):
     from app.infrastructure.services.backup_service import BackupService

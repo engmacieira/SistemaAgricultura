@@ -6,7 +6,7 @@ from app.application.use_cases.log_use_cases import LogUseCases
 from app.presentation.schemas.log_schema import PaginatedLogResponse, LogCreate, LogResponse
 from app.core.dependencies import get_current_user
 
-router = APIRouter(prefix="/logs", tags=["Logs"])
+router = APIRouter(prefix="/logs", tags=["Logs"], dependencies=[Depends(get_current_user)])
 
 def get_use_case(db: Session = Depends(get_db)):
     return LogUseCases(LogRepository(db))

@@ -7,7 +7,9 @@ from app.infrastructure.repositories.pagamento_repository import PagamentoReposi
 from app.infrastructure.repositories.produtor_repository import ProdutorRepository
 from app.use_cases.relatorio_use_cases import RelatorioUseCases
 
-router = APIRouter(prefix="/relatorios", tags=["Relatórios"])
+from app.core.dependencies import get_current_user
+
+router = APIRouter(prefix="/relatorios", tags=["Relatórios"], dependencies=[Depends(get_current_user)])
 
 def get_relatorio_use_cases(db: Session = Depends(get_db)):
     exec_repo = ExecucaoRepository(db)

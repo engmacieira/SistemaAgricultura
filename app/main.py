@@ -18,15 +18,11 @@ from app.presentation.routers import (
     relatorios
 )
 
-app = FastAPI(
-    title="Serviços Agrícolas API",
-    description="API para o sistema de gestão de serviços agrícolas.",
-    version="1.0.0"
-)
+from contextlib import asynccontextmanager
 
-# Startup Backup
-@app.on_event("startup")
-async def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup Backup
     from app.infrastructure.services.backup_service import BackupService
     backup_service = BackupService()
     try:
@@ -34,6 +30,14 @@ async def startup_event():
         backup_service.clean_old_backups(days=10)
     except Exception as e:
         print(f"Erro no backup automático inicial: {e}")
+    yield
+
+app = FastAPI(
+    title="Serviços Agrícolas API",
+    description="API para o sistema de gestão de serviços agrícolas.",
+    version="1.0.0",
+    lifespan=lifespan
+)
 
 # Configuração de CORS (permitindo o frontend se conectar)
 origins = [
@@ -60,6 +64,9 @@ app.include_router(administrador.router)
 app.include_router(dashboard.router)
 app.include_router(relatorios.router)
 
-@app.get("/")
+from app.core.dependencies import get_current_user
+from fastapi import Depends
+
+@app.get("/", dependencies=[Depends(get_current_user)])
 def root():
     return {"message": "Bem-vindo à API de Serviços Agrícolas"}

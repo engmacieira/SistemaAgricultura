@@ -7,7 +7,12 @@ from app.application.use_cases.usuario_use_cases import UsuarioUseCases
 from app.core.security import create_access_token
 from app.presentation.schemas.usuario_schema import UsuarioCreate, UsuarioUpdate, UsuarioResponse
 
+from app.core.dependencies import get_current_user
+
 router = APIRouter(prefix="/usuarios", tags=["Usuários"])
+
+# Some endpoints like login should remain public
+# We apply dependency to specific ones or at the router level but exclude login
 
 def get_use_case(db: Session = Depends(get_db)):
     return UsuarioUseCases(UsuarioRepository(db))
@@ -18,13 +23,14 @@ def listar_usuarios(
     limit: int = 10, 
     sort_by: str = "name", 
     order: str = "asc",
-    uc: UsuarioUseCases = Depends(get_use_case)
+    uc: UsuarioUseCases = Depends(get_use_case),
+    current_user: dict = Depends(get_current_user)
 ):
     """Retorna a lista de todos os usuários do sistema com paginação e ordenação."""
     return uc.listar_usuarios(skip, limit, sort_by, order)
 
 @router.post("/", response_model=UsuarioResponse, status_code=status.HTTP_201_CREATED)
-def criar_usuario(data: UsuarioCreate, uc: UsuarioUseCases = Depends(get_use_case)):
+def criar_usuario(data: UsuarioCreate, uc: UsuarioUseCases = Depends(get_use_case), current_user: dict = Depends(get_current_user)):
     """Cria um novo usuário."""
     try:
         return uc.criar_usuario(data.model_dump())
@@ -56,4 +62,21 @@ def alterar_senha(usuario_id: str, data: dict, uc: UsuarioUseCases = Depends(get
         return uc.alterar_senha(usuario_id, senha_atual, nova_senha)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+@router.get("/{usuario_id}", response_model=UsuarioResponse)
+def obter_usuario(usuario_id: str, uc: UsuarioUseCases = Depends(get_use_case), current_user: dict = Depends(get_current_user)):
+    """Retorna os detalhes de um usuário específico."""
+    try:
+        return uc.obter_usuario(usuario_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+
+@router.delete("/{usuario_id}", status_code=status.HTTP_204_NO_CONTENT)
+def deletar_usuario(usuario_id: str, uc: UsuarioUseCases = Depends(get_use_case), current_user: dict = Depends(get_current_user)):
+    """Remove um usuário do sistema (soft delete)."""
+    try:
+        if not uc.deletar_usuario(usuario_id):
+            raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
 

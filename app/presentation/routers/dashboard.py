@@ -4,7 +4,9 @@ from app.core.database import get_db
 from app.application.use_cases.dashboard_use_cases import DashboardUseCases
 from app.application.schemas.dashboard_schemas import DashboardData
 
-router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
+from app.core.dependencies import get_current_user
+
+router = APIRouter(prefix="/dashboard", tags=["Dashboard"], dependencies=[Depends(get_current_user)])
 
 @router.get("/", response_model=DashboardData)
 def get_dashboard_data(db: Session = Depends(get_db)):

@@ -17,7 +17,7 @@ from app.application.use_cases.pagamento_use_cases import PagamentoUseCases
 from app.application.use_cases.log_use_cases import LogUseCases
 from app.core.dependencies import get_current_user
 
-router = APIRouter(prefix="/pagamentos", tags=["Pagamentos"])
+router = APIRouter(prefix="/pagamentos", tags=["Pagamentos"], dependencies=[Depends(get_current_user)])
 
 def get_use_case(db: Session = Depends(get_db)):
     return PagamentoUseCases(

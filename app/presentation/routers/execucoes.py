@@ -10,7 +10,7 @@ from app.application.use_cases.log_use_cases import LogUseCases
 from app.presentation.schemas.execucao_schema import ExecucaoCreate, ExecucaoUpdate, ExecucaoResponse
 from app.core.dependencies import get_current_user
 
-router = APIRouter(prefix="/execucoes", tags=["Execuções"])
+router = APIRouter(prefix="/execucoes", tags=["Execuções"], dependencies=[Depends(get_current_user)])
 
 def get_use_case(db: Session = Depends(get_db)):
     repo = ExecucaoRepository(db)
