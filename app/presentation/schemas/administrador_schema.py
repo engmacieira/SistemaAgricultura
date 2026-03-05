@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List
 
 class ConfiguracaoSistema(BaseModel):
-    unidades_medida: List[str]
+    unidades_medida: List[str] = []
 
 class BackupResponse(BaseModel):
     status: str

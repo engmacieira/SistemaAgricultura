@@ -15,26 +15,36 @@ class SettingsRepository {
   }
 
   async addUnit(unit: string): Promise<string[]> {
-    const config = await apiFetch(CONFIG_PATH);
-    const units = config.unidades_medida || [];
-    if (!units.includes(unit)) {
-      units.push(unit);
-      await apiFetch(CONFIG_PATH, {
-        method: "PUT",
-        body: JSON.stringify({ ...config, unidades_medida: units }),
-      });
+    try {
+      const config = await this.getUnits();
+      const units = config || [];
+      if (!units.includes(unit)) {
+        units.push(unit);
+        await apiFetch(CONFIG_PATH, {
+          method: "PUT",
+          body: JSON.stringify({ unidades_medida: units }),
+        });
+      }
+      return units;
+    } catch (error) {
+      console.error("Failed to add unit:", error);
+      throw error;
     }
-    return units;
   }
 
   async removeUnit(unit: string): Promise<string[]> {
-    const config = await apiFetch(CONFIG_PATH);
-    const units = (config.unidades_medida || []).filter((u: string) => u !== unit);
-    await apiFetch(CONFIG_PATH, {
-      method: "PUT",
-      body: JSON.stringify({ ...config, unidades_medida: units }),
-    });
-    return units;
+    try {
+      const config = await this.getUnits();
+      const units = (config || []).filter((u: string) => u !== unit);
+      await apiFetch(CONFIG_PATH, {
+        method: "PUT",
+        body: JSON.stringify({ unidades_medida: units }),
+      });
+      return units;
+    } catch (error) {
+      console.error("Failed to remove unit:", error);
+      throw error;
+    }
   }
 
   async performBackup(): Promise<void> {

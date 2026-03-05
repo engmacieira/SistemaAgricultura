@@ -15,9 +15,9 @@ def test_obter_debitos_por_produtor(client):
         "totalValue": 250.0,
         "status": "Concluído"
     }
-    client.post("/execucoes/", json=exec_payload)
+    client.post("/api/execucoes/", json=exec_payload)
     
-    response = client.get("/pagamentos/debitos-por-produtor")
+    response = client.get("/api/pagamentos/debitos-por-produtor")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert "records" in data
@@ -37,16 +37,16 @@ def test_obter_historico_pagamento(client):
         "totalValue": 100.0,
         "status": "Concluído"
     }
-    client.post("/execucoes/", json=exec_payload)
+    client.post("/api/execucoes/", json=exec_payload)
     
-    list_res = client.get("/pagamentos/")
+    list_res = client.get("/api/pagamentos/")
     pagamento = next(p for p in list_res.json()["items"] if p["producerName"] == "Produtor Historico")
     pagamento_id = pagamento["id"]
     
     # Pay 50
-    client.post(f"/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 50.0})
+    client.post(f"/api/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 50.0})
     
-    response = client.get(f"/pagamentos/{pagamento_id}/historico")
+    response = client.get(f"/api/pagamentos/{pagamento_id}/historico")
     assert response.status_code == status.HTTP_200_OK
     history = response.json()
     assert len(history) >= 1
@@ -65,18 +65,18 @@ def test_deletar_pagamento(client):
         "totalValue": 100.0,
         "status": "Concluído"
     }
-    client.post("/execucoes/", json=exec_payload)
+    client.post("/api/execucoes/", json=exec_payload)
     
-    list_res = client.get("/pagamentos/")
+    list_res = client.get("/api/pagamentos/")
     pagamento = next(p for p in list_res.json()["items"] if p["producerName"] == "Produtor Deletar")
     pagamento_id = pagamento["id"]
     
     # Delete
-    del_res = client.delete(f"/pagamentos/{pagamento_id}")
+    del_res = client.delete(f"/api/pagamentos/{pagamento_id}")
     assert del_res.status_code == status.HTTP_204_NO_CONTENT
     
     # Verify it's gone
-    get_res = client.get(f"/pagamentos/{pagamento_id}")
+    get_res = client.get(f"/api/pagamentos/{pagamento_id}")
     assert get_res.status_code == status.HTTP_404_NOT_FOUND
 
 def test_pagar_valor_invalido_ou_ja_pago(client):
@@ -92,20 +92,20 @@ def test_pagar_valor_invalido_ou_ja_pago(client):
         "totalValue": 100.0,
         "status": "Concluído"
     }
-    client.post("/execucoes/", json=exec_payload)
-    list_res = client.get("/pagamentos/")
+    client.post("/api/execucoes/", json=exec_payload)
+    list_res = client.get("/api/pagamentos/")
     pagamento = next(p for p in list_res.json()["items"] if p["producerName"] == "Produtor Erro")
     pagamento_id = pagamento["id"]
     
     # Valida valor zero
-    pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 0.0})
+    pay_res = client.post(f"/api/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 0.0})
     assert pay_res.status_code == status.HTTP_400_BAD_REQUEST
     
     # Paga tudo
-    client.post(f"/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 100.0})
+    client.post(f"/api/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 100.0})
     
     # Tenta pagar novamente
-    pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 10.0})
+    pay_res = client.post(f"/api/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 10.0})
     assert pay_res.status_code == status.HTTP_400_BAD_REQUEST
 
 def test_crud_transacoes(client):
@@ -121,21 +121,21 @@ def test_crud_transacoes(client):
         "totalValue": 100.0,
         "status": "Concluído"
     }
-    client.post("/execucoes/", json=exec_payload)
-    list_res = client.get("/pagamentos/")
+    client.post("/api/execucoes/", json=exec_payload)
+    list_res = client.get("/api/pagamentos/")
     pagamento = next(p for p in list_res.json()["items"] if p["producerName"] == "Produtor Transacao")
     pagamento_id = pagamento["id"]
     
     # Create transaction via /pagar
-    client.post(f"/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 40.0})
+    client.post(f"/api/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 40.0})
     
-    hist_res = client.get(f"/pagamentos/{pagamento_id}/historico")
+    hist_res = client.get(f"/api/pagamentos/{pagamento_id}/historico")
     trans_id = hist_res.json()[0]["id"]
     
     # Update transaction
-    upd_res = client.put(f"/pagamentos/transacoes/{trans_id}", json={"amount": 50.0})
+    upd_res = client.put(f"/api/pagamentos/transacoes/{trans_id}", json={"amount": 50.0})
     assert upd_res.status_code == status.HTTP_200_OK
     
     # Delete transaction
-    del_res = client.delete(f"/pagamentos/transacoes/{trans_id}")
+    del_res = client.delete(f"/api/pagamentos/transacoes/{trans_id}")
     assert del_res.status_code == status.HTTP_204_NO_CONTENT

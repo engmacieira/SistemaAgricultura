@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from .base_repository import BaseRepository
 from ..models.execucao_model import ExecucaoModel
 from app.domain.entities.execucao_entity import Execucao
+from typing import List, Optional
 
 class ExecucaoRepository(BaseRepository[ExecucaoModel, Execucao]):
     def __init__(self, db: Session):

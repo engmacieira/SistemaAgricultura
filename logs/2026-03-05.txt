@@ -3815,3 +3815,1036 @@
 2026-03-05 13:58:29,762 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
 2026-03-05 13:58:29,766 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 200 OK"
 2026-03-05 13:58:29,771 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:13,566 - root - INFO - Sistema de logs inicializado.
+2026-03-05 15:38:15,066 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,100 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,104 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,144 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,149 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,271 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,305 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,306 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,339 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,343 - app.infrastructure.services.backup_service - ERROR - Arquivo de backup não encontrado: backups\http://mock-backup-url.sql
+2026-03-05 15:38:15,344 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:15,376 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,390 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,424 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,432 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,470 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,583 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:15,587 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:15,593 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:15,598 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/?limit=2 "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,604 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/?show_completed=true "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,642 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,648 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:15,659 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/cde7b971-b0c2-4d8e-be08-f8d5db986b60 "HTTP/1.1 204 No Content"
+2026-03-05 15:38:15,661 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,663 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/cde7b971-b0c2-4d8e-be08-f8d5db986b60 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:15,704 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,714 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:15,757 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,770 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:15,776 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,824 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,913 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:15,915 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/32fbc236-3124-4dd9-8f29-d509df35af27 "HTTP/1.1 200 OK"
+2026-03-05 15:38:15,951 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:15,965 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:15,977 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/3c993d84-c6d7-4dc0-9637-cf72e9825d00 "HTTP/1.1 200 OK"
+2026-03-05 15:38:16,015 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:16,035 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:16,042 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/2aaf2bec-4f56-47b5-aff1-6feef7388d24 "HTTP/1.1 204 No Content"
+2026-03-05 15:38:16,045 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:16,081 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:16,090 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:16,133 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:16,143 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:16,147 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:16,165 - app.infrastructure.services.backup_service - ERROR - Erro ao criar backup: file is not a database
+2026-03-05 15:38:16,166 - app.infrastructure.services.backup_service - INFO - Backup criado via cópia de arquivo em: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-19\test_backup_single_per_day0\backups\backup_2026-03-05.db
+2026-03-05 15:38:16,169 - app.infrastructure.services.backup_service - ERROR - Erro ao criar backup: file is not a database
+2026-03-05 15:38:16,170 - app.infrastructure.services.backup_service - INFO - Backup criado via cópia de arquivo em: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-19\test_backup_single_per_day0\backups\backup_2026-03-05.db
+2026-03-05 15:38:16,177 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-19\test_backup_retention_10_days0\backups\backup_2026-02-19.db
+2026-03-05 15:38:16,177 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-19\test_backup_retention_10_days0\backups\backup_2026-02-20.db
+2026-03-05 15:38:16,178 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-19\test_backup_retention_10_days0\backups\backup_2026-02-21.db
+2026-03-05 15:38:16,178 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-19\test_backup_retention_10_days0\backups\backup_2026-02-22.db
+2026-03-05 15:38:16,178 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-19\test_backup_retention_10_days0\backups\backup_2026-02-23.db
+2026-03-05 15:38:16,181 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 15:38:16,181 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 15:38:16,181 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 15:38:16,183 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 15:38:16,183 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 15:38:16,218 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:16,261 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:16,264 - httpx - INFO - HTTP Request: GET http://testserver/ "HTTP/1.1 401 Unauthorized"
+2026-03-05 15:38:16,301 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:16,308 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:16,312 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/debitos-por-produtor "HTTP/1.1 200 OK"
+2026-03-05 15:38:16,347 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:16,355 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:16,361 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:16,370 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/998456a5-0af2-4e8c-8a4a-be4ba43a3e39/pagar "HTTP/1.1 201 Created"
+2026-03-05 15:38:16,375 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/998456a5-0af2-4e8c-8a4a-be4ba43a3e39/historico "HTTP/1.1 200 OK"
+2026-03-05 15:38:16,717 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:16,725 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:16,730 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:16,737 - httpx - INFO - HTTP Request: DELETE http://testserver/pagamentos/46494150-1c32-4027-8dba-4796ad77b4c3 "HTTP/1.1 204 No Content"
+2026-03-05 15:38:16,739 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/46494150-1c32-4027-8dba-4796ad77b4c3 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:17,038 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,044 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,048 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,053 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/4345acee-b18c-4b9a-a566-e98106efed49/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:17,060 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/4345acee-b18c-4b9a-a566-e98106efed49/pagar "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,062 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/4345acee-b18c-4b9a-a566-e98106efed49/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:17,123 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,129 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,132 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,138 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/880c25bd-326c-4266-a32c-12e758365446/pagar "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,142 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/880c25bd-326c-4266-a32c-12e758365446/historico "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,147 - httpx - INFO - HTTP Request: PUT http://testserver/pagamentos/transacoes/6a2b953b-805a-4e51-a890-71f415b7d558 "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,155 - httpx - INFO - HTTP Request: DELETE http://testserver/pagamentos/transacoes/6a2b953b-805a-4e51-a890-71f415b7d558 "HTTP/1.1 204 No Content"
+2026-03-05 15:38:17,476 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,481 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,541 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,547 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,552 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,557 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/a7a69a45-c9b6-46a3-97ed-dd202d4a9c93 "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,561 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/a7a69a45-c9b6-46a3-97ed-dd202d4a9c93/pagar "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,647 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,652 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,655 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,664 - httpx - INFO - HTTP Request: PUT http://testserver/pagamentos/2b8d88cb-fa93-4e60-b3a8-c9be48099e38 "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,706 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,709 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/id-fantasma "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:17,746 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,757 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,763 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,769 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/183acf97-91b6-4e5b-8c3d-e3e394763d79/pagar "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,774 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/183acf97-91b6-4e5b-8c3d-e3e394763d79/pagar "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,779 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/183acf97-91b6-4e5b-8c3d-e3e394763d79/pagar "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,817 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,831 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,837 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,843 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/7bdcbc6c-937c-4032-8bda-54e06e8d0744/pagar "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,876 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,884 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,926 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,932 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,941 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:17,974 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:17,979 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:17,981 - httpx - INFO - HTTP Request: GET http://testserver/produtores/e35c63bb-54e1-4deb-ba6d-c84ac4996c08 "HTTP/1.1 200 OK"
+2026-03-05 15:38:18,015 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,024 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,029 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/c2ad645b-6347-48f7-b36e-f4cc611e3492 "HTTP/1.1 200 OK"
+2026-03-05 15:38:18,063 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,072 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,076 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/fadd1918-3912-40da-8115-6fe0d154665e "HTTP/1.1 204 No Content"
+2026-03-05 15:38:18,078 - httpx - INFO - HTTP Request: GET http://testserver/produtores/fadd1918-3912-40da-8115-6fe0d154665e "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:18,115 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,123 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,127 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/57f9bdef-1466-412c-a45a-614653b79b16 "HTTP/1.1 204 No Content"
+2026-03-05 15:38:18,130 - httpx - INFO - HTTP Request: GET http://testserver/produtores/57f9bdef-1466-412c-a45a-614653b79b16 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:18,136 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,170 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,176 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,178 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:18,211 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,221 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,256 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,262 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,265 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:18,304 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,310 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,313 - httpx - INFO - HTTP Request: GET http://testserver/servicos/d4445640-37d5-41b8-b9f4-b335a1243784 "HTTP/1.1 200 OK"
+2026-03-05 15:38:18,353 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,362 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,368 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/547fc3e1-1a74-414e-a479-579c2fb7b924 "HTTP/1.1 200 OK"
+2026-03-05 15:38:18,404 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,409 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,413 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/3e736bea-471a-49e4-9d20-4e1e3ca2c26f "HTTP/1.1 204 No Content"
+2026-03-05 15:38:18,415 - httpx - INFO - HTTP Request: GET http://testserver/servicos/3e736bea-471a-49e4-9d20-4e1e3ca2c26f "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:18,455 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,462 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/?limit=5&sort_by=name&order=asc "HTTP/1.1 200 OK"
+2026-03-05 15:38:18,504 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:18,746 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:18,750 - httpx - INFO - HTTP Request: DELETE http://testserver/usuarios/f840fb88-c90c-4319-bc8f-1f620dcd1c0e "HTTP/1.1 204 No Content"
+2026-03-05 15:38:18,752 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:18,756 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/f840fb88-c90c-4319-bc8f-1f620dcd1c0e "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:18,793 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:19,004 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:19,040 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:19,251 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:19,580 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 15:38:19,621 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:19,628 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 15:38:19,665 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:38:19,881 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:20,289 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/20db1a61-3374-454c-8566-c641bbd7a23d/senha "HTTP/1.1 200 OK"
+2026-03-05 15:38:20,495 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,220 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,224 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,229 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,232 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:21,237 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,241 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:21,245 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,249 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,254 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:21,258 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:21,262 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,267 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:21,272 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 204 No Content"
+2026-03-05 15:38:21,275 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:21,279 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,284 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,288 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,292 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:21,298 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 201 Created"
+2026-03-05 15:38:21,304 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:21,308 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,312 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,315 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:21,321 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:21,325 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:21,329 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,333 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 204 No Content"
+2026-03-05 15:38:21,338 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:21,342 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,346 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,350 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 404 Not Found"
+2026-03-05 15:38:21,355 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:21,359 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:21,362 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,367 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 204 No Content"
+2026-03-05 15:38:21,372 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:21,378 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/ "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,382 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 15:38:21,388 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 400 Bad Request"
+2026-03-05 15:38:21,392 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,395 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 15:38:21,400 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 200 OK"
+2026-03-05 15:38:21,404 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 400 Bad Request"
+2026-03-05 15:46:15,041 - root - INFO - Sistema de logs inicializado.
+2026-03-05 15:46:16,739 - uvicorn.error - INFO - Started server process [12740]
+2026-03-05 15:46:16,739 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 15:46:16,788 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:46:16,792 - uvicorn.error - INFO - Application startup complete.
+2026-03-05 15:46:20,057 - uvicorn.access - INFO - 127.0.0.1:53356 - "GET / HTTP/1.1" 200
+2026-03-05 15:46:20,082 - uvicorn.access - INFO - 127.0.0.1:53356 - "GET /assets/index-B3qBq7ej.js HTTP/1.1" 200
+2026-03-05 15:46:20,091 - uvicorn.access - INFO - 127.0.0.1:56727 - "GET /assets/index-COiDXSXJ.css HTTP/1.1" 200
+2026-03-05 15:46:20,191 - uvicorn.access - INFO - 127.0.0.1:56727 - "GET /favicon.ico HTTP/1.1" 404
+2026-03-05 15:46:20,219 - uvicorn.access - INFO - 127.0.0.1:56727 - "GET /favicon.ico HTTP/1.1" 404
+2026-03-05 15:46:27,628 - uvicorn.access - INFO - 127.0.0.1:59467 - "POST /api/usuarios/login HTTP/1.1" 404
+2026-03-05 15:46:31,057 - uvicorn.access - INFO - 127.0.0.1:59467 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404
+2026-03-05 15:48:40,486 - uvicorn.error - INFO - Shutting down
+2026-03-05 15:48:40,602 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-03-05 15:48:40,604 - uvicorn.error - INFO - Application shutdown complete.
+2026-03-05 15:48:40,604 - uvicorn.error - INFO - Finished server process [12740]
+2026-03-05 15:48:41,404 - root - INFO - Sistema de logs inicializado.
+2026-03-05 15:48:42,372 - uvicorn.error - INFO - Started server process [5600]
+2026-03-05 15:48:42,372 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 15:48:42,407 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:48:42,408 - uvicorn.error - INFO - Application startup complete.
+2026-03-05 15:49:01,419 - uvicorn.error - INFO - Shutting down
+2026-03-05 15:49:01,537 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-03-05 15:49:01,538 - uvicorn.error - INFO - Application shutdown complete.
+2026-03-05 15:49:01,538 - uvicorn.error - INFO - Finished server process [5600]
+2026-03-05 15:49:02,213 - root - INFO - Sistema de logs inicializado.
+2026-03-05 15:49:03,092 - uvicorn.error - INFO - Started server process [16132]
+2026-03-05 15:49:03,093 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 15:49:03,126 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:49:03,127 - uvicorn.error - INFO - Application startup complete.
+2026-03-05 15:49:45,566 - uvicorn.access - INFO - 127.0.0.1:64719 - "POST /api/usuarios/login HTTP/1.1" 200
+2026-03-05 15:49:45,641 - uvicorn.access - INFO - 127.0.0.1:64719 - "GET /api/dashboard/ HTTP/1.1" 200
+2026-03-05 15:49:48,376 - uvicorn.access - INFO - 127.0.0.1:64719 - "GET /api/produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:49:50,555 - uvicorn.access - INFO - 127.0.0.1:64719 - "GET /api/servicos/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:49:50,559 - uvicorn.access - INFO - 127.0.0.1:59379 - "GET /api/admin/configuracoes HTTP/1.1" 200
+2026-03-05 15:49:51,533 - uvicorn.access - INFO - 127.0.0.1:59379 - "GET /api/execucoes/?limit=1000&show_completed=true HTTP/1.1" 200
+2026-03-05 15:49:51,534 - uvicorn.access - INFO - 127.0.0.1:64719 - "GET /api/produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:49:51,535 - uvicorn.access - INFO - 127.0.0.1:50080 - "GET /api/servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:49:52,952 - uvicorn.access - INFO - 127.0.0.1:50080 - "GET /api/execucoes/?skip=0&limit=10&sort_by=date&order=desc&show_completed=false HTTP/1.1" 200
+2026-03-05 15:49:52,953 - uvicorn.access - INFO - 127.0.0.1:59379 - "GET /api/servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:49:52,956 - uvicorn.access - INFO - 127.0.0.1:64719 - "GET /api/produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:49:54,244 - uvicorn.access - INFO - 127.0.0.1:64719 - "GET /api/pagamentos/?skip=0&limit=10&sort_by=dueDate&order=desc&search= HTTP/1.1" 200
+2026-03-05 15:49:55,587 - uvicorn.access - INFO - 127.0.0.1:62857 - "GET /produtores?size=1000 HTTP/1.1" 307
+2026-03-05 15:51:37,191 - uvicorn.access - INFO - 127.0.0.1:59268 - "GET /relatorios HTTP/1.1" 200
+2026-03-05 15:51:37,335 - uvicorn.access - INFO - 127.0.0.1:59268 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404
+2026-03-05 15:51:37,342 - uvicorn.access - INFO - 127.0.0.1:59268 - "GET /assets/index-0SOTS9HU.js HTTP/1.1" 200
+2026-03-05 15:51:37,344 - uvicorn.access - INFO - 127.0.0.1:58337 - "GET /assets/index-COiDXSXJ.css HTTP/1.1" 200
+2026-03-05 15:51:37,470 - uvicorn.access - INFO - 127.0.0.1:59268 - "GET /api/produtores/?size=1000 HTTP/1.1" 200
+2026-03-05 15:51:40,379 - uvicorn.access - INFO - 127.0.0.1:59268 - "GET /relatorios HTTP/1.1" 200
+2026-03-05 15:51:40,398 - uvicorn.access - INFO - 127.0.0.1:59268 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404
+2026-03-05 15:51:40,400 - uvicorn.access - INFO - 127.0.0.1:58337 - "GET /assets/index-0SOTS9HU.js HTTP/1.1" 304
+2026-03-05 15:51:40,408 - uvicorn.access - INFO - 127.0.0.1:58337 - "GET /assets/index-COiDXSXJ.css HTTP/1.1" 304
+2026-03-05 15:51:40,452 - uvicorn.access - INFO - 127.0.0.1:58337 - "GET /api/produtores/?size=1000 HTTP/1.1" 200
+2026-03-05 15:51:58,141 - uvicorn.access - INFO - 127.0.0.1:55816 - "GET /api/relatorios/servicos-executados?start_date=2026-03-01&end_date=2026-03-05&format=pdf HTTP/1.1" 401
+2026-03-05 15:52:10,516 - uvicorn.access - INFO - 127.0.0.1:55706 - "GET /api/relatorios/faturamento?start_date=2026-03-01&end_date=2026-03-01&producers=Aline%20Carvalho%20Gl%C3%B3ria%20& HTTP/1.1" 401
+2026-03-05 15:52:14,564 - uvicorn.access - INFO - 127.0.0.1:55706 - "GET /api/relatorios/produtores?producer_id=273633e7-92b4-4817-bd00-41572c0435eb& HTTP/1.1" 401
+2026-03-05 15:53:00,979 - uvicorn.access - INFO - 127.0.0.1:63821 - "GET /api/usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 307
+2026-03-05 15:53:00,992 - uvicorn.access - INFO - 127.0.0.1:63821 - "GET /api/usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:53:03,799 - uvicorn.access - INFO - 127.0.0.1:63821 - "GET /api/logs?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 307
+2026-03-05 15:53:03,810 - uvicorn.access - INFO - 127.0.0.1:63821 - "GET /api/logs/?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 15:53:13,595 - uvicorn.access - INFO - 127.0.0.1:56625 - "GET /api/produtores/?size=1000 HTTP/1.1" 200
+2026-03-05 15:53:25,771 - uvicorn.error - INFO - Shutting down
+2026-03-05 15:53:25,879 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-03-05 15:53:25,880 - uvicorn.error - INFO - Application shutdown complete.
+2026-03-05 15:53:25,880 - uvicorn.error - INFO - Finished server process [16132]
+2026-03-05 15:53:27,238 - root - INFO - Sistema de logs inicializado.
+2026-03-05 15:53:28,834 - uvicorn.error - INFO - Started server process [17392]
+2026-03-05 15:53:28,835 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 15:53:28,878 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 15:53:28,879 - uvicorn.error - INFO - Application startup complete.
+2026-03-05 15:55:05,121 - uvicorn.access - INFO - 127.0.0.1:61783 - "GET /relatorios HTTP/1.1" 200
+2026-03-05 15:55:05,169 - uvicorn.access - INFO - 127.0.0.1:61783 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404
+2026-03-05 15:55:05,196 - uvicorn.access - INFO - 127.0.0.1:61783 - "GET /assets/index-B224Y_Nr.js HTTP/1.1" 200
+2026-03-05 15:55:05,197 - uvicorn.access - INFO - 127.0.0.1:56536 - "GET /assets/index-COiDXSXJ.css HTTP/1.1" 200
+2026-03-05 15:55:05,298 - uvicorn.access - INFO - 127.0.0.1:61783 - "GET /api/produtores/?size=1000 HTTP/1.1" 200
+2026-03-05 15:55:12,372 - uvicorn.access - INFO - 127.0.0.1:52948 - "GET /api/relatorios/servicos-executados?start_date=2026-03-01&end_date=2026-03-05&format=pdf&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NDhkZDRkYS01YTZiLTRjZDMtYmY4Ni0wYTU0ODdmMjE0OGUiLCJleHAiOjE3NzMzNDEzODV9.4tZY8iqqoQqTtA-IB1tPfRQTFAASu3jOC2RxqemRdcw HTTP/1.1" 200
+2026-03-05 15:55:22,351 - uvicorn.access - INFO - 127.0.0.1:49970 - "GET /api/relatorios/faturamento?producers=Aline%20Carvalho%20Gl%C3%B3ria%20&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NDhkZDRkYS01YTZiLTRjZDMtYmY4Ni0wYTU0ODdmMjE0OGUiLCJleHAiOjE3NzMzNDEzODV9.4tZY8iqqoQqTtA-IB1tPfRQTFAASu3jOC2RxqemRdcw HTTP/1.1" 200
+2026-03-05 15:55:29,223 - uvicorn.access - INFO - 127.0.0.1:56489 - "GET /api/relatorios/faturamento?producers=Matheus%20Henrique%20Macieira&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NDhkZDRkYS01YTZiLTRjZDMtYmY4Ni0wYTU0ODdmMjE0OGUiLCJleHAiOjE3NzMzNDEzODV9.4tZY8iqqoQqTtA-IB1tPfRQTFAASu3jOC2RxqemRdcw HTTP/1.1" 200
+2026-03-05 15:55:36,140 - uvicorn.access - INFO - 127.0.0.1:56226 - "GET /api/relatorios/produtores?producer_id=273633e7-92b4-4817-bd00-41572c0435eb&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NDhkZDRkYS01YTZiLTRjZDMtYmY4Ni0wYTU0ODdmMjE0OGUiLCJleHAiOjE3NzMzNDEzODV9.4tZY8iqqoQqTtA-IB1tPfRQTFAASu3jOC2RxqemRdcw HTTP/1.1" 200
+2026-03-05 15:55:44,355 - uvicorn.access - INFO - 127.0.0.1:59969 - "GET /api/execucoes/?limit=1000&show_completed=true HTTP/1.1" 200
+2026-03-05 15:55:44,358 - uvicorn.access - INFO - 127.0.0.1:60381 - "GET /api/produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:55:44,359 - uvicorn.access - INFO - 127.0.0.1:56610 - "GET /api/servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:55:46,355 - uvicorn.access - INFO - 127.0.0.1:59969 - "GET /api/servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:55:46,360 - uvicorn.access - INFO - 127.0.0.1:60381 - "GET /api/produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:55:46,361 - uvicorn.access - INFO - 127.0.0.1:56610 - "GET /api/execucoes/?skip=0&limit=10&sort_by=date&order=desc&show_completed=false HTTP/1.1" 200
+2026-03-05 15:55:47,137 - uvicorn.access - INFO - 127.0.0.1:60381 - "GET /api/produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:55:47,139 - uvicorn.access - INFO - 127.0.0.1:59969 - "GET /api/servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:55:47,141 - uvicorn.access - INFO - 127.0.0.1:56610 - "GET /api/execucoes/?limit=1000&show_completed=true HTTP/1.1" 200
+2026-03-05 15:55:47,910 - uvicorn.access - INFO - 127.0.0.1:56610 - "GET /api/execucoes/?skip=0&limit=10&sort_by=date&order=desc&show_completed=false HTTP/1.1" 200
+2026-03-05 15:55:47,912 - uvicorn.access - INFO - 127.0.0.1:59969 - "GET /api/produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:55:47,913 - uvicorn.access - INFO - 127.0.0.1:60381 - "GET /api/servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:55:48,271 - uvicorn.access - INFO - 127.0.0.1:60381 - "GET /api/pagamentos/?skip=0&limit=10&sort_by=dueDate&order=desc&search= HTTP/1.1" 200
+2026-03-05 15:55:49,908 - uvicorn.access - INFO - 127.0.0.1:60381 - "GET /api/produtores/?size=1000 HTTP/1.1" 200
+2026-03-05 15:55:56,802 - uvicorn.access - INFO - 127.0.0.1:51857 - "GET /api/relatorios/servicos-executados?start_date=2026-03-01&end_date=2026-03-10&format=pdf&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4NDhkZDRkYS01YTZiLTRjZDMtYmY4Ni0wYTU0ODdmMjE0OGUiLCJleHAiOjE3NzMzNDEzODV9.4tZY8iqqoQqTtA-IB1tPfRQTFAASu3jOC2RxqemRdcw HTTP/1.1" 200
+2026-03-05 15:56:03,888 - uvicorn.access - INFO - 127.0.0.1:51512 - "GET /api/usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 307
+2026-03-05 15:56:03,899 - uvicorn.access - INFO - 127.0.0.1:51512 - "GET /api/usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 15:56:05,085 - uvicorn.access - INFO - 127.0.0.1:51512 - "GET /api/logs?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 307
+2026-03-05 15:56:05,097 - uvicorn.access - INFO - 127.0.0.1:51512 - "GET /api/logs/?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 15:58:12,480 - uvicorn.error - INFO - Shutting down
+2026-03-05 15:58:12,587 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-03-05 15:58:12,589 - uvicorn.error - INFO - Application shutdown complete.
+2026-03-05 15:58:12,590 - uvicorn.error - INFO - Finished server process [17392]
+2026-03-05 16:00:53,123 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:00:55,028 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,046 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,049 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,088 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,097 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,131 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,165 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,167 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,199 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,203 - app.infrastructure.services.backup_service - ERROR - Arquivo de backup não encontrado: backups\http://mock-backup-url.sql
+2026-03-05 16:00:55,204 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:00:55,241 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,261 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,296 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,302 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,345 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,361 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,366 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,369 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,376 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/?limit=2 "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,382 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/?show_completed=true "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,460 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,469 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,480 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/15d3ed6e-3f68-48ec-b7e0-deb920dea185 "HTTP/1.1 204 No Content"
+2026-03-05 16:00:55,484 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,511 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/15d3ed6e-3f68-48ec-b7e0-deb920dea185 "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,660 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,665 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,698 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,703 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,708 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,743 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,751 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,754 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/259c61b2-691e-4b45-a54d-1e4e1b5ed149 "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,797 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,804 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,816 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/c21240b5-6955-4cd1-91a0-4eec4aaa2aa9 "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,850 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,857 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,865 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/3b55e6f5-66fe-4583-8ce8-4e1654cd581b "HTTP/1.1 204 No Content"
+2026-03-05 16:00:55,868 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,901 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,908 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,943 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:55,953 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:55,956 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:55,969 - app.infrastructure.services.backup_service - ERROR - Erro ao criar backup: file is not a database
+2026-03-05 16:00:55,970 - app.infrastructure.services.backup_service - INFO - Backup criado via cópia de arquivo em: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-20\test_backup_single_per_day0\backups\backup_2026-03-05.db
+2026-03-05 16:00:55,972 - app.infrastructure.services.backup_service - ERROR - Erro ao criar backup: file is not a database
+2026-03-05 16:00:55,973 - app.infrastructure.services.backup_service - INFO - Backup criado via cópia de arquivo em: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-20\test_backup_single_per_day0\backups\backup_2026-03-05.db
+2026-03-05 16:00:55,988 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-20\test_backup_retention_10_days0\backups\backup_2026-02-19.db
+2026-03-05 16:00:55,989 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-20\test_backup_retention_10_days0\backups\backup_2026-02-20.db
+2026-03-05 16:00:55,990 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-20\test_backup_retention_10_days0\backups\backup_2026-02-21.db
+2026-03-05 16:00:55,990 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-20\test_backup_retention_10_days0\backups\backup_2026-02-22.db
+2026-03-05 16:00:55,991 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-20\test_backup_retention_10_days0\backups\backup_2026-02-23.db
+2026-03-05 16:00:55,994 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:00:55,995 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:00:55,995 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:00:55,996 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:00:55,997 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:00:56,050 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,122 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,125 - httpx - INFO - HTTP Request: GET http://testserver/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,162 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,168 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,172 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/debitos-por-produtor "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,210 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,217 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,222 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,231 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/6c4ef1b0-1cca-44ab-9632-3cf916d9ed49/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,235 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/6c4ef1b0-1cca-44ab-9632-3cf916d9ed49/historico "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,272 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,280 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,283 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,287 - httpx - INFO - HTTP Request: DELETE http://testserver/pagamentos/573affdd-ab9a-4c94-8a0d-c1e2801a606f "HTTP/1.1 204 No Content"
+2026-03-05 16:00:56,289 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/573affdd-ab9a-4c94-8a0d-c1e2801a606f "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,327 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,333 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,337 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,340 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/a5f5d3b2-a624-4586-950f-0d1369b44893/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:00:56,346 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/a5f5d3b2-a624-4586-950f-0d1369b44893/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,348 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/a5f5d3b2-a624-4586-950f-0d1369b44893/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:00:56,381 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,387 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,392 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,398 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1071bf12-77d8-444e-836d-9f3f286fc634/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,401 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1071bf12-77d8-444e-836d-9f3f286fc634/historico "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,406 - httpx - INFO - HTTP Request: PUT http://testserver/pagamentos/transacoes/518d4882-c6bf-4d74-9758-ff9956f54e3b "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,412 - httpx - INFO - HTTP Request: DELETE http://testserver/pagamentos/transacoes/518d4882-c6bf-4d74-9758-ff9956f54e3b "HTTP/1.1 204 No Content"
+2026-03-05 16:00:56,445 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,450 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,483 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,489 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,493 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,495 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/e1cf7483-d68a-4dea-b288-331780a99649 "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,500 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/e1cf7483-d68a-4dea-b288-331780a99649/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,531 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,537 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,542 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,548 - httpx - INFO - HTTP Request: PUT http://testserver/pagamentos/01a61093-5d69-4bac-85d7-fa7e833ba1cd "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,581 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,586 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/id-fantasma "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,624 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,634 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,638 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,644 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/6e60ddaa-70ef-47dd-b7c5-f06ce12bb7ec/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,649 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/6e60ddaa-70ef-47dd-b7c5-f06ce12bb7ec/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,653 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/6e60ddaa-70ef-47dd-b7c5-f06ce12bb7ec/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,687 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,701 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,704 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,712 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/0e675958-a388-4a6c-8edc-81101e20e285/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,745 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,751 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,784 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,789 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,796 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,831 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,837 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,842 - httpx - INFO - HTTP Request: GET http://testserver/produtores/02812aec-a444-4e7c-a50d-d4aa0b47b1d4 "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,877 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,884 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,889 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/85b3ec3d-ca78-41ab-9648-9957f0cb9e09 "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,927 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,934 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,938 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/385a4aaa-ac89-4164-aeff-3dfd77f9f419 "HTTP/1.1 204 No Content"
+2026-03-05 16:00:56,941 - httpx - INFO - HTTP Request: GET http://testserver/produtores/385a4aaa-ac89-4164-aeff-3dfd77f9f419 "HTTP/1.1 200 OK"
+2026-03-05 16:00:56,978 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:56,985 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:56,989 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/6e601bc5-7832-4067-a373-dc6103d415a5 "HTTP/1.1 204 No Content"
+2026-03-05 16:00:56,994 - httpx - INFO - HTTP Request: GET http://testserver/produtores/6e601bc5-7832-4067-a373-dc6103d415a5 "HTTP/1.1 200 OK"
+2026-03-05 16:00:57,032 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:57,038 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:57,040 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 16:00:57,075 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:57,086 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:57,124 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:57,134 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:57,138 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:57,176 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:57,181 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:57,184 - httpx - INFO - HTTP Request: GET http://testserver/servicos/8ea5a856-48ce-41d3-9e79-1007f0bdbb7d "HTTP/1.1 200 OK"
+2026-03-05 16:00:57,224 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:57,231 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:57,237 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/69d024e4-0213-4b32-97c0-683829ffc941 "HTTP/1.1 200 OK"
+2026-03-05 16:00:57,277 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:57,295 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:57,299 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/da13810e-afd0-4244-97f3-0af804bf814c "HTTP/1.1 204 No Content"
+2026-03-05 16:00:57,301 - httpx - INFO - HTTP Request: GET http://testserver/servicos/da13810e-afd0-4244-97f3-0af804bf814c "HTTP/1.1 200 OK"
+2026-03-05 16:00:57,338 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:57,348 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/?limit=5&sort_by=name&order=asc "HTTP/1.1 200 OK"
+2026-03-05 16:00:57,385 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:57,650 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:57,654 - httpx - INFO - HTTP Request: DELETE http://testserver/usuarios/87d53aa8-4b05-4a0a-ba8c-3eb5c1879119 "HTTP/1.1 204 No Content"
+2026-03-05 16:00:57,657 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/ "HTTP/1.1 200 OK"
+2026-03-05 16:00:57,661 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/87d53aa8-4b05-4a0a-ba8c-3eb5c1879119 "HTTP/1.1 200 OK"
+2026-03-05 16:00:57,698 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:57,908 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:57,945 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:58,159 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:58,372 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 16:00:58,407 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:58,414 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 16:00:58,449 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:00:58,662 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:00:59,071 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/b40cc784-1be6-4a79-b000-bfe7c0c7482d/senha "HTTP/1.1 200 OK"
+2026-03-05 16:00:59,276 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,029 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,033 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,037 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,040 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 400 Bad Request"
+2026-03-05 16:01:00,046 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,050 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:01:00,054 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,059 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,064 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,073 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:01:00,080 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,085 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 16:01:00,090 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 204 No Content"
+2026-03-05 16:01:00,095 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 16:01:00,100 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,104 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,109 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,114 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,121 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:01:00,126 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:01:00,130 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,134 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,138 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,147 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:01:00,151 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 16:01:00,156 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,161 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 204 No Content"
+2026-03-05 16:01:00,165 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 404 Not Found"
+2026-03-05 16:01:00,169 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,173 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,178 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,185 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:01:00,189 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 400 Bad Request"
+2026-03-05 16:01:00,195 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,199 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 204 No Content"
+2026-03-05 16:01:00,203 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 400 Bad Request"
+2026-03-05 16:01:00,207 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/ "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,214 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:01:00,218 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 400 Bad Request"
+2026-03-05 16:01:00,222 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,228 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 16:01:00,232 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 200 OK"
+2026-03-05 16:01:00,236 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:34,268 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:02:35,187 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,202 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,204 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,237 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,245 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,279 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,314 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,315 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,349 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,353 - app.infrastructure.services.backup_service - ERROR - Arquivo de backup não encontrado: backups\http://mock-backup-url.sql
+2026-03-05 16:02:35,353 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:35,390 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,407 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,445 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,455 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,501 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,518 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:35,522 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:35,531 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:35,536 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/?limit=2 "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,542 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/?show_completed=true "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,623 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,632 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:35,641 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/39b5e66f-7635-4ad5-923b-b7ebc5ebaab6 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:35,647 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,675 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/39b5e66f-7635-4ad5-923b-b7ebc5ebaab6 "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,819 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,826 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:35,861 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,869 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:35,872 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,908 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,928 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:35,935 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/e67ffd78-68a0-4714-a28a-e5ef5539c15d "HTTP/1.1 200 OK"
+2026-03-05 16:02:35,969 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:35,978 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:35,986 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1ebe839a-89fe-43d0-b4ba-d8297140dbe7 "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,021 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,033 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,038 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/26cf6e39-8b0b-41e4-a33e-0b1045a3ce62 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:36,041 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,077 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,085 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,121 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,134 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,137 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,150 - app.infrastructure.services.backup_service - ERROR - Erro ao criar backup: file is not a database
+2026-03-05 16:02:36,152 - app.infrastructure.services.backup_service - INFO - Backup criado via cópia de arquivo em: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-21\test_backup_single_per_day0\backups\backup_2026-03-05.db
+2026-03-05 16:02:36,154 - app.infrastructure.services.backup_service - ERROR - Erro ao criar backup: file is not a database
+2026-03-05 16:02:36,154 - app.infrastructure.services.backup_service - INFO - Backup criado via cópia de arquivo em: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-21\test_backup_single_per_day0\backups\backup_2026-03-05.db
+2026-03-05 16:02:36,163 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-21\test_backup_retention_10_days0\backups\backup_2026-02-19.db
+2026-03-05 16:02:36,164 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-21\test_backup_retention_10_days0\backups\backup_2026-02-20.db
+2026-03-05 16:02:36,164 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-21\test_backup_retention_10_days0\backups\backup_2026-02-21.db
+2026-03-05 16:02:36,164 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-21\test_backup_retention_10_days0\backups\backup_2026-02-22.db
+2026-03-05 16:02:36,165 - app.infrastructure.services.backup_service - INFO - Backup antigo removido: C:\Users\matheus\AppData\Local\Temp\pytest-of-matheus\pytest-21\test_backup_retention_10_days0\backups\backup_2026-02-23.db
+2026-03-05 16:02:36,168 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:02:36,168 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:02:36,168 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:02:36,169 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:02:36,169 - test_logger - INFO - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+2026-03-05 16:02:36,202 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,244 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,248 - httpx - INFO - HTTP Request: GET http://testserver/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,281 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,287 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,292 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/debitos-por-produtor "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,328 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,334 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,339 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,348 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/8c02977f-05da-46e2-bc72-752802d1518d/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,351 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/8c02977f-05da-46e2-bc72-752802d1518d/historico "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,383 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,389 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,393 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,397 - httpx - INFO - HTTP Request: DELETE http://testserver/pagamentos/b62ed3f6-a03a-41ec-808d-339f135655c6 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:36,400 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/b62ed3f6-a03a-41ec-808d-339f135655c6 "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,440 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,449 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,452 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,454 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/c355127d-9fc7-443d-a9ac-d77a68cbf4c5/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:36,461 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/c355127d-9fc7-443d-a9ac-d77a68cbf4c5/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,464 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/c355127d-9fc7-443d-a9ac-d77a68cbf4c5/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:36,501 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,507 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,514 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,520 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/6c662a47-7a4e-4d7e-af51-4b7f39149076/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,523 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/6c662a47-7a4e-4d7e-af51-4b7f39149076/historico "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,530 - httpx - INFO - HTTP Request: PUT http://testserver/pagamentos/transacoes/d36a4c20-8702-4567-a5e3-2b6fe5baadf7 "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,534 - httpx - INFO - HTTP Request: DELETE http://testserver/pagamentos/transacoes/d36a4c20-8702-4567-a5e3-2b6fe5baadf7 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:36,568 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,572 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,606 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,618 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,621 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,623 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/d895ca85-08f4-44ee-8878-b691c163443c "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,630 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/d895ca85-08f4-44ee-8878-b691c163443c/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,663 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,669 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,672 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,680 - httpx - INFO - HTTP Request: PUT http://testserver/pagamentos/92b7759b-eb4f-439a-982d-47939346c64b "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,714 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,720 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/id-fantasma "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,761 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,771 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,775 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,782 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/8e6371fb-c904-4b8f-83aa-f2b26f0c3572/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,786 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/8e6371fb-c904-4b8f-83aa-f2b26f0c3572/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,791 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/8e6371fb-c904-4b8f-83aa-f2b26f0c3572/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,824 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,834 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,837 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,843 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/151c1da4-e676-481a-880a-1b432c4b94fd/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,878 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,887 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,928 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,937 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,941 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:36,977 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:36,982 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:36,985 - httpx - INFO - HTTP Request: GET http://testserver/produtores/05a629bc-b184-4252-ae2a-ea5e35fe3115 "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,086 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,096 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,102 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/92bf2f4e-36e2-4f26-bafc-d3b76ccf01ed "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,134 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,140 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,148 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/af09d6cc-ae57-4d76-91a5-6594ac1c73c1 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:37,151 - httpx - INFO - HTTP Request: GET http://testserver/produtores/af09d6cc-ae57-4d76-91a5-6594ac1c73c1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,187 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,195 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,200 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/37de14e9-5ab4-4b93-93cb-e7db7f476ff2 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:37,203 - httpx - INFO - HTTP Request: GET http://testserver/produtores/37de14e9-5ab4-4b93-93cb-e7db7f476ff2 "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,240 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,249 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,251 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:37,285 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,292 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,326 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,334 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,337 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,371 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,379 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,384 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1bc6600b-3621-4c5c-80a0-35be509dc413 "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,420 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,430 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,438 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/c22faae9-16c0-4fc0-830a-5156a6ec02bd "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,476 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,493 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,497 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/d500c97c-39e4-4600-9248-1f9d57807be0 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:37,500 - httpx - INFO - HTTP Request: GET http://testserver/servicos/d500c97c-39e4-4600-9248-1f9d57807be0 "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,537 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,550 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/?limit=5&sort_by=name&order=asc "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,587 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:37,826 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:37,830 - httpx - INFO - HTTP Request: DELETE http://testserver/usuarios/00aafaf5-c0cc-4b9f-b844-c1096b222493 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:37,833 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,837 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/00aafaf5-c0cc-4b9f-b844-c1096b222493 "HTTP/1.1 200 OK"
+2026-03-05 16:02:37,875 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:38,088 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:38,123 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:38,339 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:38,549 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 16:02:38,584 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:38,588 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 16:02:38,622 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:02:38,839 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:39,244 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/9c552ef5-7ba8-4824-9145-6e72935339cd/senha "HTTP/1.1 200 OK"
+2026-03-05 16:02:39,450 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,204 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,209 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,214 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,218 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:40,222 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,228 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:40,232 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,236 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,241 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,248 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:40,252 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,257 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 16:02:40,262 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:40,266 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 16:02:40,271 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,275 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,280 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,285 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,291 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 201 Created"
+2026-03-05 16:02:40,296 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:40,300 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,304 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,310 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,317 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:40,321 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:40,326 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,330 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:40,334 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 404 Not Found"
+2026-03-05 16:02:40,338 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,342 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,347 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,353 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:40,358 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:40,363 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,367 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 204 No Content"
+2026-03-05 16:02:40,371 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:40,376 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/ "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,381 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 16:02:40,386 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 400 Bad Request"
+2026-03-05 16:02:40,390 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,395 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 16:02:40,400 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 200 OK"
+2026-03-05 16:02:40,404 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 400 Bad Request"
+2026-03-05 16:12:54,910 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:13:14,614 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:13:15,433 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:13:15,459 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:13:15,481 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:13:15,501 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:13:15,528 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:13:15,549 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:13:15,577 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:03,078 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:03,363 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:03,374 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:03,384 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:03,416 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:03,432 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:03,442 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:03,451 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:12,132 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:14:30,990 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:16:28,822 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:18:16,668 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:18:16,974 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:18:16,985 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:18:16,998 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:18:17,030 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:18:17,045 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:18:17,056 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:18:17,067 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:19:16,533 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:19:19,979 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:19:46,635 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:19:49,588 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:20:21,363 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:20:22,340 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:23:12,935 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:23:13,912 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:26:19,247 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:26:20,276 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:26:41,764 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:26:42,804 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 16:29:21,454 - root - INFO - Sistema de logs inicializado.
+2026-03-05 16:29:22,485 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 17:01:36,276 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:01:37,298 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:01:37,298 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:01:37,298 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:01:37,298 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:01:37,298 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:01:37,298 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:02:25,437 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:02:26,358 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:02:26,358 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:02:26,358 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:02:26,358 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:02:26,358 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:02:26,358 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:03:56,903 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:03:57,919 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:03:57,919 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:03:57,919 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:03:57,919 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:03:57,919 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:03:57,919 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:03:58,273 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 17:04:21,583 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:04:22,575 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:04:22,575 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:04:22,575 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:04:22,575 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:04:22,575 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:04:22,575 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:05:06,283 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:05:07,244 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:05:07,244 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:05:07,244 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:05:07,244 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:05:07,244 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:05:07,244 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:08:59,317 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:09:02,288 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:09:02,289 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:09:02,289 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:09:02,289 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:09:02,289 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:09:02,289 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:09:02,410 - uvicorn.error - INFO - Started server process [3524]
+2026-03-05 17:09:02,410 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 17:12:31,258 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:12:32,483 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:12:32,483 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:12:32,485 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:12:32,485 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:12:32,485 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:12:32,485 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:12:32,603 - uvicorn.error - INFO - Started server process [6708]
+2026-03-05 17:12:32,603 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 17:12:35,126 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:12:36,246 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:12:36,246 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:12:36,246 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:12:36,246 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:12:36,246 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:12:36,247 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:12:36,382 - uvicorn.error - INFO - Started server process [5712]
+2026-03-05 17:12:36,382 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 17:15:50,435 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:15:52,127 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:15:52,127 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:15:52,127 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:15:52,127 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:15:52,127 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:15:52,127 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:16:57,883 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:16:58,645 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:16:58,645 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:16:58,645 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:16:58,645 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:16:58,645 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:16:58,646 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:17:22,974 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:17:23,731 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:17:23,732 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:17:23,732 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:17:23,732 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:17:23,732 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:17:23,733 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:21:16,742 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:21:18,198 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:21:18,198 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:21:18,198 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:21:18,200 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:21:18,200 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:21:18,200 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:21:25,920 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:21:26,695 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:21:26,695 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:21:26,695 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:21:26,695 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:21:26,695 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:21:26,695 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:21:31,394 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:21:32,158 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:21:32,158 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:21:32,158 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:21:32,158 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:21:32,158 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:21:32,158 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:21:37,496 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:21:38,233 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:21:38,417 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:21:38,417 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:21:38,417 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:21:38,417 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:21:38,417 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:21:38,417 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:21:39,183 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:21:39,184 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:21:39,184 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:21:39,184 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:21:39,184 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:21:39,184 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:21:50,460 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:21:51,266 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:21:51,266 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:21:51,266 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:21:51,266 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:21:51,266 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:21:51,266 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:21:54,766 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:21:55,577 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:21:55,577 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:21:55,577 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:21:55,577 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:21:55,577 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:21:55,577 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:22:00,386 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:22:01,214 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:22:01,214 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:22:01,214 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:22:01,214 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:22:01,214 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:22:01,214 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:22:02,885 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:22:03,658 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:22:03,659 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:22:03,659 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:22:03,659 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:22:03,659 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:22:03,659 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:22:14,044 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:22:14,886 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:22:14,886 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:22:14,886 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:22:14,887 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:22:14,887 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:22:14,887 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:22:29,558 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:22:30,493 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:22:30,493 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:22:30,493 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:22:30,494 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:22:30,494 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:22:30,494 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:22:30,628 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 401 Unauthorized"
+2026-03-05 17:22:40,052 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:22:40,966 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:22:40,966 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:22:40,966 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:22:40,966 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:22:40,967 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:22:40,967 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:22:41,178 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 17:22:41,242 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/38181f8e-d0f5-46f0-af9b-a2fab96edd06 "HTTP/1.1 204 No Content"
+2026-03-05 17:22:41,248 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/38181f8e-d0f5-46f0-af9b-a2fab96edd06 "HTTP/1.1 404 Not Found"
+2026-03-05 17:23:08,752 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:23:09,611 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:23:09,611 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:23:09,611 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:23:09,611 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:23:09,611 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:23:09,611 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:23:32,211 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:23:33,232 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:23:33,232 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:23:33,232 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:23:33,232 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:23:33,232 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:23:33,232 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:23:57,069 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:23:57,969 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:23:57,971 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:23:57,971 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:23:57,971 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:23:57,971 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:23:57,971 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:25:51,068 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:25:51,876 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:25:51,876 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:25:51,876 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:25:51,876 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:25:51,876 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:25:51,876 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:26:11,022 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:26:11,828 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:26:11,828 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:26:11,828 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:26:11,828 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:26:11,828 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:26:11,828 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:26:34,728 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:26:35,714 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:26:35,714 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:26:35,714 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:26:35,714 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:26:35,714 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:26:35,714 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:28:24,381 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:28:25,159 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:28:25,159 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:28:25,159 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:28:25,159 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:28:25,159 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:28:25,159 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:28:57,959 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:28:58,869 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:28:58,870 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:28:58,870 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:28:58,870 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:28:58,870 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:28:58,870 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:31:43,417 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:31:44,412 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.schemas
+2026-03-05 17:31:44,415 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.tables
+2026-03-05 17:31:44,415 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.types
+2026-03-05 17:31:44,415 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.constraints
+2026-03-05 17:31:44,415 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.defaults
+2026-03-05 17:31:44,415 - alembic.runtime.plugins - INFO - setup plugin alembic.autogenerate.comments
+2026-03-05 17:31:44,535 - uvicorn.error - INFO - Started server process [13568]
+2026-03-05 17:31:44,535 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 17:35:18,815 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:36:11,018 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:36:11,849 - uvicorn.error - INFO - Started server process [10320]
+2026-03-05 17:36:11,849 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 17:38:12,351 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:38:13,151 - uvicorn.error - INFO - Started server process [8228]
+2026-03-05 17:38:13,152 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 17:39:03,938 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:39:41,580 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:40:03,408 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:43:54,214 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:44:12,615 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:44:19,117 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:44:57,346 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:45:44,446 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:45:57,390 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:46:02,781 - root - INFO - Sistema de logs inicializado.
+2026-03-05 17:46:38,739 - root - INFO - Sistema de logs inicializado.

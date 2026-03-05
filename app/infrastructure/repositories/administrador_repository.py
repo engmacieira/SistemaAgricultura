@@ -9,7 +9,7 @@ class AdministradorRepository(BaseRepository[ConfiguracaoModel, Configuracao]):
 
     def get_configuracoes(self):
         config = self.db.query(self.model).filter(self.model.chave == "geral").first()
-        return config.valor if config else {}
+        return config.valor if config else {"unidades_medida": []}
 
     def update_configuracoes(self, data: dict):
         config = self.db.query(self.model).filter(self.model.chave == "geral").first()

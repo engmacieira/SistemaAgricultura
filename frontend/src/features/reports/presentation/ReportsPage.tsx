@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FileText, Download, BarChart3, TrendingUp, Users, Calendar, Filter } from "lucide-react";
 import { Button } from "../../../shared/components/Button";
+import { apiFetch, API_BASE_URL } from "../../../core/api";
 
 interface Producer {
   id: string;
@@ -26,8 +27,7 @@ export function ReportsPage() {
   const [prodRegion, setProdRegion] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8000/produtores?size=1000")
-      .then(res => res.json())
+    apiFetch("/produtores/?size=1000")
       .then(data => {
         if (data && data.items) {
           setProducers(data.items);
@@ -43,11 +43,13 @@ export function ReportsPage() {
       alert("Por favor, selecione o período inicial e final.");
       return;
     }
-    window.open(`http://localhost:8000/relatorios/servicos-executados?start_date=${servStart}&end_date=${servEnd}&format=pdf`, "_blank");
+    const token = localStorage.getItem("auth_token") || "";
+    window.open(`${API_BASE_URL}/relatorios/servicos-executados?start_date=${servStart}&end_date=${servEnd}&format=pdf&token=${token}`, "_blank");
   };
 
   const handleExportBilling = () => {
-    let url = `http://localhost:8000/relatorios/faturamento?`;
+    const token = localStorage.getItem("auth_token") || "";
+    let url = `${API_BASE_URL}/relatorios/faturamento?`;
     if (billStart) url += `start_date=${billStart}&`;
     if (billEnd) url += `end_date=${billEnd}&`;
     if (billProducers.length > 0) {
@@ -55,14 +57,17 @@ export function ReportsPage() {
         url += `producers=${encodeURIComponent(p)}&`;
       });
     }
+    url += `token=${token}`;
     window.open(url, "_blank");
   };
 
   const handleExportProducers = () => {
-    let url = `http://localhost:8000/relatorios/produtores?`;
+    const token = localStorage.getItem("auth_token") || "";
+    let url = `${API_BASE_URL}/relatorios/produtores?`;
     if (prodId) url += `producer_id=${prodId}&`;
     if (prodStatus) url += `status=${prodStatus}&`;
     if (prodRegion) url += `regiao=${encodeURIComponent(prodRegion)}&`;
+    url += `token=${token}`;
     window.open(url, "_blank");
   };
 
