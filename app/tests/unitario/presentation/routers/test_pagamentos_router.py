@@ -32,31 +32,31 @@ pagamento_mock = {
 def test_listar_pagamentos(mock_uc):
     mock_uc.listar_pagamentos.return_value = [pagamento_mock]
     mock_uc.contar_pagamentos.return_value = 1
-    response = client.get("/pagamentos/")
+    response = client.get("/api/pagamentos/")
     assert response.status_code == 200
     assert response.json()["items"][0]["id"] == "1"
     assert response.json()["total"] == 1
 
 def test_obter_pagamento(mock_uc):
     mock_uc.obter_pagamento.return_value = pagamento_mock
-    response = client.get("/pagamentos/1")
+    response = client.get("/api/pagamentos/1")
     assert response.status_code == 200
     assert response.json()["id"] == "1"
 
 def test_obter_pagamento_erro(mock_uc):
     mock_uc.obter_pagamento.side_effect = ValueError("Pagamento não encontrado")
-    response = client.get("/pagamentos/1")
+    response = client.get("/api/pagamentos/1")
     assert response.status_code == 404
 
 def test_registrar_pagamento(mock_uc):
     mock_uc.registrar_pagamento.return_value = {"id": "1", "status": "Pago"}
-    response = client.post("/pagamentos/1/pagar", json={"amountToPay": 100.0})
+    response = client.post("/api/pagamentos/1/pagar", json={"amountToPay": 100.0})
     assert response.status_code == 201
     assert response.json() == {"id": "1", "status": "Pago"}
     mock_uc.registrar_pagamento.assert_called_once_with("1", 100.0, None, {"id": "1", "name": "Admin Test", "email": "admin@teste.com", "role": "admin"})
 
 def test_registrar_pagamento_erro(mock_uc):
     mock_uc.registrar_pagamento.side_effect = ValueError("Este pagamento já foi realizado")
-    response = client.post("/pagamentos/1/pagar", json={"amountToPay": 100.0})
+    response = client.post("/api/pagamentos/1/pagar", json={"amountToPay": 100.0})
     assert response.status_code == 400
     assert response.json() == {"detail": "Este pagamento já foi realizado"}

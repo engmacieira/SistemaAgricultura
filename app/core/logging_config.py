@@ -38,9 +38,8 @@ def setup_logging():
     """
     Configures the logging system to save logs to files.
     """
-    # Define the log directory (root/logs)
-    root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    log_dir = os.path.join(root_dir, "logs")
+    from app.core.database import BASE_DIR
+    log_dir = os.path.join(str(BASE_DIR), "logs")
     
     # Create the handler
     file_handler = DateRotatingFileHandler(log_dir)

@@ -7,9 +7,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 class BackupService:
-    def __init__(self, db_path: str = "app.db", backup_dir: str = "backups"):
-        self.db_path = db_path
-        self.backup_dir = backup_dir
+    def __init__(self, db_path: str = None, backup_dir: str = None):
+        from app.core.database import BASE_DIR, DB_PATH
+        self.db_path = db_path or str(DB_PATH)
+        self.backup_dir = backup_dir or os.path.join(str(BASE_DIR), "backups")
         if not os.path.exists(self.backup_dir):
             os.makedirs(self.backup_dir)
 

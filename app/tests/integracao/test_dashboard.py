@@ -2,7 +2,7 @@ def test_get_dashboard_data(client):
     """
     Testa se o endpoint do dashboard retorna a estrutura correta de dados.
     """
-    response = client.get("/dashboard/")
+    response = client.get("/api/dashboard/")
     assert response.status_code == 200
     
     data = response.json()
@@ -29,7 +29,7 @@ def test_dashboard_data_integrity(client):
     """
     Testa a integridade mínima dos dados retornados.
     """
-    response = client.get("/dashboard/")
+    response = client.get("/api/dashboard/")
     data = response.json()
     
     # Valores não devem ser negativos

@@ -8,7 +8,7 @@ def test_criar_usuario(client):
         "role": "admin",
         "password": "senha123"
     }
-    response = client.post("/usuarios/", json=payload)
+    response = client.post("/api/usuarios/", json=payload)
     assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
     assert data["email"] == payload["email"]
@@ -23,14 +23,14 @@ def test_login_usuario(client):
         "role": "user",
         "password": "password123"
     }
-    client.post("/usuarios/", json=payload)
+    client.post("/api/usuarios/", json=payload)
     
     # 2. Tentar login
     login_payload = {
         "email": "login@teste.com",
         "password": "password123"
     }
-    response = client.post("/usuarios/login", json=login_payload)
+    response = client.post("/api/usuarios/login", json=login_payload)
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert data["user"]["email"] == "login@teste.com"
@@ -41,7 +41,7 @@ def test_login_falha(client):
         "email": "inexistente@teste.com",
         "password": "errada"
     }
-    response = client.post("/usuarios/login", json=login_payload)
+    response = client.post("/api/usuarios/login", json=login_payload)
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
 def test_alterar_senha(client):
@@ -52,7 +52,7 @@ def test_alterar_senha(client):
         "role": "user",
         "password": "velha"
     }
-    create_res = client.post("/usuarios/", json=payload)
+    create_res = client.post("/api/usuarios/", json=payload)
     user_id = create_res.json()["id"]
     
     # 2. Alterar
@@ -60,7 +60,7 @@ def test_alterar_senha(client):
         "senha_atual": "velha",
         "nova_senha": "nova"
     }
-    response = client.put(f"/usuarios/{user_id}/senha", json=alterar_payload)
+    response = client.put(f"/api/usuarios/{user_id}/senha", json=alterar_payload)
     assert response.status_code == status.HTTP_200_OK
     
     # 3. Validar login com nova senha
@@ -68,5 +68,5 @@ def test_alterar_senha(client):
         "email": "senha@teste.com",
         "password": "nova"
     }
-    login_res = client.post("/usuarios/login", json=login_payload)
+    login_res = client.post("/api/usuarios/login", json=login_payload)
     assert login_res.status_code == status.HTTP_200_OK

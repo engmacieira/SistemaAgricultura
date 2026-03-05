@@ -18,40 +18,40 @@ def mock_uc():
 
 def test_listar_usuarios(mock_uc):
     mock_uc.listar_usuarios.return_value = {"items": [{"email": "admin@ex.com"}], "total": 1, "page": 1, "size": 10, "pages": 1}
-    response = client.get("/usuarios/")
+    response = client.get("/api/usuarios/")
     assert response.status_code == 200
 
 def test_criar_usuario(mock_uc):
     mock_uc.criar_usuario.return_value = {"id": "1", "name": "Admin", "email": "admin@ex.com", "role": "admin"}
     payload = {"name": "Admin", "email": "admin@ex.com", "role": "admin", "password": "123"}
-    response = client.post("/usuarios/", json=payload)
+    response = client.post("/api/usuarios/", json=payload)
     assert response.status_code == 201
     mock_uc.criar_usuario.assert_called_once_with(payload)
 
 def test_criar_usuario_erro(mock_uc):
     mock_uc.criar_usuario.side_effect = ValueError("Já existe")
     payload = {"name": "Admin", "email": "admin@ex.com", "role": "admin", "password": "123"}
-    response = client.post("/usuarios/", json=payload)
+    response = client.post("/api/usuarios/", json=payload)
     assert response.status_code == 400
 
 def test_login(mock_uc):
     mock_uc.autenticar_usuario.return_value = {"id": "1", "email": "admin@ex.com"}
-    response = client.post("/usuarios/login", json={"email": "admin@ex.com", "password": "123"})
+    response = client.post("/api/usuarios/login", json={"email": "admin@ex.com", "password": "123"})
     assert response.status_code == 200
     mock_uc.autenticar_usuario.assert_called_once_with("admin@ex.com", "123")
 
 def test_login_erro(mock_uc):
     mock_uc.autenticar_usuario.side_effect = ValueError("Credenciais inválidas")
-    response = client.post("/usuarios/login", json={"email": "admin@ex.com", "password": "123"})
+    response = client.post("/api/usuarios/login", json={"email": "admin@ex.com", "password": "123"})
     assert response.status_code == 401
 
 def test_alterar_senha(mock_uc):
     mock_uc.alterar_senha.return_value = True
-    response = client.put("/usuarios/1/senha", json={"senha_atual": "old", "nova_senha": "new"})
+    response = client.put("/api/usuarios/1/senha", json={"senha_atual": "old", "nova_senha": "new"})
     assert response.status_code == 200
     mock_uc.alterar_senha.assert_called_once_with("1", "old", "new")
 
 def test_alterar_senha_erro(mock_uc):
     mock_uc.alterar_senha.side_effect = ValueError("Senha atual incorreta")
-    response = client.put("/usuarios/1/senha", json={"senha_atual": "old", "nova_senha": "new"})
+    response = client.put("/api/usuarios/1/senha", json={"senha_atual": "old", "nova_senha": "new"})
     assert response.status_code == 400

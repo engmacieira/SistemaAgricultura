@@ -15,10 +15,10 @@ def test_partial_payment_flow(client):
         "totalValue": 1000.0,
         "status": "Concluído"
     }
-    client.post("/execucoes/", json=exec_payload)
+    client.post("/api/execucoes/", json=exec_payload)
     
     # 2. Find the payment ID
-    list_res = client.get("/pagamentos/")
+    list_res = client.get("/api/pagamentos/")
     pagamentos = list_res.json().get("items", [])
     pagamento = next(p for p in pagamentos if p["producerName"] == "João Parcial")
     pagamento_id = pagamento["id"]
@@ -31,7 +31,7 @@ def test_partial_payment_flow(client):
     pay_payload = {
         "amountToPay": 500.0
     }
-    pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar", json=pay_payload)
+    pay_res = client.post(f"/api/pagamentos/{pagamento_id}/pagar", json=pay_payload)
     assert pay_res.status_code == status.HTTP_201_CREATED
     data = pay_res.json()
     assert data["paidAmount"] == 500.0
@@ -41,7 +41,7 @@ def test_partial_payment_flow(client):
     pay_payload = {
         "amountToPay": 300.0
     }
-    pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar", json=pay_payload)
+    pay_res = client.post(f"/api/pagamentos/{pagamento_id}/pagar", json=pay_payload)
     data = pay_res.json()
     assert data["paidAmount"] == 800.0
     assert data["status"] == "Parcial"
@@ -50,7 +50,7 @@ def test_partial_payment_flow(client):
     pay_payload = {
         "amountToPay": 200.0
     }
-    pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar", json=pay_payload)
+    pay_res = client.post(f"/api/pagamentos/{pagamento_id}/pagar", json=pay_payload)
     data = pay_res.json()
     assert data["paidAmount"] == 1000.0
     assert data["status"] == "Pago"
@@ -68,10 +68,10 @@ def test_payment_overpay(client):
         "totalValue": 100.0,
         "status": "Concluído"
     }
-    client.post("/execucoes/", json=exec_payload)
+    client.post("/api/execucoes/", json=exec_payload)
     
     # Find payment
-    list_res = client.get("/pagamentos/")
+    list_res = client.get("/api/pagamentos/")
     pagamentos = list_res.json().get("items", [])
     pagamento = next(p for p in pagamentos if p["producerName"] == "Maria Rica")
     pagamento_id = pagamento["id"]
@@ -80,7 +80,7 @@ def test_payment_overpay(client):
     pay_payload = {
         "amountToPay": 150.0
     }
-    pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar", json=pay_payload)
+    pay_res = client.post(f"/api/pagamentos/{pagamento_id}/pagar", json=pay_payload)
     data = pay_res.json()
     assert data["paidAmount"] == 100.0 # Clamped to total
     assert data["status"] == "Pago"

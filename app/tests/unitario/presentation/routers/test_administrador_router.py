@@ -20,37 +20,37 @@ backup_mock = {"status": "ok", "message": "Backup realizado", "timestamp": "2026
 
 def test_obter_configuracoes(mock_uc):
     mock_uc.obter_configuracoes.return_value = configuracao_mock
-    response = client.get("/admin/configuracoes")
+    response = client.get("/api/admin/configuracoes")
     assert response.status_code == 200
     assert response.json() == configuracao_mock
 
 def test_atualizar_configuracoes(mock_uc):
     mock_uc.atualizar_configuracoes.return_value = configuracao_mock
-    response = client.put("/admin/configuracoes", json=configuracao_mock)
+    response = client.put("/api/admin/configuracoes", json=configuracao_mock)
     assert response.status_code == 200
     assert response.json() == configuracao_mock
 
 def test_realizar_backup(mock_uc):
     mock_uc.realizar_backup.return_value = backup_mock
-    response = client.post("/admin/backup")
+    response = client.post("/api/admin/backup")
     assert response.status_code == 200
     assert response.json() == backup_mock
 
 def test_realizar_backup_erro(mock_uc):
     mock_uc.realizar_backup.side_effect = ValueError("Erro")
-    response = client.post("/admin/backup")
+    response = client.post("/api/admin/backup")
     assert response.status_code == 400
     assert response.json() == {"detail": "Erro"}
 
 def test_restaurar_backup(mock_uc):
     mock_uc.restaurar_backup.return_value = {**backup_mock, "status": "restaurado"}
-    response = client.post("/admin/restaurar", json={"file_url": "url.sql"})
+    response = client.post("/api/admin/restaurar", json={"file_url": "url.sql"})
     assert response.status_code == 200
     assert response.json()["status"] == "restaurado"
     mock_uc.restaurar_backup.assert_called_once_with("url.sql")
 
 def test_restaurar_backup_erro(mock_uc):
     mock_uc.restaurar_backup.side_effect = ValueError("Falha")
-    response = client.post("/admin/restaurar", json={"file_url": "url.sql"})
+    response = client.post("/api/admin/restaurar", json={"file_url": "url.sql"})
     assert response.status_code == 400
     assert response.json() == {"detail": "Falha"}

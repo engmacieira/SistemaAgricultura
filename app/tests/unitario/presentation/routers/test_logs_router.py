@@ -18,7 +18,7 @@ def mock_uc():
 def test_listar_logs(mock_uc):
     logs_data = {"items": [{"id": "1", "userId": "u1", "userName": "U1", "action": "LOGIN", "entity": "auth", "details": "d", "timestamp": "2026-03-03T10:00:00"}], "total": 1, "page": 1, "pages": 1}
     mock_uc.listar_logs.return_value = logs_data
-    response = client.get("/logs/")
+    response = client.get("/api/logs/")
     assert response.status_code == 200
     assert response.json()["items"][0]["action"] == "LOGIN"
     assert response.json()["total"] == 1

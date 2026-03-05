@@ -11,7 +11,7 @@ def test_criar_produtor(client):
         "apelido_produtor": "Joao",
         "status": "Ativo"
     }
-    response = client.post("/produtores/", json=payload)
+    response = client.post("/api/produtores/", json=payload)
     assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
     assert data["name"] == payload["name"]
@@ -29,9 +29,9 @@ def test_listar_produtores(client):
         "apelido_produtor": "Maria",
         "status": "Ativo"
     }
-    client.post("/produtores/", json=payload)
+    client.post("/api/produtores/", json=payload)
     
-    response = client.get("/produtores/")
+    response = client.get("/api/produtores/")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert "items" in data
@@ -49,10 +49,10 @@ def test_obter_produtor(client):
         "apelido_produtor": "Carlos",
         "status": "Ativo"
     }
-    create_res = client.post("/produtores/", json=payload)
+    create_res = client.post("/api/produtores/", json=payload)
     produtor_id = create_res.json()["id"]
     
-    response = client.get(f"/produtores/{produtor_id}")
+    response = client.get(f"/api/produtores/{produtor_id}")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert data["id"] == produtor_id
@@ -68,11 +68,11 @@ def test_atualizar_produtor(client):
         "apelido_produtor": "Pedro",
         "status": "Ativo"
     }
-    create_res = client.post("/produtores/", json=payload)
+    create_res = client.post("/api/produtores/", json=payload)
     produtor_id = create_res.json()["id"]
     
     update_payload = {"name": "Pedro Rocha Junior", "regiao_referencia": "Nova Região"}
-    response = client.put(f"/produtores/{produtor_id}", json=update_payload)
+    response = client.put(f"/api/produtores/{produtor_id}", json=update_payload)
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert data["name"] == "Pedro Rocha Junior"
@@ -88,14 +88,14 @@ def test_deletar_produtor(client):
         "apelido_produtor": "Deletar",
         "status": "Inativo"
     }
-    create_res = client.post("/produtores/", json=payload)
+    create_res = client.post("/api/produtores/", json=payload)
     produtor_id = create_res.json()["id"]
     
-    response = client.delete(f"/produtores/{produtor_id}")
+    response = client.delete(f"/api/produtores/{produtor_id}")
     assert response.status_code == status.HTTP_204_NO_CONTENT
     
     # Verificar se foi "deletado" (não aparece mais na listagem/obter)
-    get_res = client.get(f"/produtores/{produtor_id}")
+    get_res = client.get(f"/api/produtores/{produtor_id}")
     assert get_res.status_code == status.HTTP_404_NOT_FOUND
 
 def test_reativar_produtor_excluido(client):
@@ -108,18 +108,18 @@ def test_reativar_produtor_excluido(client):
         "apelido_produtor": "Maria",
         "status": "Ativo"
     }
-    create_res = client.post("/produtores/", json=payload)
+    create_res = client.post("/api/produtores/", json=payload)
     produtor_id = create_res.json()["id"]
     
     # Deletar (Soft Delete)
-    client.delete(f"/produtores/{produtor_id}")
+    client.delete(f"/api/produtores/{produtor_id}")
     
     # Verificar que sumiu
-    assert client.get(f"/produtores/{produtor_id}").status_code == 404
+    assert client.get(f"/api/produtores/{produtor_id}").status_code == 404
     
     # Tentar criar novamente com o mesmo CPF
     payload["name"] = "Maria Reativada"
-    response = client.post("/produtores/", json=payload)
+    response = client.post("/api/produtores/", json=payload)
     assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
     assert data["id"] == produtor_id # Deve ser o mesmo ID
@@ -136,9 +136,9 @@ def test_erro_cpf_duplicado_ativo(client):
         "apelido_produtor": "Joao",
         "status": "Ativo"
     }
-    client.post("/produtores/", json=payload)
+    client.post("/api/produtores/", json=payload)
     
     # Tentar criar novamente
-    response = client.post("/produtores/", json=payload)
+    response = client.post("/api/produtores/", json=payload)
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert "já está cadastrado" in response.json()["detail"]

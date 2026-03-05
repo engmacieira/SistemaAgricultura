@@ -6,13 +6,13 @@ from pathlib import Path
 APP_NAME = "SistemaAgricultura"
 
 if os.name == 'nt':  # Se for Windows
-    base_dir = Path(os.getenv('LOCALAPPDATA', os.path.expanduser('~'))) / APP_NAME
+    BASE_DIR = Path(os.getenv('LOCALAPPDATA', os.path.expanduser('~'))) / APP_NAME
 else:  # Se for Linux ou Mac
-    base_dir = Path(os.path.expanduser('~')) / f".{APP_NAME.lower()}"
+    BASE_DIR = Path(os.path.expanduser('~')) / f".{APP_NAME.lower()}"
 
-base_dir.mkdir(parents=True, exist_ok=True)
+BASE_DIR.mkdir(parents=True, exist_ok=True)
 
-DB_PATH = base_dir / "app.db"
+DB_PATH = BASE_DIR / "app.db"
 
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{DB_PATH}")
 

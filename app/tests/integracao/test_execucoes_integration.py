@@ -16,7 +16,7 @@ def test_registrar_execucao(client):
         "totalValue": 2500.0,
         "status": "Concluído"
     }
-    response = client.post("/execucoes/", json=payload)
+    response = client.post("/api/execucoes/", json=payload)
     assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
     assert data["producerName"] == payload["producerName"]
@@ -34,9 +34,9 @@ def test_listar_execucoes(client):
         "totalValue": 1500.0,
         "status": "Pendente"
     }
-    client.post("/execucoes/", json=payload)
+    client.post("/api/execucoes/", json=payload)
     
-    response = client.get("/execucoes/")
+    response = client.get("/api/execucoes/")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert isinstance(data, dict)
@@ -55,10 +55,10 @@ def test_obter_execucao(client):
         "totalValue": 3000.0,
         "status": "Em Andamento"
     }
-    create_res = client.post("/execucoes/", json=payload)
+    create_res = client.post("/api/execucoes/", json=payload)
     execucao_id = create_res.json()["id"]
     
-    response = client.get(f"/execucoes/{execucao_id}")
+    response = client.get(f"/api/execucoes/{execucao_id}")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert data["id"] == execucao_id
@@ -75,11 +75,11 @@ def test_atualizar_execucao(client):
         "totalValue": 5000.0,
         "status": "Concluído"
     }
-    create_res = client.post("/execucoes/", json=payload)
+    create_res = client.post("/api/execucoes/", json=payload)
     execucao_id = create_res.json()["id"]
     
     update_payload = {"status": "Cancelado", "totalValue": 0.0}
-    response = client.put(f"/execucoes/{execucao_id}", json=update_payload)
+    response = client.put(f"/api/execucoes/{execucao_id}", json=update_payload)
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert data["status"] == "Cancelado"
@@ -97,13 +97,13 @@ def test_deletar_execucao(client):
         "totalValue": 10.0,
         "status": "Pendente"
     }
-    create_res = client.post("/execucoes/", json=payload)
+    create_res = client.post("/api/execucoes/", json=payload)
     execucao_id = create_res.json()["id"]
     
-    response = client.delete(f"/execucoes/{execucao_id}")
+    response = client.delete(f"/api/execucoes/{execucao_id}")
     assert response.status_code == status.HTTP_204_NO_CONTENT
     
     # By default, listing shouldn't show it
-    get_res = client.get("/execucoes/")
+    get_res = client.get("/api/execucoes/")
     items = get_res.json()["items"]
     assert not any(item["id"] == execucao_id for item in items)

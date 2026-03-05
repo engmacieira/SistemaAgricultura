@@ -3,7 +3,7 @@ from fastapi import status
 from datetime import date
 
 def test_listar_logs_vazio(client):
-    response = client.get("/logs/")
+    response = client.get("/api/logs/")
     assert response.status_code == status.HTTP_200_OK
     assert isinstance(response.json().get("items", []), list)
 
@@ -16,9 +16,9 @@ def test_geracao_log_automatica(client):
         "totalArea": 50.0,
         "status": "Ativo"
     }
-    client.post("/produtores/", json=payload)
+    client.post("/api/produtores/", json=payload)
     
-    response = client.get("/logs/")
+    response = client.get("/api/logs/")
     assert response.status_code == status.HTTP_200_OK
     logs = response.json()
     assert len(logs) >= 1

@@ -6,7 +6,7 @@ def test_listar_usuarios_paginacao_ordenacao(client):
     # but we depend on the isolated session)
     # The current user 'Admin Test' already exists.
     
-    response = client.get("/usuarios/?limit=5&sort_by=name&order=asc")
+    response = client.get("/api/usuarios/?limit=5&sort_by=name&order=asc")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert "items" in data
@@ -21,18 +21,18 @@ def test_soft_delete_usuario(client):
         "password": "password123",
         "role": "operador"
     }
-    create_res = client.post("/usuarios/", json=payload)
+    create_res = client.post("/api/usuarios/", json=payload)
     user_id = create_res.json()["id"]
     
     # Delete (Soft Delete)
-    del_res = client.delete(f"/usuarios/{user_id}")
+    del_res = client.delete(f"/api/usuarios/{user_id}")
     assert del_res.status_code == status.HTTP_204_NO_CONTENT
     
     # Verify it doesn't appear in normal list
-    list_res = client.get("/usuarios/")
+    list_res = client.get("/api/usuarios/")
     users = list_res.json()["items"]
     assert not any(u["id"] == user_id for u in users)
     
     # Verify it can't be retrieved via GET
-    get_res = client.get(f"/usuarios/{user_id}")
+    get_res = client.get(f"/api/usuarios/{user_id}")
     assert get_res.status_code == status.HTTP_404_NOT_FOUND

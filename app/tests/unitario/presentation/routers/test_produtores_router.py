@@ -30,46 +30,46 @@ produtor_mock = {
 
 def test_listar_produtores(mock_uc):
     mock_uc.listar_produtores.return_value = {"items": [produtor_mock], "total": 1, "page": 1, "size": 10, "pages": 1}
-    response = client.get("/produtores/")
+    response = client.get("/api/produtores/")
     assert response.status_code == 200
     assert response.json()["items"][0]["id"] == "1"
 
 def test_obter_produtor(mock_uc):
     mock_uc.obter_produtor.return_value = produtor_mock
-    response = client.get("/produtores/1")
+    response = client.get("/api/produtores/1")
     assert response.status_code == 200
     assert response.json()["id"] == "1"
 
 def test_obter_produtor_erro(mock_uc):
     mock_uc.obter_produtor.side_effect = ValueError("Produtor não encontrado")
-    response = client.get("/produtores/1")
+    response = client.get("/api/produtores/1")
     assert response.status_code == 404
 
 def test_criar_produtor(mock_uc):
     mock_uc.criar_produtor.return_value = produtor_mock
     payload = {"name": "Maria", "cpfCnpj": "123", "property": "Prop", "status": "Ativo", "regiao_referencia": None, "telefone_contato": None, "apelido_produtor": None}
-    response = client.post("/produtores/", json=payload)
+    response = client.post("/api/produtores/", json=payload)
     assert response.status_code == 201
     assert response.json()["id"] == "1"
     mock_uc.criar_produtor.assert_called_once_with(payload, {"id": "test_user_id", "name": "Test User"})
 
 def test_criar_produtor_erro(mock_uc):
     mock_uc.criar_produtor.side_effect = ValueError("CPF/CNPJ já cadastrado")
-    response = client.post("/produtores/", json={"name": "Maria", "cpfCnpj": "123", "property": "Prop", "status": "Ativo"})
+    response = client.post("/api/produtores/", json={"name": "Maria", "cpfCnpj": "123", "property": "Prop", "status": "Ativo"})
     assert response.status_code == 400
 
 def test_atualizar_produtor(mock_uc):
     mock_uc.atualizar_produtor.return_value = {**produtor_mock, "name": "Novo"}
-    response = client.put("/produtores/1", json={"name": "Novo"})
+    response = client.put("/api/produtores/1", json={"name": "Novo"})
     assert response.status_code == 200
     assert response.json()["name"] == "Novo"
 
 def test_deletar_produtor(mock_uc):
     mock_uc.deletar_produtor.return_value = True
-    response = client.delete("/produtores/1")
+    response = client.delete("/api/produtores/1")
     assert response.status_code == 204
 
 def test_deletar_produtor_falha_bool(mock_uc):
     mock_uc.deletar_produtor.return_value = False
-    response = client.delete("/produtores/1")
+    response = client.delete("/api/produtores/1")
     assert response.status_code == 404

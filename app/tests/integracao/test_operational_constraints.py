@@ -83,7 +83,7 @@ def test_admin_access_allowed(client):
     # and reached the endpoint, which is what we want to verify.
     from fastapi.exceptions import ResponseValidationError
     try:
-        response = client.get("/admin/configuracoes")
+        response = client.get("/api/admin/configuracoes")
         assert response.status_code == 200
     except ResponseValidationError:
         # Success: reached the endpoint (otherwise would be 401/403)
