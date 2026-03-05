@@ -1,29 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { SystemLog } from "../../logs/domain/SystemLog";
 import { logRepository } from "../../logs/data/LogRepository";
 import { DataTable } from "../../../shared/components/DataTable";
-import { Search, ShieldAlert } from "lucide-react";
+import { Pagination } from "../../../shared/components/Pagination";
+import { Modal } from "../../../shared/components/Modal";
+import { Search, Eye } from "lucide-react";
 
 export function SystemLogsPage() {
   const [logs, setLogs] = useState<SystemLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  const [selectedJson, setSelectedJson] = useState<{ title: string; content: string } | null>(null);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [sortConfig, setSortConfig] = useState<{ sortBy: string; order: "asc" | "desc" }>({
+    sortBy: "timestamp",
+    order: "desc",
+  });
+  const limit = 10;
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+      setCurrentPage(0); // Reset page on search
+    }, 500);
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
 
   useEffect(() => {
     const fetchLogs = async () => {
       setLoading(true);
-      const data = await logRepository.getLogs();
-      setLogs(data);
-      setLoading(false);
+      try {
+        const response = await logRepository.getLogs(
+          currentPage * limit,
+          limit,
+          sortConfig.sortBy,
+          sortConfig.order,
+          debouncedSearch
+        );
+        setLogs(response.items);
+        setTotalPages(response.pages);
+      } catch (error) {
+        console.error("Failed to fetch logs", error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchLogs();
-  }, []);
+  }, [currentPage, sortConfig, debouncedSearch]);
 
-  const filteredLogs = logs.filter((log) =>
-    log.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    log.details.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    log.entity.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleSort = (column: string) => {
+    setSortConfig((current) => {
+      if (current.sortBy === column) {
+        return { sortBy: column, order: current.order === "asc" ? "desc" : "asc" };
+      }
+      return { sortBy: column, order: "asc" };
+    });
+  };
 
   const getActionColor = (action: string) => {
     switch (action) {
@@ -34,6 +70,20 @@ export function SystemLogsPage() {
       case "LOGOUT": return "bg-gray-100 text-gray-800 border-gray-300";
       default: return "bg-gray-100 text-gray-800 border-gray-300";
     }
+  };
+
+  const renderJsonLink = (jsonStr: string | null | undefined, title: string) => {
+    if (!jsonStr) return <span className="text-gray-400">-</span>;
+    return (
+      <button
+        type="button"
+        onClick={() => setSelectedJson({ title, content: jsonStr })}
+        className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+      >
+        <Eye className="w-4 h-4" />
+        Visualizar
+      </button>
+    );
   };
 
   const columns = [
@@ -63,6 +113,16 @@ export function SystemLogsPage() {
     },
     { header: "Entidade", accessorKey: "entity" },
     { header: "Detalhes", accessorKey: "details" },
+    {
+      header: "Registro Anterior",
+      accessorKey: "dados_anteriores",
+      cell: (item: SystemLog) => renderJsonLink(item.dados_anteriores, "Registro Anterior"),
+    },
+    {
+      header: "Registro Novo",
+      accessorKey: "dados_novos",
+      cell: (item: SystemLog) => renderJsonLink(item.dados_novos, "Registro Novo"),
+    },
   ];
 
   return (
@@ -92,8 +152,41 @@ export function SystemLogsPage() {
           <div className="text-xl font-bold text-gray-500 animate-pulse">Carregando logs...</div>
         </div>
       ) : (
-        <DataTable data={filteredLogs} columns={columns} />
+        <div className="space-y-4">
+          <DataTable
+            data={logs}
+            columns={columns}
+            onSort={handleSort}
+            sortConfig={sortConfig}
+          />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       )}
+
+      {/* Modal para exibir JSON */}
+      <Modal
+        isOpen={!!selectedJson}
+        onClose={() => setSelectedJson(null)}
+        title={selectedJson?.title || "Detalhes"}
+      >
+        {selectedJson && (
+          <div className="bg-gray-50 p-4 rounded-md border border-gray-200 overflow-auto max-h-[60vh]">
+            <pre className="text-sm text-gray-800 whitespace-pre-wrap">
+              {(() => {
+                try {
+                  return JSON.stringify(JSON.parse(selectedJson.content), null, 2);
+                } catch {
+                  return selectedJson.content;
+                }
+              })()}
+            </pre>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }

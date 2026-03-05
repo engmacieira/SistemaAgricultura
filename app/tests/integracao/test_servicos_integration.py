@@ -10,7 +10,7 @@ def test_criar_servico(client):
         "active": True
     }
     response = client.post("/servicos/", json=payload)
-    assert response.status_code == status.HTTP_200_OK
+    assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
     assert data["name"] == payload["name"]
     assert "id" in data
@@ -28,8 +28,8 @@ def test_listar_servicos(client):
     response = client.get("/servicos/")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
-    assert isinstance(data, list)
-    assert len(data) >= 1
+    assert isinstance(data.get("items", []), list)
+    assert len(data.get("items", [])) >= 1
 
 def test_obter_servico(client):
     payload = {
@@ -76,8 +76,7 @@ def test_deletar_servico(client):
     servico_id = create_res.json()["id"]
     
     response = client.delete(f"/servicos/{servico_id}")
-    assert response.status_code == status.HTTP_200_OK
-    assert response.json()["message"] == "Serviço deletado com sucesso"
+    assert response.status_code == status.HTTP_204_NO_CONTENT
     
     get_res = client.get(f"/servicos/{servico_id}")
     assert get_res.status_code == status.HTTP_404_NOT_FOUND

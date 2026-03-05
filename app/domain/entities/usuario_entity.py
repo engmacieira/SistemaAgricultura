@@ -7,3 +7,4 @@ class Usuario:
     email: str
     role: str
     password_hash: str
+    is_deleted: bool = False

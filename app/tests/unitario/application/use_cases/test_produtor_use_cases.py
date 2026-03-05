@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, ANY
 from app.application.use_cases.produtor_use_cases import ProdutorUseCases
 
 def test_obter_produtor_erro():
@@ -13,6 +13,7 @@ def test_criar_produtor_com_log():
     repo_mock = MagicMock()
     log_mock = MagicMock()
     produtor_mock = MagicMock()
+    repo_mock.get_model_by_cpf_cnpj.return_value = None
     repo_mock.create.return_value = produtor_mock
     
     use_cases = ProdutorUseCases(repo_mock, log_use_cases=log_mock)
@@ -28,7 +29,9 @@ def test_criar_produtor_com_log():
         user_name="Admin1",
         action="CRIAR",
         entity="Produtor",
-        details="Criou o produtor 'João'"
+        details="Criou o produtor 'João'",
+        dados_anteriores=None,
+        dados_novos=ANY
     )
 
 def test_atualizar_produtor_com_log():
@@ -52,5 +55,7 @@ def test_atualizar_produtor_com_log():
         user_name="Admin1",
         action="EDITAR",
         entity="Produtor",
-        details="Atualizou os dados do produtor 'João Antigo'"
+        details="Atualizou os dados do produtor 'João Antigo'",
+        dados_anteriores=ANY,
+        dados_novos=ANY
     )

@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="24" skipped="0" tests="167" time="10.164" timestamp="2026-03-05T09:24:16.525345-03:00" hostname="MCR024"><testcase classname="app.tests.integracao.test_administrador_integration" name="test_obter_configuracoes" time="0.018" /><testcase classname="app.tests.integracao.test_administrador_integration" name="test_atualizar_configuracoes" time="0.008" /><testcase classname="app.tests.integracao.test_administrador_integration" name="test_realizar_backup" time="0.004" /><testcase classname="app.tests.integracao.test_administrador_integration" name="test_restaurar_backup" time="0.004" /><testcase classname="app.tests.integracao.test_execucoes_integration" name="test_registrar_execucao" time="0.013" /><testcase classname="app.tests.integracao.test_execucoes_integration" name="test_listar_execucoes" time="0.013" /><testcase classname="app.tests.integracao.test_execucoes_integration" name="test_obter_execucao" time="0.009" /><testcase classname="app.tests.integracao.test_execucoes_integration" name="test_atualizar_execucao" time="0.012" /><testcase classname="app.tests.integracao.test_execucoes_integration" name="test_deletar_execucao" time="0.013" /><testcase classname="app.tests.integracao.test_logs_integration" name="test_listar_logs_vazio" time="0.007" /><testcase classname="app.tests.integracao.test_logs_integration" name="test_geracao_log_automatica" time="0.011" /><testcase classname="app.tests.integracao.test_pagamentos_integration" name="test_listar_pagamentos" time="0.010" /><testcase classname="app.tests.integracao.test_pagamentos_integration" name="test_registrar_pagamento_fluxo" time="0.019"><failure message="assert 201 == 200&#10; +  where 201 = &lt;Response [201 Created]&gt;.status_code&#10; +  and   200 = status.HTTP_200_OK">client = &lt;starlette.testclient.TestClient object at 0x000001505E24F570&gt;
+
+    def test_registrar_pagamento_fluxo(client):
+        # 1. Criar uma execução (que deve gerar um pagamento via logic do sistema)
+        exec_payload = {
+            "producerId": "prod-p1",
+            "producerName": "João Pagador",
+            "serviceId": "serv-p1",
+            "serviceName": "Aragem",
+            "date": str(date.today()),
+            "quantity": 10.0,
+            "unit": "Hectare",
+            "totalValue": 1000.0,
+            "status": "Concluído"
+        }
+        client.post("/execucoes/", json=exec_payload)
+    
+        # 2. Listar pagamentos para pegar o ID
+        list_res = client.get("/pagamentos/")
+        pagamentos = list_res.json().get("items", [])
+        assert len(pagamentos) &gt;= 1
+        pagamento_id = pagamentos[0]["id"]
+    
+        # 3. Obter pagamento específico
+        get_res = client.get(f"/pagamentos/{pagamento_id}")
+        assert get_res.status_code == status.HTTP_200_OK
+        assert get_res.json()["id"] == pagamento_id
+    
+        # 4. Registrar o pagamento (pagar)
+        pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 1000.0})
+&gt;       assert pay_res.status_code == status.HTTP_200_OK
+E       assert 201 == 200
+E        +  where 201 = &lt;Response [201 Created]&gt;.status_code
+E        +  and   200 = status.HTTP_200_OK
+
+app\tests\integracao\test_pagamentos_integration.py:40: AssertionError</failure></testcase><testcase classname="app.tests.integracao.test_pagamentos_integration" name="test_atualizar_pagamento" time="0.012" /><testcase classname="app.tests.integracao.test_pagamentos_integration" name="test_obter_pagamento_inexistente" time="0.005" /><testcase classname="app.tests.integracao.test_partial_payments" name="test_partial_payment_flow" time="0.014"><failure message="assert 201 == 200&#10; +  where 201 = &lt;Response [201 Created]&gt;.status_code&#10; +  and   200 = status.HTTP_200_OK">client = &lt;starlette.testclient.TestClient object at 0x000001505E2EB240&gt;
+
+    def test_partial_payment_flow(client):
+        # 1. Create an execution (this should trigger payment creation)
+        exec_payload = {
+            "producerId": "prod-partial",
+            "producerName": "João Parcial",
+            "serviceId": "serv-p1",
+            "serviceName": "Aragem Especial",
+            "date": str(date.today()),
+            "quantity": 10.0,
+            "unit": "Hectare",
+            "totalValue": 1000.0,
+            "status": "Concluído"
+        }
+        client.post("/execucoes/", json=exec_payload)
+    
+        # 2. Find the payment ID
+        list_res = client.get("/pagamentos/")
+        pagamentos = list_res.json().get("items", [])
+        pagamento = next(p for p in pagamentos if p["producerName"] == "João Parcial")
+        pagamento_id = pagamento["id"]
+    
+        assert pagamento["amount"] == 1000.0
+        assert pagamento["paidAmount"] == 0.0
+        assert pagamento["status"] == "Pendente"
+    
+        # 3. Register a partial payment (500)
+        pay_payload = {
+            "amountToPay": 500.0
+        }
+        pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar", json=pay_payload)
+&gt;       assert pay_res.status_code == status.HTTP_200_OK
+E       assert 201 == 200
+E        +  where 201 = &lt;Response [201 Created]&gt;.status_code
+E        +  and   200 = status.HTTP_200_OK
+
+app\tests\integracao\test_partial_payments.py:35: AssertionError</failure></testcase><testcase classname="app.tests.integracao.test_partial_payments" name="test_payment_overpay" time="0.013" /><testcase classname="app.tests.integracao.test_produtores_integration" name="test_criar_produtor" time="0.006" /><testcase classname="app.tests.integracao.test_produtores_integration" name="test_listar_produtores" time="0.010" /><testcase classname="app.tests.integracao.test_produtores_integration" name="test_obter_produtor" time="0.009" /><testcase classname="app.tests.integracao.test_produtores_integration" name="test_atualizar_produtor" time="0.010" /><testcase classname="app.tests.integracao.test_produtores_integration" name="test_deletar_produtor" time="0.012" /><testcase classname="app.tests.integracao.test_produtores_integration" name="test_reativar_produtor_excluido" time="0.015" /><testcase classname="app.tests.integracao.test_produtores_integration" name="test_erro_cpf_duplicado_ativo" time="0.008" /><testcase classname="app.tests.integracao.test_servicos_integration" name="test_criar_servico" time="0.009" /><testcase classname="app.tests.integracao.test_servicos_integration" name="test_listar_servicos" time="0.010" /><testcase classname="app.tests.integracao.test_servicos_integration" name="test_obter_servico" time="0.008" /><testcase classname="app.tests.integracao.test_servicos_integration" name="test_atualizar_servico" time="0.011" /><testcase classname="app.tests.integracao.test_servicos_integration" name="test_deletar_servico" time="0.010" /><testcase classname="app.tests.integracao.test_usuarios_integration" name="test_criar_usuario" time="0.243"><failure message="KeyError: 'user'">client = &lt;starlette.testclient.TestClient object at 0x000001505E2E9370&gt;
+
+    def test_criar_usuario(client):
+        payload = {
+            "name": "Admin Teste",
+            "email": "admin@teste.com",
+            "role": "admin",
+            "password": "senha123"
+        }
+        response = client.post("/usuarios/", json=payload)
+        assert response.status_code == status.HTTP_201_CREATED
+        data = response.json()
+&gt;       assert data["user"]["email"] == payload["email"]
+               ^^^^^^^^^^^^
+E       KeyError: 'user'
+
+app\tests\integracao\test_usuarios_integration.py:14: KeyError</failure></testcase><testcase classname="app.tests.integracao.test_usuarios_integration" name="test_login_usuario" time="0.438" /><testcase classname="app.tests.integracao.test_usuarios_integration" name="test_login_falha" time="0.005" /><testcase classname="app.tests.integracao.test_usuarios_integration" name="test_alterar_senha" time="0.880" /><testcase classname="app.tests.unitario.application.use_cases.test_administrador_use_cases" name="test_obter_configuracoes" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_administrador_use_cases" name="test_atualizar_configuracoes" time="0.000" /><testcase classname="app.tests.unitario.application.use_cases.test_administrador_use_cases" name="test_realizar_backup_sem_servico" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_administrador_use_cases" name="test_restaurar_backup_sem_servico" time="0.000" /><testcase classname="app.tests.unitario.application.use_cases.test_execucao_use_cases" name="test_obter_execucao_sucesso" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_execucao_use_cases" name="test_listar_execucoes" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_execucao_use_cases" name="test_obter_execucao_nao_encontrado" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_execucao_use_cases" name="test_criar_execucao" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_execucao_use_cases" name="test_atualizar_execucao" time="0.002" /><testcase classname="app.tests.unitario.application.use_cases.test_log_use_cases" name="test_listar_logs" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_log_use_cases" name="test_registrar_acao" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_pagamento_use_cases" name="test_obter_pagamento_sucesso" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_pagamento_use_cases" name="test_obter_pagamento_erro" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_pagamento_use_cases" name="test_registrar_pagamento_ja_pago" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_pagamento_use_cases" name="test_registrar_pagamento_sucesso" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_produtor_use_cases" name="test_obter_produtor_erro" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_produtor_use_cases" name="test_criar_produtor_com_log" time="0.003"><failure message="AssertionError: assert &lt;MagicMock na...444693628576'&gt; == &lt;MagicMock na...444693625552'&gt;&#10;  &#10;  Use -v to get more diff">def test_criar_produtor_com_log():
+        repo_mock = MagicMock()
+        log_mock = MagicMock()
+        produtor_mock = MagicMock()
+        repo_mock.create.return_value = produtor_mock
+    
+        use_cases = ProdutorUseCases(repo_mock, log_use_cases=log_mock)
+        usuario_logado = {"id": "u1", "name": "Admin1"}
+        data = {"name": "João", "cpfCnpj": "123"}
+    
+        result = use_cases.criar_produtor(data, usuario_logado)
+    
+&gt;       assert result == produtor_mock
+E       AssertionError: assert &lt;MagicMock na...444693628576'&gt; == &lt;MagicMock na...444693625552'&gt;
+E         
+E         Use -v to get more diff
+
+app\tests\unitario\application\use_cases\test_produtor_use_cases.py:24: AssertionError</failure></testcase><testcase classname="app.tests.unitario.application.use_cases.test_produtor_use_cases" name="test_atualizar_produtor_com_log" time="0.003" /><testcase classname="app.tests.unitario.application.use_cases.test_servico_use_cases" name="test_obter_servico_erro" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_servico_use_cases" name="test_criar_servico_com_log" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_servico_use_cases" name="test_deletar_servico" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_usuario_use_cases" name="test_obter_usuario_erro" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_usuario_use_cases" name="test_autenticar_usuario_nao_encontrado" time="0.000" /><testcase classname="app.tests.unitario.application.use_cases.test_usuario_use_cases" name="test_autenticar_usuario_sucesso" time="0.004" /><testcase classname="app.tests.unitario.application.use_cases.test_usuario_use_cases" name="test_criar_usuario_email_existente" time="0.001" /><testcase classname="app.tests.unitario.application.use_cases.test_usuario_use_cases" name="test_criar_usuario_sucesso" time="0.001" /><testcase classname="app.tests.unitario.core.test_database" name="test_get_db" time="0.001" /><testcase classname="app.tests.unitario.core.test_security" name="test_password_hashing" time="0.729" /><testcase classname="app.tests.unitario.core.test_security" name="test_create_access_token_default_expiration" time="0.001" /><testcase classname="app.tests.unitario.core.test_security" name="test_create_access_token_custom_expiration" time="0.001" /><testcase classname="app.tests.unitario.domain.entities.test_administrador_entity" name="test_criar_configuracao" time="0.001" /><testcase classname="app.tests.unitario.domain.entities.test_execucao_entity" name="test_criar_execucao" time="0.000" /><testcase classname="app.tests.unitario.domain.entities.test_log_entity" name="test_criar_log" time="0.000" /><testcase classname="app.tests.unitario.domain.entities.test_pagamento_entity" name="test_criar_pagamento_sem_data_pagamento" time="0.000" /><testcase classname="app.tests.unitario.domain.entities.test_pagamento_entity" name="test_criar_pagamento_com_data_pagamento" time="0.000" /><testcase classname="app.tests.unitario.domain.entities.test_produtor_entity" name="test_criar_produtor" time="0.001" /><testcase classname="app.tests.unitario.domain.entities.test_servico_entity" name="test_criar_servico_com_descricao" time="0.000" /><testcase classname="app.tests.unitario.domain.entities.test_servico_entity" name="test_criar_servico_sem_descricao" time="0.001" /><testcase classname="app.tests.unitario.domain.entities.test_usuario_entity" name="test_criar_usuario" time="0.000" /><testcase classname="app.tests.unitario.domain.repositories.test_administrador_repository" name="test_administrador_repository_interface" time="0.002" /><testcase classname="app.tests.unitario.domain.repositories.test_execucao_repository" name="test_execucao_repository_interface" time="0.001" /><testcase classname="app.tests.unitario.domain.repositories.test_log_repository" name="test_log_repository_interface" time="0.002" /><testcase classname="app.tests.unitario.domain.repositories.test_pagamento_repository" name="test_pagamento_repository_interface" time="0.001" /><testcase classname="app.tests.unitario.domain.repositories.test_produtor_repository" name="test_produtor_repository_interface" time="0.002" /><testcase classname="app.tests.unitario.domain.repositories.test_servico_repository" name="test_servico_repository_interface" time="0.001" /><testcase classname="app.tests.unitario.domain.repositories.test_usuario_repository" name="test_usuario_repository_interface" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.models.test_administrador_model" name="test_configuracao_model_to_entity" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.models.test_execucao_model" name="test_execucao_model_to_entity" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.models.test_log_model" name="test_log_model_to_entity" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.models.test_pagamento_model" name="test_pagamento_model_to_entity" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.models.test_produtor_model" name="test_produtor_model_to_entity" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.models.test_servico_model" name="test_servico_model_to_entity" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.models.test_usuario_model" name="test_usuario_model_to_entity" time="0.000" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_administrador_repository" name="test_administrador_repository_get_configuracoes" time="0.003" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_administrador_repository" name="test_administrador_repository_update_configuracoes_existing" time="0.003" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_administrador_repository" name="test_administrador_repository_update_configuracoes_new" time="0.002" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_base_repository" name="test_base_repository_get_all" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_base_repository" name="test_base_repository_get_by_id" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_base_repository" name="test_base_repository_create" time="0.002" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_base_repository" name="test_base_repository_update_existing" time="0.002" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_base_repository" name="test_base_repository_delete" time="0.002" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_execucao_repository" name="test_execucao_repository_init" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_log_repository" name="test_log_repository_init" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_pagamento_repository" name="test_pagamento_repository_init" time="0.001" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_produtor_repository" name="test_produtor_repository_get_by_cpf_cnpj" time="0.003" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_produtor_repository" name="test_produtor_repository_has_execucoes" time="0.002" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_servico_repository" name="test_servico_repository_get_by_name" time="0.004" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_servico_repository" name="test_servico_repository_has_execucoes" time="0.002" /><testcase classname="app.tests.unitario.infrastructure.repositories.test_usuario_repository" name="test_usuario_repository_get_by_email" time="0.002" /><testcase classname="app.tests.unitario.presentation.routers.test_administrador_router" name="test_obter_configuracoes" time="0.005"><failure message="fastapi.exceptions.ResponseValidationError: 1 validation error:&#10;  {'type': 'missing', 'loc': ('response', 'unidades_medida'), 'msg': 'Field required', 'input': {'tema': 'escuro'}}&#10;&#10;  File &quot;E:\Projetos\AgendamentosAgricultura\app\presentation\routers\administrador.py&quot;, line 13, in obter_configuracoes&#10;    GET /admin/configuracoes">mock_uc = &lt;MagicMock id='1444695420480'&gt;
+
+    def test_obter_configuracoes(mock_uc):
+        mock_uc.obter_configuracoes.return_value = {"tema": "escuro"}
+&gt;       response = client.get("/admin/configuracoes")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\routers\test_administrador_router.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\starlette\testclient.py:473: in get
+    return super().get(
+.venv\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: ModelField | None = None,
+        response_content: Any,
+        include: IncEx | None = None,
+        exclude: IncEx | None = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+        endpoint_ctx: EndpointContext | None = None,
+        dump_json: bool = False,
+    ) -&gt; Any:
+        if field:
+            if is_coroutine:
+                value, errors = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if errors:
+                ctx = endpoint_ctx or EndpointContext()
+&gt;               raise ResponseValidationError(
+                    errors=errors,
+                    body=response_content,
+                    endpoint_ctx=ctx,
+                )
+E               fastapi.exceptions.ResponseValidationError: 1 validation error:
+E                 {'type': 'missing', 'loc': ('response', 'unidades_medida'), 'msg': 'Field required', 'input': {'tema': 'escuro'}}
+E               
+E                 File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\administrador.py", line 13, in obter_configuracoes
+E                   GET /admin/configuracoes
+
+.venv\Lib\site-packages\fastapi\routing.py:296: ResponseValidationError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_administrador_router" name="test_atualizar_configuracoes" time="0.003"><failure message="assert 422 == 200&#10; +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code">mock_uc = &lt;MagicMock id='1444695424512'&gt;
+
+    def test_atualizar_configuracoes(mock_uc):
+        mock_uc.atualizar_configuracoes.return_value = {"tema": "claro"}
+        response = client.put("/admin/configuracoes", json={"tema": "claro"})
+&gt;       assert response.status_code == 200
+E       assert 422 == 200
+E        +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code
+
+app\tests\unitario\presentation\routers\test_administrador_router.py:27: AssertionError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_administrador_router" name="test_realizar_backup" time="0.006"><failure message="fastapi.exceptions.ResponseValidationError: 2 validation errors:&#10;  {'type': 'missing', 'loc': ('response', 'message'), 'msg': 'Field required', 'input': {'status': 'ok'}}&#10;  {'type': 'missing', 'loc': ('response', 'timestamp'), 'msg': 'Field required', 'input': {'status': 'ok'}}&#10;&#10;  File &quot;E:\Projetos\AgendamentosAgricultura\app\presentation\routers\administrador.py&quot;, line 23, in realizar_backup&#10;    POST /admin/backup">mock_uc = &lt;MagicMock id='1444695423840'&gt;
+
+    def test_realizar_backup(mock_uc):
+        mock_uc.realizar_backup.return_value = {"status": "ok"}
+&gt;       response = client.post("/admin/backup")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\routers\test_administrador_router.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\starlette\testclient.py:546: in post
+    return super().post(
+.venv\Lib\site-packages\httpx\_client.py:1144: in post
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: ModelField | None = None,
+        response_content: Any,
+        include: IncEx | None = None,
+        exclude: IncEx | None = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+        endpoint_ctx: EndpointContext | None = None,
+        dump_json: bool = False,
+    ) -&gt; Any:
+        if field:
+            if is_coroutine:
+                value, errors = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if errors:
+                ctx = endpoint_ctx or EndpointContext()
+&gt;               raise ResponseValidationError(
+                    errors=errors,
+                    body=response_content,
+                    endpoint_ctx=ctx,
+                )
+E               fastapi.exceptions.ResponseValidationError: 2 validation errors:
+E                 {'type': 'missing', 'loc': ('response', 'message'), 'msg': 'Field required', 'input': {'status': 'ok'}}
+E                 {'type': 'missing', 'loc': ('response', 'timestamp'), 'msg': 'Field required', 'input': {'status': 'ok'}}
+E               
+E                 File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\administrador.py", line 23, in realizar_backup
+E                   POST /admin/backup
+
+.venv\Lib\site-packages\fastapi\routing.py:296: ResponseValidationError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_administrador_router" name="test_realizar_backup_erro" time="0.003" /><testcase classname="app.tests.unitario.presentation.routers.test_administrador_router" name="test_restaurar_backup" time="0.003"><failure message="fastapi.exceptions.ResponseValidationError: 2 validation errors:&#10;  {'type': 'missing', 'loc': ('response', 'message'), 'msg': 'Field required', 'input': {'status': 'restaurado'}}&#10;  {'type': 'missing', 'loc': ('response', 'timestamp'), 'msg': 'Field required', 'input': {'status': 'restaurado'}}&#10;&#10;  File &quot;E:\Projetos\AgendamentosAgricultura\app\presentation\routers\administrador.py&quot;, line 31, in restaurar_backup&#10;    POST /admin/restaurar">mock_uc = &lt;MagicMock id='1444717986208'&gt;
+
+    def test_restaurar_backup(mock_uc):
+        mock_uc.restaurar_backup.return_value = {"status": "restaurado"}
+&gt;       response = client.post("/admin/restaurar", json={"file_url": "url.sql"})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\routers\test_administrador_router.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\starlette\testclient.py:546: in post
+    return super().post(
+.venv\Lib\site-packages\httpx\_client.py:1144: in post
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: ModelField | None = None,
+        response_content: Any,
+        include: IncEx | None = None,
+        exclude: IncEx | None = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+        endpoint_ctx: EndpointContext | None = None,
+        dump_json: bool = False,
+    ) -&gt; Any:
+        if field:
+            if is_coroutine:
+                value, errors = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if errors:
+                ctx = endpoint_ctx or EndpointContext()
+&gt;               raise ResponseValidationError(
+                    errors=errors,
+                    body=response_content,
+                    endpoint_ctx=ctx,
+                )
+E               fastapi.exceptions.ResponseValidationError: 2 validation errors:
+E                 {'type': 'missing', 'loc': ('response', 'message'), 'msg': 'Field required', 'input': {'status': 'restaurado'}}
+E                 {'type': 'missing', 'loc': ('response', 'timestamp'), 'msg': 'Field required', 'input': {'status': 'restaurado'}}
+E               
+E                 File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\administrador.py", line 31, in restaurar_backup
+E                   POST /admin/restaurar
+
+.venv\Lib\site-packages\fastapi\routing.py:296: ResponseValidationError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_administrador_router" name="test_restaurar_backup_erro" time="0.004" /><testcase classname="app.tests.unitario.presentation.routers.test_execucoes_router" name="test_listar_execucoes" time="0.008"><failure message="KeyError: 0">mock_uc = &lt;MagicMock id='1444695422160'&gt;
+
+    def test_listar_execucoes(mock_uc):
+        mock_uc.listar_execucoes.return_value = {"items": [{"id": "1", "producerId": "p1", "producerName": "P1", "serviceId": "s1", "serviceName": "S1", "date": "2026-03-03", "quantity": 10.0, "unit": "H", "totalValue": 100.0, "status": "Pendente", "is_deleted": False}], "total": 1, "page": 1, "size": 10, "pages": 1}
+        response = client.get("/execucoes/")
+        assert response.status_code == 200
+&gt;       assert response.json()["items"][0]["id"] == "1"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 0
+
+app\tests\unitario\presentation\routers\test_execucoes_router.py:23: KeyError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_execucoes_router" name="test_obter_execucao" time="0.004" /><testcase classname="app.tests.unitario.presentation.routers.test_execucoes_router" name="test_obter_execucao_nao_encontrado" time="0.003" /><testcase classname="app.tests.unitario.presentation.routers.test_execucoes_router" name="test_registrar_execucao" time="0.004" /><testcase classname="app.tests.unitario.presentation.routers.test_execucoes_router" name="test_atualizar_execucao" time="0.004" /><testcase classname="app.tests.unitario.presentation.routers.test_execucoes_router" name="test_atualizar_execucao_erro" time="0.005" /><testcase classname="app.tests.unitario.presentation.routers.test_execucoes_router" name="test_deletar_execucao" time="0.003" /><testcase classname="app.tests.unitario.presentation.routers.test_execucoes_router" name="test_deletar_execucao_falha" time="0.003" /><testcase classname="app.tests.unitario.presentation.routers.test_logs_router" name="test_listar_logs" time="0.004"><failure message="AssertionError: assert {'items': [{'...1, 'total': 1} == [{'action': '...d': '1', ...}]&#10;  &#10;  Use -v to get more diff">mock_uc = &lt;MagicMock id='1444695415104'&gt;
+
+    def test_listar_logs(mock_uc):
+        mock_uc.listar_logs.return_value = {"items": [{"id": "1", "userId": "u1", "userName": "U1", "action": "LOGIN", "entity": "auth", "details": "d", "timestamp": "2026-03-03T10:00:00", "is_deleted": False}], "total": 1, "page": 1, "size": 10, "pages": 1}
+        response = client.get("/logs/")
+        assert response.status_code == 200
+&gt;       assert response.json() == [{"id": "1", "userId": "u1", "userName": "U1", "action": "LOGIN", "entity": "auth", "details": "d", "timestamp": "2026-03-03T10:00:00", "is_deleted": False}]
+E       AssertionError: assert {'items': [{'...1, 'total': 1} == [{'action': '...d': '1', ...}]
+E         
+E         Use -v to get more diff
+
+app\tests\unitario\presentation\routers\test_logs_router.py:22: AssertionError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_pagamentos_router" name="test_listar_pagamentos" time="0.004"><failure message="fastapi.exceptions.ResponseValidationError: 1 validation error:&#10;  {'type': 'list_type', 'loc': ('response', 'items'), 'msg': 'Input should be a valid list', 'input': {'items': [{'id': '1', 'executionId': 'e1', 'producerName': 'P1', 'serviceName': 'S1', 'amount': 100.0, 'dueDate': '2026-03-03', 'paymentDate': '2026-03-03', 'status': 'Pago', 'is_deleted': False}], 'total': 1, 'page': 1, 'size': 10, 'pages': 1}}&#10;&#10;  File &quot;E:\Projetos\AgendamentosAgricultura\app\presentation\routers\pagamentos.py&quot;, line 28, in listar_pagamentos&#10;    GET /pagamentos/">mock_uc = &lt;MagicMock id='1444695413424'&gt;
+
+    def test_listar_pagamentos(mock_uc):
+        mock_uc.listar_pagamentos.return_value = {"items": [{"id": "1", "executionId": "e1", "producerName": "P1", "serviceName": "S1", "amount": 100.0, "dueDate": "2026-03-03", "paymentDate": "2026-03-03", "status": "Pago", "is_deleted": False}], "total": 1, "page": 1, "size": 10, "pages": 1}
+&gt;       response = client.get("/pagamentos/")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\routers\test_pagamentos_router.py:21: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\starlette\testclient.py:473: in get
+    return super().get(
+.venv\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: ModelField | None = None,
+        response_content: Any,
+        include: IncEx | None = None,
+        exclude: IncEx | None = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+        endpoint_ctx: EndpointContext | None = None,
+        dump_json: bool = False,
+    ) -&gt; Any:
+        if field:
+            if is_coroutine:
+                value, errors = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if errors:
+                ctx = endpoint_ctx or EndpointContext()
+&gt;               raise ResponseValidationError(
+                    errors=errors,
+                    body=response_content,
+                    endpoint_ctx=ctx,
+                )
+E               fastapi.exceptions.ResponseValidationError: 1 validation error:
+E                 {'type': 'list_type', 'loc': ('response', 'items'), 'msg': 'Input should be a valid list', 'input': {'items': [{'id': '1', 'executionId': 'e1', 'producerName': 'P1', 'serviceName': 'S1', 'amount': 100.0, 'dueDate': '2026-03-03', 'paymentDate': '2026-03-03', 'status': 'Pago', 'is_deleted': False}], 'total': 1, 'page': 1, 'size': 10, 'pages': 1}}
+E               
+E                 File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\pagamentos.py", line 28, in listar_pagamentos
+E                   GET /pagamentos/
+
+.venv\Lib\site-packages\fastapi\routing.py:296: ResponseValidationError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_pagamentos_router" name="test_obter_pagamento" time="0.006"><failure message="fastapi.exceptions.ResponseValidationError: 6 validation errors:&#10;  {'type': 'missing', 'loc': ('response', 'executionId'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'producerName'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'serviceName'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'dueDate'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'amount'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'status'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;&#10;  File &quot;E:\Projetos\AgendamentosAgricultura\app\presentation\routers\pagamentos.py&quot;, line 58, in obter_pagamento&#10;    GET /pagamentos/{pagamento_id}">mock_uc = &lt;MagicMock id='1444695408720'&gt;
+
+    def test_obter_pagamento(mock_uc):
+        mock_uc.obter_pagamento.return_value = {"id": "1"}
+&gt;       response = client.get("/pagamentos/1")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\routers\test_pagamentos_router.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\starlette\testclient.py:473: in get
+    return super().get(
+.venv\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: ModelField | None = None,
+        response_content: Any,
+        include: IncEx | None = None,
+        exclude: IncEx | None = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+        endpoint_ctx: EndpointContext | None = None,
+        dump_json: bool = False,
+    ) -&gt; Any:
+        if field:
+            if is_coroutine:
+                value, errors = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if errors:
+                ctx = endpoint_ctx or EndpointContext()
+&gt;               raise ResponseValidationError(
+                    errors=errors,
+                    body=response_content,
+                    endpoint_ctx=ctx,
+                )
+E               fastapi.exceptions.ResponseValidationError: 6 validation errors:
+E                 {'type': 'missing', 'loc': ('response', 'executionId'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'producerName'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'serviceName'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'dueDate'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'amount'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'status'), 'msg': 'Field required', 'input': {'id': '1'}}
+E               
+E                 File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\pagamentos.py", line 58, in obter_pagamento
+E                   GET /pagamentos/{pagamento_id}
+
+.venv\Lib\site-packages\fastapi\routing.py:296: ResponseValidationError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_pagamentos_router" name="test_obter_pagamento_erro" time="0.003" /><testcase classname="app.tests.unitario.presentation.routers.test_pagamentos_router" name="test_registrar_pagamento" time="0.004" /><testcase classname="app.tests.unitario.presentation.routers.test_pagamentos_router" name="test_registrar_pagamento_erro" time="0.005" /><testcase classname="app.tests.unitario.presentation.routers.test_produtores_router" name="test_listar_produtores" time="0.005"><failure message="AssertionError: assert {'items': [{'...ize': 10, ...} == [{'id': '1', 'name': 'João'}]&#10;  &#10;  Use -v to get more diff">mock_uc = &lt;MagicMock id='1444695416784'&gt;
+
+    def test_listar_produtores(mock_uc):
+        mock_uc.listar_produtores.return_value = {"items": [{"id": "1", "name": "João", "cpfCnpj": "123", "property": "Prop", "regiao_referencia": "R", "telefone_contato": "1", "apelido_produtor": "A", "status": "Ativo", "is_deleted": False}], "total": 1, "page": 1, "size": 10, "pages": 1}
+        response = client.get("/produtores/")
+        assert response.status_code == 200
+&gt;       assert response.json() == [{"id": "1", "name": "João"}]
+E       AssertionError: assert {'items': [{'...ize': 10, ...} == [{'id': '1', 'name': 'João'}]
+E         
+E         Use -v to get more diff
+
+app\tests\unitario\presentation\routers\test_produtores_router.py:23: AssertionError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_produtores_router" name="test_obter_produtor" time="0.029"><failure message="AssertionError: assert {'apelido_pro...': False, ...} == {'id': '1', 'name': 'João'}&#10;  &#10;  Omitting 2 identical items, use -vv to show&#10;  Left contains 7 more items:&#10;  #x1B[0m{#x1B[33m'#x1B[39;49;00m#x1B[33mapelido_produtor#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m: #x1B[33m'#x1B[39;49;00m#x1B[33mA#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m,#x1B[90m#x1B[39;49;00m&#10;   #x1B[33m'#x1B[39;49;00m#x1B[33mcpfCnpj#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m: #x1B[33m'#x1B[39;49;00m#x1B[33m123#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m,#x1B[90m#x1B[39;49;00m&#10;   #x1B[33m'#x1B[39;49;00m#x1B[33mis_deleted#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m: #x1B[94mFalse#x1B[39;49;00m,#x1B[90m#x1B[39;49;00m&#10;   #x1B[33m'#x1B[39;49;00m#x1B[33mproperty#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m: #x1B[33m'#x1B[39;49;00m#x1B[33mProp#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m,#x1B[90m#x1B[39;49;00m...&#10;  &#10;  ...Full output truncated (4 lines hidden), use '-vv' to show">mock_uc = &lt;MagicMock id='1444695419136'&gt;
+
+    def test_obter_produtor(mock_uc):
+        mock_uc.obter_produtor.return_value = {"id": "1", "name": "João", "cpfCnpj": "123", "property": "Prop", "regiao_referencia": "R", "telefone_contato": "1", "apelido_produtor": "A", "status": "Ativo", "is_deleted": False}
+        response = client.get("/produtores/1")
+        assert response.status_code == 200
+&gt;       assert response.json() == {"id": "1", "name": "João"}
+E       AssertionError: assert {'apelido_pro...': False, ...} == {'id': '1', 'name': 'João'}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Left contains 7 more items:
+E         #x1B[0m{#x1B[33m'#x1B[39;49;00m#x1B[33mapelido_produtor#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m: #x1B[33m'#x1B[39;49;00m#x1B[33mA#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m,#x1B[90m#x1B[39;49;00m
+E          #x1B[33m'#x1B[39;49;00m#x1B[33mcpfCnpj#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m: #x1B[33m'#x1B[39;49;00m#x1B[33m123#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m,#x1B[90m#x1B[39;49;00m
+E          #x1B[33m'#x1B[39;49;00m#x1B[33mis_deleted#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m: #x1B[94mFalse#x1B[39;49;00m,#x1B[90m#x1B[39;49;00m
+E          #x1B[33m'#x1B[39;49;00m#x1B[33mproperty#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m: #x1B[33m'#x1B[39;49;00m#x1B[33mProp#x1B[39;49;00m#x1B[33m'#x1B[39;49;00m,#x1B[90m#x1B[39;49;00m...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+app\tests\unitario\presentation\routers\test_produtores_router.py:29: AssertionError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_produtores_router" name="test_obter_produtor_erro" time="0.004" /><testcase classname="app.tests.unitario.presentation.routers.test_produtores_router" name="test_criar_produtor" time="0.006"><failure message="assert 422 == 201&#10; +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code">mock_uc = &lt;MagicMock id='1444688901664'&gt;
+
+    def test_criar_produtor(mock_uc):
+        mock_uc.criar_produtor.return_value = {"id": "1"}
+        response = client.post("/produtores/", json={"name": "Maria"})
+&gt;       assert response.status_code == 201
+E       assert 422 == 201
+E        +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code
+
+app\tests\unitario\presentation\routers\test_produtores_router.py:39: AssertionError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_produtores_router" name="test_criar_produtor_erro" time="0.004"><failure message="assert 422 == 400&#10; +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code">mock_uc = &lt;MagicMock id='1444688903680'&gt;
+
+    def test_criar_produtor_erro(mock_uc):
+        mock_uc.criar_produtor.side_effect = ValueError("CPF/CNPJ já cadastrado")
+        response = client.post("/produtores/", json={"name": "Maria"})
+&gt;       assert response.status_code == 400
+E       assert 422 == 400
+E        +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code
+
+app\tests\unitario\presentation\routers\test_produtores_router.py:47: AssertionError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_produtores_router" name="test_atualizar_produtor" time="0.006"><failure message="fastapi.exceptions.ResponseValidationError: 4 validation errors:&#10;  {'type': 'missing', 'loc': ('response', 'cpfCnpj'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}&#10;  {'type': 'missing', 'loc': ('response', 'property'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}&#10;  {'type': 'missing', 'loc': ('response', 'status'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}&#10;  {'type': 'missing', 'loc': ('response', 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}&#10;&#10;  File &quot;E:\Projetos\AgendamentosAgricultura\app\presentation\routers\produtores.py&quot;, line 46, in atualizar_produtor&#10;    PUT /produtores/{produtor_id}">mock_uc = &lt;MagicMock id='1444717988224'&gt;
+
+    def test_atualizar_produtor(mock_uc):
+        mock_uc.atualizar_produtor.return_value = {"id": "1", "name": "Novo"}
+&gt;       response = client.put("/produtores/1", json={"name": "Novo"})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\routers\test_produtores_router.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\starlette\testclient.py:577: in put
+    return super().put(
+.venv\Lib\site-packages\httpx\_client.py:1181: in put
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: ModelField | None = None,
+        response_content: Any,
+        include: IncEx | None = None,
+        exclude: IncEx | None = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+        endpoint_ctx: EndpointContext | None = None,
+        dump_json: bool = False,
+    ) -&gt; Any:
+        if field:
+            if is_coroutine:
+                value, errors = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if errors:
+                ctx = endpoint_ctx or EndpointContext()
+&gt;               raise ResponseValidationError(
+                    errors=errors,
+                    body=response_content,
+                    endpoint_ctx=ctx,
+                )
+E               fastapi.exceptions.ResponseValidationError: 4 validation errors:
+E                 {'type': 'missing', 'loc': ('response', 'cpfCnpj'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}
+E                 {'type': 'missing', 'loc': ('response', 'property'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}
+E                 {'type': 'missing', 'loc': ('response', 'status'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}
+E                 {'type': 'missing', 'loc': ('response', 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}
+E               
+E                 File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\produtores.py", line 46, in atualizar_produtor
+E                   PUT /produtores/{produtor_id}
+
+.venv\Lib\site-packages\fastapi\routing.py:296: ResponseValidationError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_produtores_router" name="test_deletar_produtor" time="0.004" /><testcase classname="app.tests.unitario.presentation.routers.test_produtores_router" name="test_deletar_produtor_falha_bool" time="0.005" /><testcase classname="app.tests.unitario.presentation.routers.test_servicos_router" name="test_listar_servicos" time="0.004"><failure message="fastapi.exceptions.ResponseValidationError: 5 validation errors:&#10;  {'type': 'missing', 'loc': ('response', 'items', 0, 'description'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;  {'type': 'missing', 'loc': ('response', 'items', 0, 'unit'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;  {'type': 'missing', 'loc': ('response', 'items', 0, 'basePrice'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;  {'type': 'missing', 'loc': ('response', 'items', 0, 'active'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;  {'type': 'missing', 'loc': ('response', 'items', 0, 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;&#10;  File &quot;E:\Projetos\AgendamentosAgricultura\app\presentation\routers\servicos.py&quot;, line 20, in listar_servicos&#10;    GET /servicos/">mock_uc = &lt;MagicMock id='1444688899312'&gt;
+
+    def test_listar_servicos(mock_uc):
+        mock_uc.listar_servicos.return_value = {"items": [{"id": "1", "name": "Aração"}], "total": 1, "page": 1, "size": 10, "pages": 1}
+&gt;       response = client.get("/servicos/")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\routers\test_servicos_router.py:21: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\starlette\testclient.py:473: in get
+    return super().get(
+.venv\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: ModelField | None = None,
+        response_content: Any,
+        include: IncEx | None = None,
+        exclude: IncEx | None = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+        endpoint_ctx: EndpointContext | None = None,
+        dump_json: bool = False,
+    ) -&gt; Any:
+        if field:
+            if is_coroutine:
+                value, errors = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if errors:
+                ctx = endpoint_ctx or EndpointContext()
+&gt;               raise ResponseValidationError(
+                    errors=errors,
+                    body=response_content,
+                    endpoint_ctx=ctx,
+                )
+E               fastapi.exceptions.ResponseValidationError: 5 validation errors:
+E                 {'type': 'missing', 'loc': ('response', 'items', 0, 'description'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E                 {'type': 'missing', 'loc': ('response', 'items', 0, 'unit'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E                 {'type': 'missing', 'loc': ('response', 'items', 0, 'basePrice'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E                 {'type': 'missing', 'loc': ('response', 'items', 0, 'active'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E                 {'type': 'missing', 'loc': ('response', 'items', 0, 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E               
+E                 File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\servicos.py", line 20, in listar_servicos
+E                   GET /servicos/
+
+.venv\Lib\site-packages\fastapi\routing.py:296: ResponseValidationError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_servicos_router" name="test_obter_servico" time="0.003"><failure message="fastapi.exceptions.ResponseValidationError: 5 validation errors:&#10;  {'type': 'missing', 'loc': ('response', 'description'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;  {'type': 'missing', 'loc': ('response', 'unit'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;  {'type': 'missing', 'loc': ('response', 'basePrice'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;  {'type': 'missing', 'loc': ('response', 'active'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;  {'type': 'missing', 'loc': ('response', 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}&#10;&#10;  File &quot;E:\Projetos\AgendamentosAgricultura\app\presentation\routers\servicos.py&quot;, line 31, in obter_servico&#10;    GET /servicos/{servico_id}">mock_uc = &lt;MagicMock id='1444688891248'&gt;
+
+    def test_obter_servico(mock_uc):
+        mock_uc.obter_servico.return_value = {"id": "1", "name": "Aração"}
+&gt;       response = client.get("/servicos/1")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\routers\test_servicos_router.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\starlette\testclient.py:473: in get
+    return super().get(
+.venv\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: ModelField | None = None,
+        response_content: Any,
+        include: IncEx | None = None,
+        exclude: IncEx | None = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+        endpoint_ctx: EndpointContext | None = None,
+        dump_json: bool = False,
+    ) -&gt; Any:
+        if field:
+            if is_coroutine:
+                value, errors = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if errors:
+                ctx = endpoint_ctx or EndpointContext()
+&gt;               raise ResponseValidationError(
+                    errors=errors,
+                    body=response_content,
+                    endpoint_ctx=ctx,
+                )
+E               fastapi.exceptions.ResponseValidationError: 5 validation errors:
+E                 {'type': 'missing', 'loc': ('response', 'description'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E                 {'type': 'missing', 'loc': ('response', 'unit'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E                 {'type': 'missing', 'loc': ('response', 'basePrice'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E                 {'type': 'missing', 'loc': ('response', 'active'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E                 {'type': 'missing', 'loc': ('response', 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Aração'}}
+E               
+E                 File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\servicos.py", line 31, in obter_servico
+E                   GET /servicos/{servico_id}
+
+.venv\Lib\site-packages\fastapi\routing.py:296: ResponseValidationError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_servicos_router" name="test_obter_servico_erro" time="0.003" /><testcase classname="app.tests.unitario.presentation.routers.test_servicos_router" name="test_criar_servico" time="0.005"><failure message="assert 422 == 201&#10; +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code">mock_uc = &lt;MagicMock id='1444695416448'&gt;
+
+    def test_criar_servico(mock_uc):
+        mock_uc.criar_servico.return_value = {"id": "1", "name": "Aração"}
+        response = client.post("/servicos/", json={"name": "Aração"})
+&gt;       assert response.status_code == 201
+E       assert 422 == 201
+E        +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code
+
+app\tests\unitario\presentation\routers\test_servicos_router.py:38: AssertionError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_servicos_router" name="test_criar_servico_erro" time="0.005"><failure message="assert 422 == 400&#10; +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code">mock_uc = &lt;MagicMock id='1444695416112'&gt;
+
+    def test_criar_servico_erro(mock_uc):
+        mock_uc.criar_servico.side_effect = ValueError("Existe")
+        response = client.post("/servicos/", json={"name": "Aração"})
+&gt;       assert response.status_code == 400
+E       assert 422 == 400
+E        +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code
+
+app\tests\unitario\presentation\routers\test_servicos_router.py:43: AssertionError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_servicos_router" name="test_atualizar_servico" time="0.004"><failure message="fastapi.exceptions.ResponseValidationError: 6 validation errors:&#10;  {'type': 'missing', 'loc': ('response', 'name'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'description'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'unit'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'basePrice'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'active'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;  {'type': 'missing', 'loc': ('response', 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1'}}&#10;&#10;  File &quot;E:\Projetos\AgendamentosAgricultura\app\presentation\routers\servicos.py&quot;, line 47, in atualizar_servico&#10;    PUT /servicos/{servico_id}">mock_uc = &lt;MagicMock id='1444717987216'&gt;
+
+    def test_atualizar_servico(mock_uc):
+        mock_uc.atualizar_servico.return_value = {"id": "1"}
+&gt;       response = client.put("/servicos/1", json={"name": "Novo"})
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\routers\test_servicos_router.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\starlette\testclient.py:577: in put
+    return super().put(
+.venv\Lib\site-packages\httpx\_client.py:1181: in put
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: ModelField | None = None,
+        response_content: Any,
+        include: IncEx | None = None,
+        exclude: IncEx | None = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+        endpoint_ctx: EndpointContext | None = None,
+        dump_json: bool = False,
+    ) -&gt; Any:
+        if field:
+            if is_coroutine:
+                value, errors = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if errors:
+                ctx = endpoint_ctx or EndpointContext()
+&gt;               raise ResponseValidationError(
+                    errors=errors,
+                    body=response_content,
+                    endpoint_ctx=ctx,
+                )
+E               fastapi.exceptions.ResponseValidationError: 6 validation errors:
+E                 {'type': 'missing', 'loc': ('response', 'name'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'description'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'unit'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'basePrice'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'active'), 'msg': 'Field required', 'input': {'id': '1'}}
+E                 {'type': 'missing', 'loc': ('response', 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1'}}
+E               
+E                 File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\servicos.py", line 47, in atualizar_servico
+E                   PUT /servicos/{servico_id}
+
+.venv\Lib\site-packages\fastapi\routing.py:296: ResponseValidationError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_servicos_router" name="test_deletar_servico" time="0.003"><failure message="AssertionError: expected call not found.&#10;Expected: deletar_servico('1', {'id': 'test_user_id', 'name': 'Test User'}, &lt;ANY&gt;)&#10;  Actual: deletar_servico('1', {'id': 'test_user_id', 'name': 'Test User'})">mock_uc = &lt;MagicMock id='1444717989904'&gt;
+
+    def test_deletar_servico(mock_uc):
+        mock_uc.deletar_servico.return_value = True
+        response = client.delete("/servicos/1")
+        assert response.status_code == 204
+&gt;       mock_uc.deletar_servico.assert_called_once_with("1", {"id": "test_user_id", "name": "Test User"}, ANY)
+
+app\tests\unitario\presentation\routers\test_servicos_router.py:54: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\unittest\mock.py:997: in assert_called_once_with
+    return self.assert_called_with(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;MagicMock name='mock.deletar_servico' id='1444717986880'&gt;
+args = ('1', {'id': 'test_user_id', 'name': 'Test User'}, &lt;ANY&gt;)
+kwargs = {}
+expected = call('1', {'id': 'test_user_id', 'name': 'Test User'}, &lt;ANY&gt;)
+actual = call('1', {'id': 'test_user_id', 'name': 'Test User'})
+_error_message = &lt;function NonCallableMock.assert_called_with.&lt;locals&gt;._error_message at 0x000001505E6E6350&gt;
+cause = None
+
+    def assert_called_with(self, /, *args, **kwargs):
+        """assert that the last call was made with the specified arguments.
+    
+        Raises an AssertionError if the args and keyword args passed in are
+        different to the last call to the mock."""
+        if self.call_args is None:
+            expected = self._format_mock_call_signature(args, kwargs)
+            actual = 'not called.'
+            error_message = ('expected call not found.\nExpected: %s\n  Actual: %s'
+                    % (expected, actual))
+            raise AssertionError(error_message)
+    
+        def _error_message():
+            msg = self._format_mock_failure_message(args, kwargs)
+            return msg
+        expected = self._call_matcher(_Call((args, kwargs), two=True))
+        actual = self._call_matcher(self.call_args)
+        if actual != expected:
+            cause = expected if isinstance(expected, Exception) else None
+&gt;           raise AssertionError(_error_message()) from cause
+E           AssertionError: expected call not found.
+E           Expected: deletar_servico('1', {'id': 'test_user_id', 'name': 'Test User'}, &lt;ANY&gt;)
+E             Actual: deletar_servico('1', {'id': 'test_user_id', 'name': 'Test User'})
+
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\unittest\mock.py:985: AssertionError</failure></testcase><testcase classname="app.tests.unitario.presentation.routers.test_servicos_router" name="test_deletar_servico_erro" time="0.005" /><testcase classname="app.tests.unitario.presentation.routers.test_usuarios_router" name="test_listar_usuarios" time="0.006" /><testcase classname="app.tests.unitario.presentation.routers.test_usuarios_router" name="test_criar_usuario" time="0.005" /><testcase classname="app.tests.unitario.presentation.routers.test_usuarios_router" name="test_criar_usuario_erro" time="0.004" /><testcase classname="app.tests.unitario.presentation.routers.test_usuarios_router" name="test_login" time="0.007" /><testcase classname="app.tests.unitario.presentation.routers.test_usuarios_router" name="test_login_erro" time="0.005" /><testcase classname="app.tests.unitario.presentation.routers.test_usuarios_router" name="test_alterar_senha" time="0.004" /><testcase classname="app.tests.unitario.presentation.routers.test_usuarios_router" name="test_alterar_senha_erro" time="0.006" /><testcase classname="app.tests.unitario.presentation.schemas.test_administrador_schema" name="test_configuracao_sistema_schema_valido" time="0.001" /><testcase classname="app.tests.unitario.presentation.schemas.test_administrador_schema" name="test_configuracao_sistema_schema_invalido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_administrador_schema" name="test_backup_response_schema" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_execucao_schema" name="test_execucao_create_schema_valido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_execucao_schema" name="test_execucao_create_schema_invalido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_execucao_schema" name="test_execucao_update_schema" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_log_schema" name="test_log_create_schema_valido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_log_schema" name="test_log_create_schema_invalido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_log_schema" name="test_log_response_schema" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_pagamento_schema" name="test_pagamento_create_schema_valido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_pagamento_schema" name="test_pagamento_create_schema_invalido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_pagamento_schema" name="test_pagamento_update_schema" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_produtor_schema" name="test_produtor_create_schema_valido" time="0.000"><failure message="AttributeError: 'ProdutorCreate' object has no attribute 'totalArea'">def test_produtor_create_schema_valido():
+        data = {
+            "name": "João",
+            "cpfCnpj": "123.456.789-00",
+            "property": "Fazenda",
+            "totalArea": 50.5,
+            "status": "Ativo"
+        }
+        schema = ProdutorCreate(**data)
+        assert schema.name == "João"
+&gt;       assert schema.totalArea == 50.5
+               ^^^^^^^^^^^^^^^^
+
+app\tests\unitario\presentation\schemas\test_produtor_schema.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = ProdutorCreate(name='João', cpfCnpj='123.456.789-00', property='Fazenda', regiao_referencia=None, telefone_contato=None, apelido_produtor=None, status='Ativo')
+item = 'totalArea'
+
+    def __getattr__(self, item: str) -&gt; Any:
+        private_attributes = object.__getattribute__(self, '__private_attributes__')
+        if item in private_attributes:
+            attribute = private_attributes[item]
+            if hasattr(attribute, '__get__'):
+                return attribute.__get__(self, type(self))  # type: ignore
+    
+            try:
+                # Note: self.__pydantic_private__ cannot be None if self.__private_attributes__ has items
+                return self.__pydantic_private__[item]  # type: ignore
+            except KeyError as exc:
+                raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}') from exc
+        else:
+            # `__pydantic_extra__` can fail to be set if the model is not yet fully initialized.
+            # See `BaseModel.__repr_args__` for more details
+            try:
+                pydantic_extra = object.__getattribute__(self, '__pydantic_extra__')
+            except AttributeError:
+                pydantic_extra = None
+    
+            if pydantic_extra and item in pydantic_extra:
+                return pydantic_extra[item]
+            else:
+                if hasattr(self.__class__, item):
+                    return super().__getattribute__(item)  # Raises AttributeError if appropriate
+                else:
+                    # this is the current error
+&gt;                   raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+E                   AttributeError: 'ProdutorCreate' object has no attribute 'totalArea'
+
+.venv\Lib\site-packages\pydantic\main.py:1026: AttributeError</failure></testcase><testcase classname="app.tests.unitario.presentation.schemas.test_produtor_schema" name="test_produtor_create_schema_invalido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_produtor_schema" name="test_produtor_update_schema" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_servico_schema" name="test_servico_create_schema_valido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_servico_schema" name="test_servico_create_schema_invalido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_servico_schema" name="test_servico_update_schema" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_usuario_schema" name="test_usuario_create_schema_valido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_usuario_schema" name="test_usuario_create_schema_email_invalido" time="0.000" /><testcase classname="app.tests.unitario.presentation.schemas.test_usuario_schema" name="test_usuario_update_schema" time="0.000" /><testcase classname="test_update_exec" name="test_execution_update" time="4.047" /></testsuite></testsuites>

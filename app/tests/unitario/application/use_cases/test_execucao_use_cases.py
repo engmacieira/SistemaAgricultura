@@ -12,6 +12,15 @@ def test_obter_execucao_sucesso():
     assert result == execucao_mock
     repo_mock.get_by_id.assert_called_once_with("1")
 
+def test_listar_execucoes():
+    repo_mock = MagicMock()
+    repo_mock.get_all_paginated.return_value = []
+    use_cases = ExecucaoUseCases(repo_mock)
+    
+    result = use_cases.listar_execucoes()
+    assert result == []
+    repo_mock.get_all_paginated.assert_called_once()
+
 def test_obter_execucao_nao_encontrado():
     repo_mock = MagicMock()
     repo_mock.get_by_id.return_value = None

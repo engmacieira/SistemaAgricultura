@@ -20,7 +20,7 @@ export function LoginPage() {
     try {
       const success = await login(email, password);
       if (success) {
-        navigate("/produtores");
+        navigate("/dashboard");
       } else {
         setError("Credenciais inválidas. Tente novamente.");
       }
@@ -108,7 +108,7 @@ export function LoginPage() {
             )}
           </Button>
         </form>
-        
+
         <div className="mt-6 text-center text-xs text-gray-500">
           <p>Credenciais de demonstração:</p>
           <p>Email: <strong>admin@sistema.com</strong> | Senha: <strong>123456</strong></p>

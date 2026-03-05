@@ -6,5 +6,14 @@ export interface Payment {
   dueDate: string;
   paymentDate?: string;
   amount: number;
-  status: "Pendente" | "Pago" | "Atrasado";
+  paidAmount: number;
+  is_deleted: boolean;
+  status: "Pendente" | "Parcial" | "Pago" | "Atrasado";
+}
+
+export interface PaymentTransaction {
+  id: string;
+  pagamentoId: string;
+  amount: number;
+  date: string;
 }

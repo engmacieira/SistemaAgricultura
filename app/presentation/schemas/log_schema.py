@@ -7,6 +7,8 @@ class LogBase(BaseModel):
     action: str
     entity: str
     details: str
+    dados_anteriores: str | None = None
+    dados_novos: str | None = None
 
 class LogCreate(LogBase):
     pass
@@ -16,3 +18,9 @@ class LogResponse(LogBase):
     timestamp: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+class PaginatedLogResponse(BaseModel):
+    items: list[LogResponse]
+    total: int
+    page: int
+    pages: int

@@ -9,7 +9,7 @@ def test_criar_usuario(client):
         "password": "senha123"
     }
     response = client.post("/usuarios/", json=payload)
-    assert response.status_code == status.HTTP_200_OK
+    assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
     assert data["email"] == payload["email"]
     assert "id" in data
@@ -33,7 +33,7 @@ def test_login_usuario(client):
     response = client.post("/usuarios/login", json=login_payload)
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
-    assert data["email"] == "login@teste.com"
+    assert data["user"]["email"] == "login@teste.com"
     # assert "token" in data # Se houver JWT implementado no UC
 
 def test_login_falha(client):

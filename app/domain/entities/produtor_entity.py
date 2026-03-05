@@ -7,5 +7,8 @@ class Produtor:
     name: str
     cpfCnpj: str
     property: str
-    totalArea: float
+    regiao_referencia: str
+    telefone_contato: str
+    apelido_produtor: str
     status: str
+    is_deleted: bool = False

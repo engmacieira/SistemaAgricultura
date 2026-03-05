@@ -1,13 +1,15 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "../../core/utils";
-import { Users, Tractor, CalendarCheck, DollarSign, FileText, Settings, LogOut, User, ShieldAlert, UserCog } from "lucide-react";
+import { Users, Tractor, Calendar, ClipboardList, DollarSign, FileText, Settings, LogOut, User, ShieldAlert, UserCog, LayoutDashboard } from "lucide-react";
 import { useAuth } from "../../core/context/AuthContext";
 
 const navItems = [
+  { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
   { name: "Produtores", path: "/produtores", icon: Users },
   { name: "Serviços", path: "/servicos", icon: Tractor },
-  { name: "Execuções", path: "/execucoes", icon: CalendarCheck },
+  { name: "Agendamentos", path: "/agendamentos", icon: Calendar },
+  { name: "Execuções", path: "/execucoes", icon: ClipboardList },
   { name: "Pagamentos", path: "/pagamentos", icon: DollarSign },
   { name: "Relatórios", path: "/relatorios", icon: FileText },
 ];
@@ -30,7 +32,7 @@ export function Sidebar() {
           Serviços Agrícolas
         </h1>
       </div>
-      
+
       <div className="px-4 py-4 border-b border-gray-800">
         <div className="flex items-center gap-3 px-2">
           <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">

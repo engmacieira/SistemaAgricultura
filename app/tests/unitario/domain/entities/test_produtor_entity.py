@@ -7,7 +7,7 @@ def test_criar_produtor():
         name="João da Silva",
         cpfCnpj="123.456.789-00",
         property="Fazenda Esperança",
-        totalArea=50.5,
+        regiao_referencia="R", telefone_contato="1", apelido_produtor="A",
         status="Ativo"
     )
     
@@ -15,5 +15,5 @@ def test_criar_produtor():
     assert produtor.name == "João da Silva"
     assert produtor.cpfCnpj == "123.456.789-00"
     assert getattr(produtor, "property") == "Fazenda Esperança"
-    assert produtor.totalArea == 50.5
+    assert produtor.regiao_referencia == "R"
     assert produtor.status == "Ativo"

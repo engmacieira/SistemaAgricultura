@@ -8,7 +8,7 @@ def test_produtor_model_to_entity():
         name="Produtor Teste",
         cpfCnpj="000.000.000-00",
         property="Fazenda Esperança",
-        totalArea=300.5,
+        regiao_referencia="R", telefone_contato="1", apelido_produtor="A",
         status="Ativo"
     )
     
@@ -18,5 +18,5 @@ def test_produtor_model_to_entity():
     assert entity.name == model.name
     assert entity.cpfCnpj == model.cpfCnpj
     assert getattr(entity, 'property') == getattr(model, 'property')
-    assert entity.totalArea == model.totalArea
+    assert entity.regiao_referencia == model.regiao_referencia
     assert entity.status == model.status

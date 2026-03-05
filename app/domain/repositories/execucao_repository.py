@@ -8,6 +8,14 @@ class IExecucaoRepository(ABC):
         pass
 
     @abstractmethod
+    def get_all_paginated(self, skip: int = 0, limit: int = 10, sort_by: str = "date", order: str = "desc", show_completed: bool = False) -> List[Execucao]:
+        pass
+
+    @abstractmethod
+    def count_filtered(self, show_completed: bool = False) -> int:
+        pass
+
+    @abstractmethod
     def get_by_id(self, id: str) -> Optional[Execucao]:
         pass
 

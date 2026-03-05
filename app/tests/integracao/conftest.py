@@ -6,6 +6,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from app.core.database import Base, get_db
+from app.core.dependencies import get_current_user
 
 # Use an in-memory SQLite database for testing to avoid touching production data
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
@@ -52,7 +53,16 @@ def client(db_session):
         finally:
             pass # Session is closed by the db_session fixture
             
+    def override_current_user():
+        return {
+            "id": "1",
+            "name": "Admin Test",
+            "email": "admin@teste.com",
+            "role": "admin"
+        }
+            
     app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[get_current_user] = override_current_user
     with TestClient(app) as c:
         yield c
         

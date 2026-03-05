@@ -7,12 +7,12 @@ def test_produtor_create_schema_valido():
         "name": "João",
         "cpfCnpj": "123.456.789-00",
         "property": "Fazenda",
-        "totalArea": 50.5,
+        "regiao_referencia": "Norte",
         "status": "Ativo"
     }
     schema = ProdutorCreate(**data)
     assert schema.name == "João"
-    assert schema.totalArea == 50.5
+    assert schema.regiao_referencia == "Norte"
 
 def test_produtor_create_schema_invalido():
     with pytest.raises(ValidationError):

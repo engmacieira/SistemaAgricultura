@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ConfigDict
-from typing import Optional
+from typing import Optional, List
 
 class ServicoBase(BaseModel):
     name: str
@@ -20,5 +20,14 @@ class ServicoUpdate(BaseModel):
 
 class ServicoResponse(ServicoBase):
     id: str
+    is_deleted: bool
+
 
     model_config = ConfigDict(from_attributes=True)
+
+class PaginatedServicoResponse(BaseModel):
+    items: List[ServicoResponse]
+    total: int
+    page: int
+    size: int
+    pages: int

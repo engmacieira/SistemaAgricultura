@@ -11,7 +11,7 @@ def test_produtor_repository_get_by_cpf_cnpj():
     
     query_mock = MagicMock()
     model_mock = MagicMock(spec=ProdutorModel)
-    entidade_mock = Produtor(id="1", name="João", cpfCnpj="123", property="A", totalArea=10, status="A")
+    entidade_mock = Produtor(id="1", name="João", cpfCnpj="123", property="A", regiao_referencia="R", telefone_contato="1", apelido_produtor="A", status="A")
     model_mock.to_entity.return_value = entidade_mock
     
     query_mock.filter.return_value = query_mock

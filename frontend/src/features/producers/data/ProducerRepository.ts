@@ -4,8 +4,14 @@ import { apiFetch } from "../../../core/api";
 const PATH = "/produtores";
 
 export class ProducerRepository {
-  async getProducers(): Promise<Producer[]> {
-    return apiFetch(PATH);
+  async getProducers(page: number = 1, size: number = 10, sortBy: string = "name", order: string = "asc"): Promise<{ items: Producer[], total: number, pages: number }> {
+    const params = new URLSearchParams({
+      page: page.toString(),
+      size: size.toString(),
+      sort_by: sortBy,
+      order: order
+    });
+    return apiFetch(`${PATH}/?${params.toString()}`);
   }
 
   async getProducerById(id: string): Promise<Producer | undefined> {
@@ -17,7 +23,7 @@ export class ProducerRepository {
   }
 
   async addProducer(producer: Omit<Producer, "id">): Promise<Producer> {
-    return apiFetch(PATH, {
+    return apiFetch(`${PATH}/`, {
       method: "POST",
       body: JSON.stringify(producer),
     });

@@ -10,3 +10,5 @@ class Log:
     action: str
     entity: str
     details: str
+    dados_anteriores: str = None
+    dados_novos: str = None

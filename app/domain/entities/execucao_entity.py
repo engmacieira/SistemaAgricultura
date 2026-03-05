@@ -13,3 +13,4 @@ class Execucao:
     unit: str
     totalValue: float
     status: str
+    is_deleted: bool = False

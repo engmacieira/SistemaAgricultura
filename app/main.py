@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.core.logging_config import setup_logging
+
+# Inicialização do logging
+setup_logging()
 
 # Importando os routers
 from app.presentation.routers import (
@@ -9,7 +13,9 @@ from app.presentation.routers import (
     pagamentos,
     usuarios,
     logs,
-    administrador
+    administrador,
+    dashboard,
+    relatorios
 )
 
 app = FastAPI(
@@ -17,6 +23,17 @@ app = FastAPI(
     description="API para o sistema de gestão de serviços agrícolas.",
     version="1.0.0"
 )
+
+# Startup Backup
+@app.on_event("startup")
+async def startup_event():
+    from app.infrastructure.services.backup_service import BackupService
+    backup_service = BackupService()
+    try:
+        backup_service.create_backup()
+        backup_service.clean_old_backups(days=10)
+    except Exception as e:
+        print(f"Erro no backup automático inicial: {e}")
 
 # Configuração de CORS (permitindo o frontend se conectar)
 origins = [
@@ -40,6 +57,8 @@ app.include_router(pagamentos.router)
 app.include_router(usuarios.router)
 app.include_router(logs.router)
 app.include_router(administrador.router)
+app.include_router(dashboard.router)
+app.include_router(relatorios.router)
 
 @app.get("/")
 def root():

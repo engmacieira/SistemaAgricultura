@@ -26,10 +26,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, pass: string) => {
-    const loggedUser = await authRepository.login(email, pass);
-    if (loggedUser) {
-      setUser(loggedUser);
-      localStorage.setItem("auth_user", JSON.stringify(loggedUser));
+    const loginResponse = await authRepository.login(email, pass);
+    if (loginResponse && loginResponse.user) {
+      setUser(loginResponse.user);
+      localStorage.setItem("auth_user", JSON.stringify(loginResponse.user));
+      localStorage.setItem("auth_token", loginResponse.access_token);
       return true;
     }
     return false;
@@ -39,6 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // await authRepository.logout();
     setUser(null);
     localStorage.removeItem("auth_user");
+    localStorage.removeItem("auth_token");
   };
 
   return (

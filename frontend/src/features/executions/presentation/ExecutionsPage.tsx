@@ -8,7 +8,8 @@ import { AgriculturalService } from "../../services/domain/AgriculturalService";
 import { Button } from "../../../shared/components/Button";
 import { DataTable } from "../../../shared/components/DataTable";
 import { Modal } from "../../../shared/components/Modal";
-import { CalendarPlus, Search, Edit } from "lucide-react";
+import { CalendarPlus, Search, Edit, Trash2, Filter } from "lucide-react";
+import { Pagination } from "../../../shared/components/Pagination";
 
 const repository = new ExecutionRepository();
 const producerRepository = new ProducerRepository();
@@ -20,6 +21,14 @@ export function ExecutionsPage() {
   const [servicesList, setServicesList] = useState<AgriculturalService[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [totalItems, setTotalItems] = useState(0);
+
+  // Pagination & Sorting State
+  const [currentPage, setCurrentPage] = useState(0);
+  const [limit] = useState(10);
+  const [sortBy, setSortBy] = useState("date");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [showCompleted, setShowCompleted] = useState(false);
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,28 +47,35 @@ export function ExecutionsPage() {
 
   const fetchExecutions = async () => {
     setLoading(true);
-    const [data, producersData, servicesData] = await Promise.all([
-      repository.getExecutions(),
-      producerRepository.getProducers(),
-      serviceRepository.getServices(),
+    const [result, resultProducers, resultServices] = await Promise.all([
+      repository.getExecutions({
+        skip: currentPage * limit,
+        limit,
+        sort_by: sortBy,
+        order: sortOrder,
+        show_completed: showCompleted
+      }),
+      producerRepository.getProducers(1, 1000), // Get all for selects
+      serviceRepository.getServices(0, 1000),   // Get all for selects
     ]);
-    setExecutions(data);
-    setProducersList(producersData.filter(p => p.status === "Ativo"));
-    setServicesList(servicesData.filter(s => s.active));
+    setExecutions(result.items);
+    setTotalItems(result.total);
+    setProducersList(resultProducers.items.filter(p => p.status === "Ativo"));
+    setServicesList(resultServices.items.filter(s => s.active));
     setLoading(false);
   };
 
   useEffect(() => {
     fetchExecutions();
-  }, []);
+  }, [currentPage, sortBy, sortOrder, showCompleted]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    
+
     setFormData((prev) => {
-      const newData = { 
-        ...prev, 
-        [name]: name === "quantity" || name === "totalValue" ? parseFloat(value) || 0 : value 
+      const newData = {
+        ...prev,
+        [name]: name === "quantity" || name === "totalValue" ? parseFloat(value) || 0 : value
       };
 
       // Auto-calculate total value if service or quantity changes
@@ -67,7 +83,7 @@ export function ExecutionsPage() {
         const serviceId = name === "serviceId" ? value : prev.serviceId;
         const quantity = name === "quantity" ? (parseFloat(value) || 0) : prev.quantity;
         const service = servicesList.find(s => s.id === serviceId);
-        
+
         if (service) {
           newData.totalValue = service.basePrice * quantity;
         }
@@ -106,7 +122,7 @@ export function ExecutionsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     const selectedProducer = producersList.find(p => p.id === formData.producerId);
     const selectedService = servicesList.find(s => s.id === formData.serviceId);
 
@@ -122,12 +138,29 @@ export function ExecutionsPage() {
     } else {
       await repository.addExecution(executionData);
     }
-    
+
     await fetchExecutions(); // Refresh list
-    
+
     setIsSubmitting(false);
     setIsModalOpen(false);
     setEditingId(null);
+  };
+
+  const handleDeleteClick = async (id: string) => {
+    if (window.confirm("Tem certeza que deseja excluir esta execução?")) {
+      await repository.deleteExecution(id);
+      await fetchExecutions();
+    }
+  };
+
+  const handleSort = (column: string) => {
+    if (sortBy === column) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(column);
+      setSortOrder("desc");
+    }
+    setCurrentPage(0); // Reset to first page on sort
   };
 
   const filteredExecutions = executions.filter((e) =>
@@ -197,18 +230,32 @@ export function ExecutionsPage() {
       header: "Ações",
       accessorKey: "actions",
       cell: (item: Execution) => (
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={(e) => {
-            e.stopPropagation();
-            handleEditClick(item);
-          }}
-          className="h-8 w-8 p-0 text-blue-600 hover:text-blue-800 hover:bg-blue-50"
-          title="Editar Execução"
-        >
-          <Edit className="h-4 w-4" />
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleEditClick(item);
+            }}
+            className="h-8 w-8 p-0 text-blue-600 hover:text-blue-800 hover:bg-blue-50"
+            title="Editar Execução"
+          >
+            <Edit className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDeleteClick(item.id);
+            }}
+            className="h-8 w-8 p-0 text-red-600 hover:text-red-800 hover:bg-red-50"
+            title="Excluir Execução"
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </div>
       ),
     }
   ];
@@ -217,17 +264,13 @@ export function ExecutionsPage() {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-300 pb-6">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">Execuções e Agendamentos</h1>
-          <p className="text-lg text-gray-600 mt-2">Acompanhe os serviços prestados e agendados para os produtores.</p>
+          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">Execuções de Serviços</h1>
+          <p className="text-lg text-gray-600 mt-2">Controle o status e acompanhe a execução dos serviços agendados.</p>
         </div>
-        <Button size="lg" className="shrink-0 gap-2" onClick={handleNewClick}>
-          <CalendarPlus className="h-5 w-5" />
-          Novo Agendamento
-        </Button>
       </div>
 
-      <div className="flex items-center gap-4 bg-white p-4 rounded-lg border border-gray-300 shadow-sm">
-        <div className="relative flex-1 max-w-md">
+      <div className="flex flex-col md:flex-row items-center gap-4 bg-white p-4 rounded-lg border border-gray-300 shadow-sm">
+        <div className="relative flex-1 w-full max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
           <input
             type="text"
@@ -237,6 +280,22 @@ export function ExecutionsPage() {
             className="h-12 w-full rounded-md border border-gray-300 pl-12 pr-4 text-base font-medium text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+
+        <div className="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-md border border-gray-200">
+          <Filter className="h-4 w-4 text-gray-500" />
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={showCompleted}
+              onChange={(e) => {
+                setShowCompleted(e.target.checked);
+                setCurrentPage(0);
+              }}
+              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+            />
+            <span className="text-sm font-medium text-gray-700">Exibir concluídos</span>
+          </label>
+        </div>
       </div>
 
       {loading ? (
@@ -244,13 +303,25 @@ export function ExecutionsPage() {
           <div className="text-xl font-bold text-gray-500 animate-pulse">Carregando execuções...</div>
         </div>
       ) : (
-        <DataTable data={filteredExecutions} columns={columns} />
+        <div className="space-y-4">
+          <DataTable
+            data={filteredExecutions}
+            columns={columns}
+            onSort={handleSort}
+            sortConfig={{ sortBy, order: sortOrder }}
+          />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(totalItems / limit)}
+            onPageChange={setCurrentPage}
+          />
+        </div>
       )}
 
-      <Modal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        title={editingId ? "Editar Agendamento" : "Novo Agendamento"}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Atualizar Status da Execução"
       >
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -270,7 +341,7 @@ export function ExecutionsPage() {
                 ))}
               </select>
             </div>
-            
+
             <div className="space-y-2">
               <label htmlFor="serviceId" className="block text-sm font-bold text-gray-900">Serviço</label>
               <select
@@ -349,18 +420,18 @@ export function ExecutionsPage() {
               </select>
             </div>
           </div>
-          
+
           <div className="flex justify-end gap-4 pt-6 border-t border-gray-200 mt-8">
-            <Button 
-              type="button" 
-              variant="ghost" 
+            <Button
+              type="button"
+              variant="ghost"
               onClick={() => setIsModalOpen(false)}
               disabled={isSubmitting}
             >
               Cancelar
             </Button>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Salvando..." : "Salvar Agendamento"}

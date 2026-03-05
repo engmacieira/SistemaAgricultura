@@ -14,6 +14,8 @@ class LogModel(Base):
     action = Column(String, nullable=False)
     entity = Column(String, nullable=False)
     details = Column(String, nullable=False)
+    dados_anteriores = Column(String, nullable=True) # Armazena dados no formato JSON
+    dados_novos = Column(String, nullable=True) # Armazena dados no formato JSON
 
     def to_entity(self) -> Log:
         return Log(
@@ -23,5 +25,7 @@ class LogModel(Base):
             userName=self.userName,
             action=self.action,
             entity=self.entity,
-            details=self.details
+            details=self.details,
+            dados_anteriores=self.dados_anteriores,
+            dados_novos=self.dados_novos
         )

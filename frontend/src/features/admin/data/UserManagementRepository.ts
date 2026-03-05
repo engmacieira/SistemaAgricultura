@@ -4,8 +4,8 @@ import { apiFetch } from "../../../core/api";
 const PATH = "/usuarios";
 
 export class UserManagementRepository {
-  async getUsers(): Promise<User[]> {
-    return apiFetch(PATH);
+  async getUsers(skip: number = 0, limit: number = 10, sortBy: string = "name", order: string = "asc"): Promise<{ items: User[], total: number }> {
+    return apiFetch(`${PATH}?skip=${skip}&limit=${limit}&sort_by=${sortBy}&order=${order}`);
   }
 
   async addUser(user: Omit<User, "id">): Promise<User> {

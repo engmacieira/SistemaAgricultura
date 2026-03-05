@@ -5,7 +5,7 @@ from datetime import date
 def test_listar_logs_vazio(client):
     response = client.get("/logs/")
     assert response.status_code == status.HTTP_200_OK
-    assert isinstance(response.json(), list)
+    assert isinstance(response.json().get("items", []), list)
 
 def test_geracao_log_automatica(client):
     # Ao criar um produtor, um log deve ser gerado (pela lógica do use case)
@@ -24,7 +24,7 @@ def test_geracao_log_automatica(client):
     assert len(logs) >= 1
     
     # Verificar se o último log é sobre a criação do produtor
-    ultimo_log = logs[-1]
+    ultimo_log = logs.get("items", [])[-1]
     assert ultimo_log["entity"] == "Produtor"
     action = ultimo_log["action"].upper()
     assert "CRIAR" in action or "CREATE" in action or "CRIADO" in action

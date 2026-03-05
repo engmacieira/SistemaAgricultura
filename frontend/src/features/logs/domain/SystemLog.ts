@@ -4,6 +4,8 @@ export interface SystemLog {
   userId: string;
   userName: string;
   action: "CRIAR" | "EDITAR" | "EXCLUIR" | "LOGIN" | "LOGOUT" | "BACKUP" | "RESTAURAR";
-  entity: "Produtor" | "Serviço" | "Execução" | "Pagamento" | "Usuário" | "Sistema";
+  entity: string;
   details: string;
+  dados_anteriores?: string | null;
+  dados_novos?: string | null;
 }

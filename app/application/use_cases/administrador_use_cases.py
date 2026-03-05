@@ -1,4 +1,5 @@
 from typing import Dict, Any
+from datetime import datetime
 
 class AdministradorUseCases:
     def __init__(self, configuracao_repository, backup_service=None):
@@ -16,23 +17,26 @@ class AdministradorUseCases:
         if not self.backup_service:
             raise ValueError("Serviço de backup não configurado")
             
-        # file_url = self.backup_service.create_dump()
+        backup_path = self.backup_service.create_backup()
         return {
             "status": "sucesso",
             "message": "Backup realizado com sucesso",
-            "timestamp": "2023-11-15T10:00:00",
-            "file_url": "https://storage.exemplo.com/backup.sql"
+            "timestamp": datetime.now().isoformat(),
+            "file_url": backup_path
         }
 
-    def restaurar_backup(self, file_url: str) -> Dict[str, Any]:
+    def restaurar_backup(self, file_url: str = None) -> Dict[str, Any]:
         """Inicia o processo de restauração do banco de dados"""
         if not self.backup_service:
             raise ValueError("Serviço de backup não configurado")
             
-        # self.backup_service.restore_dump(file_url)
+        success = self.backup_service.restore_backup(file_url)
+        if not success:
+            raise ValueError("Falha ao restaurar backup. Verifique se o arquivo existe.")
+
         return {
             "status": "sucesso",
             "message": "Banco de dados restaurado com sucesso",
-            "timestamp": "2023-11-15T10:00:00",
-            "file_url": file_url
+            "timestamp": datetime.now().isoformat(),
+            "file_url": file_url or "latest"
         }

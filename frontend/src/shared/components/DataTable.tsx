@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "../../core/utils";
+import { ArrowUp, ArrowDown } from "lucide-react";
 
 interface Column<T> {
   header: string;
@@ -11,10 +12,12 @@ interface DataTableProps<T> {
   data: T[];
   columns: Column<T>[];
   onRowClick?: (item: T) => void;
+  onSort?: (column: string) => void;
+  sortConfig?: { sortBy: string; order: "asc" | "desc" };
   className?: string;
 }
 
-export function DataTable<T>({ data, columns, onRowClick, className }: DataTableProps<T>) {
+export function DataTable<T>({ data, columns, onRowClick, onSort, sortConfig, className }: DataTableProps<T>) {
   return (
     <div className={cn("w-full overflow-auto rounded-lg border border-gray-300 bg-white shadow-sm", className)}>
       <table className="w-full caption-bottom text-sm">
@@ -23,9 +26,18 @@ export function DataTable<T>({ data, columns, onRowClick, className }: DataTable
             {columns.map((col, index) => (
               <th
                 key={index}
-                className="h-14 px-6 text-left align-middle font-bold text-gray-900 uppercase tracking-wider"
+                onClick={() => onSort?.(col.accessorKey as string)}
+                className={cn(
+                  "h-14 px-6 text-left align-middle font-bold text-gray-900 uppercase tracking-wider",
+                  onSort && "cursor-pointer hover:bg-gray-200"
+                )}
               >
-                {col.header}
+                <div className="flex items-center gap-2">
+                  {col.header}
+                  {onSort && sortConfig?.sortBy === col.accessorKey && (
+                    sortConfig.order === "asc" ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />
+                  )}
+                </div>
               </th>
             ))}
           </tr>

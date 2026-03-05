@@ -9,3 +9,4 @@ class Servico:
     unit: str
     basePrice: float
     active: bool
+    is_deleted: bool = False

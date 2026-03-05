@@ -17,7 +17,7 @@ def test_registrar_execucao(client):
         "status": "Concluído"
     }
     response = client.post("/execucoes/", json=payload)
-    assert response.status_code == status.HTTP_200_OK
+    assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
     assert data["producerName"] == payload["producerName"]
     assert "id" in data
@@ -39,8 +39,9 @@ def test_listar_execucoes(client):
     response = client.get("/execucoes/")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
-    assert isinstance(data, list)
-    assert len(data) >= 1
+    assert isinstance(data, dict)
+    assert "items" in data
+    assert len(data["items"]) >= 1
 
 def test_obter_execucao(client):
     payload = {
@@ -100,8 +101,9 @@ def test_deletar_execucao(client):
     execucao_id = create_res.json()["id"]
     
     response = client.delete(f"/execucoes/{execucao_id}")
-    assert response.status_code == status.HTTP_200_OK
-    assert response.json()["message"] == "Execução deletada com sucesso"
+    assert response.status_code == status.HTTP_204_NO_CONTENT
     
-    get_res = client.get(f"/execucoes/{execucao_id}")
-    assert get_res.status_code == status.HTTP_404_NOT_FOUND
+    # By default, listing shouldn't show it
+    get_res = client.get("/execucoes/")
+    items = get_res.json()["items"]
+    assert not any(item["id"] == execucao_id for item in items)

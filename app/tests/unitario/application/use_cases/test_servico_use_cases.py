@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, ANY
 from app.application.use_cases.servico_use_cases import ServicoUseCases
 
 def test_obter_servico_erro():
@@ -28,7 +28,9 @@ def test_criar_servico_com_log():
         user_name="Admin1",
         action="CRIAR",
         entity="Serviço",
-        details="Criou o serviço 'Aração'"
+        details="Criou o serviço 'Aração'",
+        dados_anteriores=None,
+        dados_novos=ANY
     )
 
 def test_deletar_servico():

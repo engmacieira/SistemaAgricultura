@@ -23,8 +23,15 @@ class UsuarioUseCases:
         }
         return usuario_dict
 
-    def listar_usuarios(self) -> List[Any]:
-        return self.usuario_repository.get_all()
+    def listar_usuarios(self, skip: int = 0, limit: int = 10, sort_by: str = "name", order: str = "asc") -> Dict[str, Any]:
+        usuarios = self.usuario_repository.get_all_paginated(skip, limit, sort_by, order)
+        total = self.usuario_repository.count_active()
+        return {
+            "items": usuarios,
+            "total": total,
+            "skip": skip,
+            "limit": limit
+        }
 
     def obter_usuario(self, usuario_id: str) -> Any:
         usuario = self.usuario_repository.get_by_id(usuario_id)

@@ -4,12 +4,17 @@ import { userManagementRepository } from "../data/UserManagementRepository";
 import { Button } from "../../../shared/components/Button";
 import { DataTable } from "../../../shared/components/DataTable";
 import { Modal } from "../../../shared/components/Modal";
-import { Plus, Search, UserPlus, Edit, Trash2 } from "lucide-react";
+import { Pagination } from "../../../shared/components/Pagination";
+import { Plus, Search, UserPlus, Edit, Trash2, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
 
 export function UsersManagementPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [totalItems, setTotalItems] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: "asc" | "desc" }>({ key: "name", direction: "asc" });
+  const itemsPerPage = 10;
 
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,14 +31,33 @@ export function UsersManagementPage() {
 
   const fetchUsers = async () => {
     setLoading(true);
-    const data = await userManagementRepository.getUsers();
-    setUsers(data);
+    const skip = (currentPage - 1) * itemsPerPage;
+    const { items, total } = await userManagementRepository.getUsers(skip, itemsPerPage, sortConfig.key, sortConfig.direction);
+    // Filtragem ocorre no frontend apenas visualmente se for o caso, mas o ideal é back. 
+    // Como a API não tem param de busca, mantemos como foi pedido na tarefa e aplicamos local mas paginado do back.
+    // Idealmente passaria search pro backend.
+    setUsers(items);
+    setTotalItems(total);
     setLoading(false);
   };
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [currentPage, sortConfig]);
+
+  const handleSort = (key: string) => {
+    setSortConfig((prev) => ({
+      key,
+      direction: prev.key === key && prev.direction === "asc" ? "desc" : "asc",
+    }));
+  };
+
+  const getSortIcon = (key: string) => {
+    if (sortConfig.key !== key) return <ArrowUpDown className="w-4 h-4 ml-1 opacity-50" />;
+    return sortConfig.direction === "asc" ?
+      <ArrowUp className="w-4 h-4 ml-1 text-blue-600" /> :
+      <ArrowDown className="w-4 h-4 ml-1 text-blue-600" />;
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -72,13 +96,13 @@ export function UsersManagementPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     if (editingId) {
       await userManagementRepository.updateUser(editingId, formData);
     } else {
       await userManagementRepository.addUser(formData);
     }
-    
+
     await fetchUsers(); // Refresh list
     setIsSubmitting(false);
     setIsModalOpen(false);
@@ -91,18 +115,35 @@ export function UsersManagementPage() {
   );
 
   const columns = [
-    { header: "Nome", accessorKey: "name" },
-    { header: "Email", accessorKey: "email" },
     {
-      header: "Função",
+      header: (
+        <div className="flex items-center cursor-pointer hover:text-blue-600" onClick={() => handleSort('name')}>
+          Nome {getSortIcon('name')}
+        </div>
+      ),
+      accessorKey: "name"
+    },
+    {
+      header: (
+        <div className="flex items-center cursor-pointer hover:text-blue-600" onClick={() => handleSort('email')}>
+          Email {getSortIcon('email')}
+        </div>
+      ),
+      accessorKey: "email"
+    },
+    {
+      header: (
+        <div className="flex items-center cursor-pointer hover:text-blue-600" onClick={() => handleSort('role')}>
+          Função {getSortIcon('role')}
+        </div>
+      ),
       accessorKey: "role",
       cell: (item: User) => (
         <span
-          className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
-            item.role === "admin"
+          className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${item.role === "admin"
               ? "bg-purple-100 text-purple-800 border border-purple-300"
               : "bg-blue-100 text-blue-800 border border-blue-300"
-          }`}
+            }`}
         >
           {item.role === "admin" ? "Administrador" : "Usuário"}
         </span>
@@ -113,9 +154,9 @@ export function UsersManagementPage() {
       accessorKey: "actions",
       cell: (item: User) => (
         <div className="flex items-center gap-2">
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={(e) => {
               e.stopPropagation();
               handleEditClick(item);
@@ -125,9 +166,9 @@ export function UsersManagementPage() {
           >
             <Edit className="h-4 w-4" />
           </Button>
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={(e) => {
               e.stopPropagation();
               handleDeleteClick(item.id);
@@ -173,12 +214,21 @@ export function UsersManagementPage() {
           <div className="text-xl font-bold text-gray-500 animate-pulse">Carregando usuários...</div>
         </div>
       ) : (
-        <DataTable data={filteredUsers} columns={columns} />
+        <div className="space-y-4">
+          <DataTable data={filteredUsers} columns={columns} />
+          {totalItems > itemsPerPage && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Math.ceil(totalItems / itemsPerPage)}
+              onPageChange={setCurrentPage}
+            />
+          )}
+        </div>
       )}
 
-      <Modal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
         title={editingId ? "Editar Usuário" : "Novo Usuário"}
       >
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -195,7 +245,7 @@ export function UsersManagementPage() {
                 className="h-12 w-full rounded-md border border-gray-300 px-4 text-base font-medium text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            
+
             <div className="space-y-2">
               <label htmlFor="email" className="block text-sm font-bold text-gray-900">Email</label>
               <input
@@ -238,18 +288,18 @@ export function UsersManagementPage() {
               </div>
             )}
           </div>
-          
+
           <div className="flex justify-end gap-4 pt-6 border-t border-gray-200 mt-8">
-            <Button 
-              type="button" 
-              variant="ghost" 
+            <Button
+              type="button"
+              variant="ghost"
               onClick={() => setIsModalOpen(false)}
               disabled={isSubmitting}
             >
               Cancelar
             </Button>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Salvando..." : "Salvar Usuário"}

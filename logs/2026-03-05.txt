@@ -1,0 +1,396 @@
+2026-03-05 13:10:24,214 - root - INFO - Sistema de logs inicializado.
+2026-03-05 13:10:28,870 - uvicorn.error - INFO - Started server process [7500]
+2026-03-05 13:10:28,870 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 13:10:28,871 - uvicorn.error - INFO - Application startup complete.
+2026-03-05 13:10:57,979 - root - INFO - Sistema de logs inicializado.
+2026-03-05 13:10:57,979 - root - INFO - LOG DE TESTE: O sistema de logs está funcionando!
+2026-03-05 13:11:04,549 - uvicorn.access - INFO - 127.0.0.1:60749 - "OPTIONS /pagamentos/?skip=0&limit=10&sort_by=dueDate&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:11:04,551 - uvicorn.access - INFO - 127.0.0.1:57691 - "OPTIONS /pagamentos/?skip=0&limit=10&sort_by=dueDate&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:11:04,753 - uvicorn.access - INFO - 127.0.0.1:57691 - "GET /pagamentos/?skip=0&limit=10&sort_by=dueDate&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:11:04,764 - uvicorn.access - INFO - 127.0.0.1:57691 - "GET /pagamentos/?skip=0&limit=10&sort_by=dueDate&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:11:05,671 - uvicorn.access - INFO - 127.0.0.1:57691 - "OPTIONS /execucoes/?skip=0&limit=10&sort_by=date&order=desc&show_completed=false HTTP/1.1" 200
+2026-03-05 13:11:05,672 - uvicorn.access - INFO - 127.0.0.1:60749 - "OPTIONS /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:05,673 - uvicorn.access - INFO - 127.0.0.1:56819 - "OPTIONS /servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:05,674 - uvicorn.access - INFO - 127.0.0.1:57691 - "OPTIONS /execucoes/?skip=0&limit=10&sort_by=date&order=desc&show_completed=false HTTP/1.1" 200
+2026-03-05 13:11:05,674 - uvicorn.access - INFO - 127.0.0.1:60749 - "OPTIONS /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:05,702 - uvicorn.access - INFO - 127.0.0.1:57691 - "GET /execucoes/?skip=0&limit=10&sort_by=date&order=desc&show_completed=false HTTP/1.1" 200
+2026-03-05 13:11:05,706 - uvicorn.access - INFO - 127.0.0.1:60749 - "GET /servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:05,707 - uvicorn.access - INFO - 127.0.0.1:56819 - "GET /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:05,715 - uvicorn.access - INFO - 127.0.0.1:57691 - "GET /execucoes/?skip=0&limit=10&sort_by=date&order=desc&show_completed=false HTTP/1.1" 200
+2026-03-05 13:11:05,718 - uvicorn.access - INFO - 127.0.0.1:60749 - "GET /servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:05,720 - uvicorn.access - INFO - 127.0.0.1:56819 - "GET /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:06,587 - uvicorn.access - INFO - 127.0.0.1:56819 - "OPTIONS /execucoes/?limit=1000&show_completed=true HTTP/1.1" 200
+2026-03-05 13:11:06,588 - uvicorn.access - INFO - 127.0.0.1:60749 - "OPTIONS /execucoes/?limit=1000&show_completed=true HTTP/1.1" 200
+2026-03-05 13:11:06,593 - uvicorn.access - INFO - 127.0.0.1:64686 - "GET /servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:06,595 - uvicorn.access - INFO - 127.0.0.1:57691 - "GET /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:06,606 - uvicorn.access - INFO - 127.0.0.1:60749 - "GET /execucoes/?limit=1000&show_completed=true HTTP/1.1" 200
+2026-03-05 13:11:06,607 - uvicorn.access - INFO - 127.0.0.1:64686 - "GET /servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:06,608 - uvicorn.access - INFO - 127.0.0.1:57691 - "GET /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:06,613 - uvicorn.access - INFO - 127.0.0.1:60749 - "GET /execucoes/?limit=1000&show_completed=true HTTP/1.1" 200
+2026-03-05 13:11:07,661 - uvicorn.access - INFO - 127.0.0.1:60749 - "OPTIONS /servicos/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:07,662 - uvicorn.access - INFO - 127.0.0.1:57691 - "OPTIONS /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:11:07,663 - uvicorn.access - INFO - 127.0.0.1:64686 - "OPTIONS /servicos/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:07,664 - uvicorn.access - INFO - 127.0.0.1:56819 - "OPTIONS /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:11:07,674 - uvicorn.access - INFO - 127.0.0.1:56819 - "GET /servicos/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:07,675 - uvicorn.access - INFO - 127.0.0.1:64686 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:11:07,681 - uvicorn.access - INFO - 127.0.0.1:64686 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:11:07,683 - uvicorn.access - INFO - 127.0.0.1:56819 - "GET /servicos/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:08,370 - uvicorn.access - INFO - 127.0.0.1:56819 - "OPTIONS /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:08,371 - uvicorn.access - INFO - 127.0.0.1:64686 - "OPTIONS /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:08,383 - uvicorn.access - INFO - 127.0.0.1:64686 - "GET /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:08,392 - uvicorn.access - INFO - 127.0.0.1:64686 - "GET /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:11:09,405 - uvicorn.access - INFO - 127.0.0.1:64686 - "OPTIONS /dashboard/ HTTP/1.1" 200
+2026-03-05 13:11:09,406 - uvicorn.access - INFO - 127.0.0.1:56819 - "OPTIONS /dashboard/ HTTP/1.1" 200
+2026-03-05 13:11:09,415 - uvicorn.access - INFO - 127.0.0.1:64686 - "GET /dashboard/ HTTP/1.1" 200
+2026-03-05 13:11:09,423 - uvicorn.access - INFO - 127.0.0.1:64686 - "GET /dashboard/ HTTP/1.1" 200
+2026-03-05 13:11:34,660 - uvicorn.error - INFO - Shutting down
+2026-03-05 13:11:34,778 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-03-05 13:11:34,779 - uvicorn.error - INFO - Application shutdown complete.
+2026-03-05 13:11:34,779 - uvicorn.error - INFO - Finished server process [7500]
+2026-03-05 13:11:37,774 - root - INFO - Sistema de logs inicializado.
+2026-03-05 13:11:39,843 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:11:39,848 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:11:39,859 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:11:39,873 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:39,882 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:39,902 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:39,908 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:39,921 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:39,930 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:39,936 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:39,944 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:39,951 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/2b832b6c-6ca1-4366-b34a-d582afc7b37c "HTTP/1.1 200 OK"
+2026-03-05 13:11:39,960 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:39,969 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/956a7a8b-cdf6-4cce-8d5c-9ff647dc8ba2 "HTTP/1.1 200 OK"
+2026-03-05 13:11:39,976 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:39,983 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/5c92e603-d335-4e64-982a-3c6427df700b "HTTP/1.1 204 No Content"
+2026-03-05 13:11:39,986 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:39,994 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,004 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,009 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,020 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,028 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,032 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,035 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/6bfbf958-4414-4a87-9c6d-88ebf977a154 "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,041 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/6bfbf958-4414-4a87-9c6d-88ebf977a154/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,050 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,053 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,057 - httpx - INFO - HTTP Request: PUT http://testserver/pagamentos/168c50ac-79a3-41f6-9c9e-653b13b73d5a "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,065 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/id-fantasma "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:40,073 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,076 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,082 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/2177b495-2a7d-4b52-aa1b-3d48a264b78f/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,087 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/2177b495-2a7d-4b52-aa1b-3d48a264b78f/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,091 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/2177b495-2a7d-4b52-aa1b-3d48a264b78f/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,101 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,103 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,107 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/6cb37ce6-81a3-4798-9bb5-e66396565805/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,117 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,124 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,154 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,162 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,166 - httpx - INFO - HTTP Request: GET http://testserver/produtores/f77aebde-ec83-4f98-a235-6941860c2dbc "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,174 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,180 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/6aeab62f-e752-4434-9abb-9fc2051d7771 "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,188 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,191 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/8f88a3e5-45b6-472a-8e96-5ee4b9ad49fe "HTTP/1.1 204 No Content"
+2026-03-05 13:11:40,193 - httpx - INFO - HTTP Request: GET http://testserver/produtores/8f88a3e5-45b6-472a-8e96-5ee4b9ad49fe "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:40,202 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,206 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/afdf5c8a-2a9c-430e-81f9-baec5ef156d0 "HTTP/1.1 204 No Content"
+2026-03-05 13:11:40,207 - httpx - INFO - HTTP Request: GET http://testserver/produtores/afdf5c8a-2a9c-430e-81f9-baec5ef156d0 "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:40,213 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,221 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,223 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:40,233 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,239 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,244 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,252 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,255 - httpx - INFO - HTTP Request: GET http://testserver/servicos/d8bf665a-d3a6-467e-8eb2-dfeb7b230429 "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,264 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,269 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/a9932647-da18-4a6e-b55b-ddb3ef4cd111 "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,276 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,282 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1ac4e14a-6dc0-459b-ad4c-97371a7f13e1 "HTTP/1.1 204 No Content"
+2026-03-05 13:11:40,284 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1ac4e14a-6dc0-459b-ad4c-97371a7f13e1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:40,531 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,753 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:40,984 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 13:11:40,989 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 13:11:41,207 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:41,633 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1992e304-3155-46f5-b30e-abf98e6aceb5/senha "HTTP/1.1 200 OK"
+2026-03-05 13:11:41,842 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,575 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,580 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,585 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,588 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:42,592 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,596 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:42,601 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,605 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,608 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:42,614 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:42,619 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,623 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:42,637 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 204 No Content"
+2026-03-05 13:11:42,641 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:42,646 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,651 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,654 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,658 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:42,662 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:11:42,668 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:42,672 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,675 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,681 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:42,685 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:42,689 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:42,693 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,699 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 204 No Content"
+2026-03-05 13:11:42,704 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:42,707 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,711 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,717 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:11:42,721 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:42,725 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:42,731 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,735 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 204 No Content"
+2026-03-05 13:11:42,739 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:42,747 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/ "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,752 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 13:11:42,756 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 400 Bad Request"
+2026-03-05 13:11:42,760 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,765 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 13:11:42,769 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 200 OK"
+2026-03-05 13:11:42,773 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 400 Bad Request"
+2026-03-05 13:12:21,408 - root - INFO - Sistema de logs inicializado.
+2026-03-05 13:12:22,302 - uvicorn.error - INFO - Started server process [14980]
+2026-03-05 13:12:22,302 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 13:12:22,303 - uvicorn.error - INFO - Application startup complete.
+2026-03-05 13:12:41,429 - uvicorn.access - INFO - 127.0.0.1:65160 - "OPTIONS /usuarios/login HTTP/1.1" 200
+2026-03-05 13:12:41,695 - uvicorn.access - INFO - 127.0.0.1:65160 - "POST /usuarios/login HTTP/1.1" 200
+2026-03-05 13:12:41,732 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /dashboard/ HTTP/1.1" 200
+2026-03-05 13:12:41,737 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /dashboard/ HTTP/1.1" 200
+2026-03-05 13:12:43,227 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:43,233 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:44,051 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:12:44,053 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /servicos/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:44,057 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:12:44,058 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /servicos/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:46,763 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /execucoes/?limit=1000&show_completed=true HTTP/1.1" 200
+2026-03-05 13:12:46,765 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:46,768 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:46,774 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /execucoes/?limit=1000&show_completed=true HTTP/1.1" 200
+2026-03-05 13:12:46,775 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:46,776 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:47,445 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:47,445 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:47,447 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /execucoes/?skip=0&limit=10&sort_by=date&order=desc&show_completed=false HTTP/1.1" 200
+2026-03-05 13:12:47,458 - uvicorn.access - INFO - 127.0.0.1:65160 - "GET /servicos/?skip=0&limit=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:47,458 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /produtores/?page=1&size=1000&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:47,459 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /execucoes/?skip=0&limit=10&sort_by=date&order=desc&show_completed=false HTTP/1.1" 200
+2026-03-05 13:12:48,151 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /pagamentos/?skip=0&limit=10&sort_by=dueDate&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:12:48,156 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /pagamentos/?skip=0&limit=10&sort_by=dueDate&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:12:48,573 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /produtores?size=1000 HTTP/1.1" 307
+2026-03-05 13:12:48,575 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /produtores?size=1000 HTTP/1.1" 307
+2026-03-05 13:12:48,580 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /produtores/?size=1000 HTTP/1.1" 200
+2026-03-05 13:12:48,585 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /produtores/?size=1000 HTTP/1.1" 200
+2026-03-05 13:12:49,075 - uvicorn.access - INFO - 127.0.0.1:50149 - "OPTIONS /usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:49,076 - uvicorn.access - INFO - 127.0.0.1:53182 - "OPTIONS /usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:49,077 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 307
+2026-03-05 13:12:49,078 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 307
+2026-03-05 13:12:49,078 - uvicorn.access - INFO - 127.0.0.1:53182 - "OPTIONS /usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:49,080 - uvicorn.access - INFO - 127.0.0.1:50149 - "OPTIONS /usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:49,085 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:49,090 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:50,443 - uvicorn.access - INFO - 127.0.0.1:53182 - "OPTIONS /logs?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:12:50,444 - uvicorn.access - INFO - 127.0.0.1:50149 - "OPTIONS /logs?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:12:50,445 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /logs?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 307
+2026-03-05 13:12:50,447 - uvicorn.access - INFO - 127.0.0.1:53182 - "GET /logs?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 307
+2026-03-05 13:12:50,448 - uvicorn.access - INFO - 127.0.0.1:50149 - "OPTIONS /logs/?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:12:50,450 - uvicorn.access - INFO - 127.0.0.1:53182 - "OPTIONS /logs/?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:12:50,461 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /logs/?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:12:50,470 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /logs/?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:12:51,792 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:12:51,795 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:12:55,922 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:12:55,925 - uvicorn.access - INFO - 127.0.0.1:50149 - "GET /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:13:02,989 - uvicorn.access - INFO - 127.0.0.1:56747 - "OPTIONS /produtores/6bdbdef5-1e7e-468e-8484-97fa66433f76 HTTP/1.1" 200
+2026-03-05 13:13:03,064 - uvicorn.access - INFO - 127.0.0.1:56747 - "PUT /produtores/6bdbdef5-1e7e-468e-8484-97fa66433f76 HTTP/1.1" 200
+2026-03-05 13:13:03,074 - uvicorn.access - INFO - 127.0.0.1:56747 - "GET /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:13:05,820 - uvicorn.access - INFO - 127.0.0.1:56747 - "GET /usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 307
+2026-03-05 13:13:05,822 - uvicorn.access - INFO - 127.0.0.1:56747 - "GET /usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 307
+2026-03-05 13:13:05,825 - uvicorn.access - INFO - 127.0.0.1:57703 - "GET /usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:13:05,830 - uvicorn.access - INFO - 127.0.0.1:57703 - "GET /usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:13:07,002 - uvicorn.access - INFO - 127.0.0.1:57703 - "GET /logs?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 307
+2026-03-05 13:13:07,004 - uvicorn.access - INFO - 127.0.0.1:57703 - "GET /logs?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 307
+2026-03-05 13:13:07,007 - uvicorn.access - INFO - 127.0.0.1:56747 - "GET /logs/?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:13:07,011 - uvicorn.access - INFO - 127.0.0.1:56747 - "GET /logs/?skip=0&limit=10&sort_by=timestamp&order=desc&search= HTTP/1.1" 200
+2026-03-05 13:13:49,877 - uvicorn.access - INFO - 127.0.0.1:64159 - "POST /usuarios/login HTTP/1.1" 200
+2026-03-05 13:13:49,896 - uvicorn.access - INFO - 127.0.0.1:64159 - "GET /dashboard/ HTTP/1.1" 200
+2026-03-05 13:13:49,904 - uvicorn.access - INFO - 127.0.0.1:64159 - "GET /dashboard/ HTTP/1.1" 200
+2026-03-05 13:13:55,206 - uvicorn.access - INFO - 127.0.0.1:65017 - "GET /usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 307
+2026-03-05 13:13:55,207 - uvicorn.access - INFO - 127.0.0.1:65017 - "GET /usuarios?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 307
+2026-03-05 13:13:55,211 - uvicorn.access - INFO - 127.0.0.1:65017 - "GET /usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:13:55,218 - uvicorn.access - INFO - 127.0.0.1:65017 - "GET /usuarios/?skip=0&limit=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:13:59,605 - uvicorn.access - INFO - 127.0.0.1:65017 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:13:59,607 - uvicorn.access - INFO - 127.0.0.1:65017 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:14:19,577 - uvicorn.access - INFO - 127.0.0.1:63746 - "OPTIONS /admin/backup HTTP/1.1" 200
+2026-03-05 13:14:19,581 - uvicorn.access - INFO - 127.0.0.1:63746 - "POST /admin/backup HTTP/1.1" 400
+2026-03-05 13:14:25,950 - uvicorn.access - INFO - 127.0.0.1:51551 - "GET /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:14:25,956 - uvicorn.access - INFO - 127.0.0.1:51551 - "GET /produtores/?page=1&size=10&sort_by=name&order=asc HTTP/1.1" 200
+2026-03-05 13:14:26,923 - uvicorn.access - INFO - 127.0.0.1:51551 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:14:26,926 - uvicorn.access - INFO - 127.0.0.1:51551 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:18:44,731 - uvicorn.error - INFO - Shutting down
+2026-03-05 13:18:44,846 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-03-05 13:18:44,846 - uvicorn.error - INFO - Application shutdown complete.
+2026-03-05 13:18:44,847 - uvicorn.error - INFO - Finished server process [14980]
+2026-03-05 13:18:52,038 - root - INFO - Sistema de logs inicializado.
+2026-03-05 13:18:55,574 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,577 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,584 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,590 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:55,595 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:55,616 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,624 - httpx - INFO - HTTP Request: GET http://testserver/dashboard/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,637 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,646 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,651 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,660 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,662 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/7f1ade38-b2d0-4fd9-bda7-b2407922f79e "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,671 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,676 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/802dd25f-a8fd-4f78-98bb-963d8c3896ed "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,684 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,689 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/6b148f71-8b8b-44aa-9bcc-96c22b2add99 "HTTP/1.1 204 No Content"
+2026-03-05 13:18:55,692 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,702 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,710 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,716 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,727 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,735 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,738 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,741 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/272d2a02-e6d0-4180-8209-15cf1aa2ca47 "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,747 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/272d2a02-e6d0-4180-8209-15cf1aa2ca47/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,756 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,759 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,764 - httpx - INFO - HTTP Request: PUT http://testserver/pagamentos/2990f662-59c8-4a7e-8c2b-5521e2d97893 "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,770 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/id-fantasma "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:55,777 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,780 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,785 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/565b4618-3e95-4061-b5a5-e261aaeb1a8a/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,789 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/565b4618-3e95-4061-b5a5-e261aaeb1a8a/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,793 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/565b4618-3e95-4061-b5a5-e261aaeb1a8a/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,801 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,804 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,808 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/a19749da-70da-4fc9-8e22-6a9a88b210df/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,815 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,823 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,850 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,857 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,860 - httpx - INFO - HTTP Request: GET http://testserver/produtores/206ff703-91f5-4427-8941-24acc9de0f39 "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,867 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,873 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/f4bcaf36-9dbf-4836-8e71-d9c97a3a0be2 "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,880 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,884 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/ad2cc1bf-8e3b-4994-96f2-2f7d7efef122 "HTTP/1.1 204 No Content"
+2026-03-05 13:18:55,887 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ad2cc1bf-8e3b-4994-96f2-2f7d7efef122 "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:55,894 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,897 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/3deaadd2-2e54-462b-a681-8de4571d7083 "HTTP/1.1 204 No Content"
+2026-03-05 13:18:55,902 - httpx - INFO - HTTP Request: GET http://testserver/produtores/3deaadd2-2e54-462b-a681-8de4571d7083 "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:55,907 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,914 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,916 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:55,927 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,934 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,939 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,946 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,950 - httpx - INFO - HTTP Request: GET http://testserver/servicos/f3d96d0f-46c4-4381-ac68-cfba99277e36 "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,958 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,963 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/80fac67f-0e0d-44f2-b38e-c372c5da8a0c "HTTP/1.1 200 OK"
+2026-03-05 13:18:55,973 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:55,977 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/af1e6442-a707-40be-a973-d16979e9166d "HTTP/1.1 204 No Content"
+2026-03-05 13:18:55,979 - httpx - INFO - HTTP Request: GET http://testserver/servicos/af1e6442-a707-40be-a973-d16979e9166d "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:56,242 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:56,460 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:56,769 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 13:18:56,776 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 13:18:56,997 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:57,435 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/85909b4b-6d86-4d02-88e0-52cb51f9760d/senha "HTTP/1.1 200 OK"
+2026-03-05 13:18:57,679 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,778 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,783 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,788 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,791 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:58,795 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,799 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:58,804 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,808 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,812 - httpx - INFO - HTTP Request: GET http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:58,817 - httpx - INFO - HTTP Request: POST http://testserver/execucoes/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:58,823 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,827 - httpx - INFO - HTTP Request: PUT http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:58,841 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 204 No Content"
+2026-03-05 13:18:58,845 - httpx - INFO - HTTP Request: DELETE http://testserver/execucoes/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:58,849 - httpx - INFO - HTTP Request: GET http://testserver/logs/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,855 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,859 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,863 - httpx - INFO - HTTP Request: GET http://testserver/pagamentos/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:58,867 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 201 Created"
+2026-03-05 13:18:58,872 - httpx - INFO - HTTP Request: POST http://testserver/pagamentos/1/pagar "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:58,876 - httpx - INFO - HTTP Request: GET http://testserver/produtores/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,880 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,885 - httpx - INFO - HTTP Request: GET http://testserver/produtores/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:58,890 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:58,893 - httpx - INFO - HTTP Request: POST http://testserver/produtores/ "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:58,897 - httpx - INFO - HTTP Request: PUT http://testserver/produtores/1 "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,902 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 204 No Content"
+2026-03-05 13:18:58,907 - httpx - INFO - HTTP Request: DELETE http://testserver/produtores/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:58,910 - httpx - INFO - HTTP Request: GET http://testserver/servicos/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,914 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,919 - httpx - INFO - HTTP Request: GET http://testserver/servicos/1 "HTTP/1.1 404 Not Found"
+2026-03-05 13:18:58,924 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:58,928 - httpx - INFO - HTTP Request: POST http://testserver/servicos/ "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:58,932 - httpx - INFO - HTTP Request: PUT http://testserver/servicos/1 "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,938 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 204 No Content"
+2026-03-05 13:18:58,942 - httpx - INFO - HTTP Request: DELETE http://testserver/servicos/1 "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:58,946 - httpx - INFO - HTTP Request: GET http://testserver/usuarios/ "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,950 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 201 Created"
+2026-03-05 13:18:58,956 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/ "HTTP/1.1 400 Bad Request"
+2026-03-05 13:18:58,961 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,967 - httpx - INFO - HTTP Request: POST http://testserver/usuarios/login "HTTP/1.1 401 Unauthorized"
+2026-03-05 13:18:58,973 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 200 OK"
+2026-03-05 13:18:58,978 - httpx - INFO - HTTP Request: PUT http://testserver/usuarios/1/senha "HTTP/1.1 400 Bad Request"
+2026-03-05 13:19:41,336 - root - INFO - Sistema de logs inicializado.
+2026-03-05 13:19:42,141 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 13:19:42,154 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:19:42,156 - httpx - INFO - HTTP Request: GET http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:19:42,191 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 13:19:42,196 - httpx - INFO - HTTP Request: PUT http://testserver/admin/configuracoes "HTTP/1.1 200 OK"
+2026-03-05 13:19:42,232 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 13:19:42,265 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 13:19:42,267 - httpx - INFO - HTTP Request: POST http://testserver/admin/backup "HTTP/1.1 200 OK"
+2026-03-05 13:19:42,300 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 13:19:42,303 - app.infrastructure.services.backup_service - ERROR - Arquivo de backup não encontrado: backups\http://mock-backup-url.sql
+2026-03-05 13:19:42,304 - httpx - INFO - HTTP Request: POST http://testserver/admin/restaurar "HTTP/1.1 400 Bad Request"
+2026-03-05 13:21:24,924 - root - INFO - Sistema de logs inicializado.
+2026-03-05 13:21:25,798 - uvicorn.error - INFO - Started server process [9332]
+2026-03-05 13:21:25,798 - uvicorn.error - INFO - Waiting for application startup.
+2026-03-05 13:21:25,835 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 13:21:25,835 - uvicorn.error - INFO - Application startup complete.
+2026-03-05 13:28:12,657 - uvicorn.access - INFO - 127.0.0.1:59730 - "OPTIONS /usuarios/login HTTP/1.1" 200
+2026-03-05 13:28:12,915 - uvicorn.access - INFO - 127.0.0.1:59730 - "POST /usuarios/login HTTP/1.1" 200
+2026-03-05 13:28:12,946 - uvicorn.access - INFO - 127.0.0.1:59730 - "OPTIONS /dashboard/ HTTP/1.1" 200
+2026-03-05 13:28:12,948 - uvicorn.access - INFO - 127.0.0.1:51046 - "OPTIONS /dashboard/ HTTP/1.1" 200
+2026-03-05 13:28:12,969 - uvicorn.access - INFO - 127.0.0.1:59730 - "GET /dashboard/ HTTP/1.1" 200
+2026-03-05 13:28:12,976 - uvicorn.access - INFO - 127.0.0.1:59730 - "GET /dashboard/ HTTP/1.1" 200
+2026-03-05 13:28:18,387 - uvicorn.access - INFO - 127.0.0.1:61406 - "OPTIONS /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:28:18,388 - uvicorn.access - INFO - 127.0.0.1:61406 - "OPTIONS /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:28:18,395 - uvicorn.access - INFO - 127.0.0.1:61406 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:28:18,399 - uvicorn.access - INFO - 127.0.0.1:61406 - "GET /admin/configuracoes HTTP/1.1" 200
+2026-03-05 13:28:36,814 - uvicorn.access - INFO - 127.0.0.1:49436 - "OPTIONS /admin/backup HTTP/1.1" 200
+2026-03-05 13:28:36,850 - app.infrastructure.services.backup_service - INFO - Backup criado com sucesso em: backups\backup_2026-03-05.db
+2026-03-05 13:28:36,851 - uvicorn.access - INFO - 127.0.0.1:54676 - "POST /admin/backup HTTP/1.1" 200
+2026-03-05 13:28:57,238 - uvicorn.access - INFO - 127.0.0.1:64743 - "OPTIONS /admin/restaurar HTTP/1.1" 200
+2026-03-05 13:28:57,244 - app.infrastructure.services.backup_service - INFO - Banco de dados restaurado com sucesso a partir de: backups\backup_2026-03-05.db
+2026-03-05 13:28:57,246 - uvicorn.access - INFO - 127.0.0.1:64743 - "POST /admin/restaurar HTTP/1.1" 200
+2026-03-05 13:29:47,594 - uvicorn.error - INFO - Shutting down
+2026-03-05 13:29:47,708 - uvicorn.error - INFO - Waiting for application shutdown.
+2026-03-05 13:29:47,709 - uvicorn.error - INFO - Application shutdown complete.
+2026-03-05 13:29:47,710 - uvicorn.error - INFO - Finished server process [9332]

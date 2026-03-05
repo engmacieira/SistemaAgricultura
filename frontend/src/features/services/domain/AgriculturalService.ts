@@ -5,4 +5,5 @@ export interface AgriculturalService {
   unit: "Hora" | "Hectare" | "Empreitada";
   basePrice: number;
   active: boolean;
+  is_deleted: boolean;
 }

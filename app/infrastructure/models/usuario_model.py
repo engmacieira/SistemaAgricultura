@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String
+from sqlalchemy import Column, String, Boolean
 from app.core.database import Base
 from app.domain.entities.usuario_entity import Usuario
 import uuid
@@ -11,6 +11,7 @@ class UsuarioModel(Base):
     email = Column(String, unique=True, nullable=False)
     role = Column(String, default="user")
     password_hash = Column(String, nullable=False)
+    is_deleted = Column(Boolean, default=False)
 
     def to_entity(self) -> Usuario:
         return Usuario(
@@ -18,5 +19,6 @@ class UsuarioModel(Base):
             name=self.name,
             email=self.email,
             role=self.role,
-            password_hash=self.password_hash
+            password_hash=self.password_hash,
+            is_deleted=self.is_deleted
         )

@@ -25,12 +25,14 @@ def test_registrar_pagamento_ja_pago():
     use_cases = PagamentoUseCases(repo_mock)
     
     with pytest.raises(ValueError, match="Este pagamento já foi realizado"):
-        use_cases.registrar_pagamento("1", date.today())
+        use_cases.registrar_pagamento("1", 100.0)
 
 def test_registrar_pagamento_sucesso():
     repo_mock = MagicMock()
     pg_mock = MagicMock()
     pg_mock.status = "Pendente"
+    pg_mock.amount = 1000.0
+    pg_mock.paidAmount = 0.0
     repo_mock.get_by_id.return_value = pg_mock
     
     pg_atualizado_mock = MagicMock()
@@ -38,10 +40,11 @@ def test_registrar_pagamento_sucesso():
     
     use_cases = PagamentoUseCases(repo_mock)
     data_pg = date.today()
-    result = use_cases.registrar_pagamento("1", data_pg)
+    result = use_cases.registrar_pagamento("1", 100.0, data_pg)
     
     assert result == pg_atualizado_mock
     repo_mock.update.assert_called_once_with("1", {
-        "status": "Pago",
+        "status": "Parcial",
+        "paidAmount": 100.0,
         "paymentDate": data_pg
     })

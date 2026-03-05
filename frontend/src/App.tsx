@@ -8,6 +8,7 @@ import { Layout } from "./shared/components/Layout";
 import { ProducersPage } from "./features/producers/presentation/ProducersPage";
 import { ServicesPage } from "./features/services/presentation/ServicesPage";
 import { ExecutionsPage } from "./features/executions/presentation/ExecutionsPage";
+import { SchedulesPage } from "./features/executions/presentation/SchedulesPage";
 import { PaymentsPage } from "./features/payments/presentation/PaymentsPage";
 import { ReportsPage } from "./features/reports/presentation/ReportsPage";
 import { SettingsPage } from "./features/settings/presentation/SettingsPage";
@@ -15,6 +16,7 @@ import { LoginPage } from "./features/auth/presentation/LoginPage";
 import { UserProfilePage } from "./features/auth/presentation/UserProfilePage";
 import { UsersManagementPage } from "./features/admin/presentation/UsersManagementPage";
 import { SystemLogsPage } from "./features/admin/presentation/SystemLogsPage";
+import { DashboardPage } from "./features/dashboard/presentation/DashboardPage";
 import { AuthProvider } from "./core/context/AuthContext";
 import { ProtectedRoute } from "./core/auth/ProtectedRoute";
 
@@ -24,15 +26,17 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          
+
           <Route path="/" element={
             <ProtectedRoute>
               <Layout />
             </ProtectedRoute>
           }>
-            <Route index element={<Navigate to="/produtores" replace />} />
+            <Route index element={<DashboardPage />} />
+            <Route path="dashboard" element={<DashboardPage />} />
             <Route path="produtores" element={<ProducersPage />} />
             <Route path="servicos" element={<ServicesPage />} />
+            <Route path="agendamentos" element={<SchedulesPage />} />
             <Route path="execucoes" element={<ExecutionsPage />} />
             <Route path="pagamentos" element={<PaymentsPage />} />
             <Route path="relatorios" element={<ReportsPage />} />

@@ -1,0 +1,652 @@
+﻿.........FFFFF.FFFFFFFFFFFFFF.F..................FF.F...............F... [ 43%]
+....F......F.............F..........F.......FF....FF.FFF.............F.. [ 86%]
+.............F.........                                                  [100%]
+================================== FAILURES ===================================
+___________________________ test_listar_logs_vazio ____________________________
+app\tests\integracao\test_logs_integration.py:7: in test_listar_logs_vazio
+    assert response.status_code == status.HTTP_200_OK
+E   assert 401 == 200
+E    +  where 401 = <Response [401 Unauthorized]>.status_code
+E    +  and   200 = status.HTTP_200_OK
+_________________________ test_geracao_log_automatica _________________________
+app\tests\integracao\test_logs_integration.py:22: in test_geracao_log_automatica
+    assert response.status_code == status.HTTP_200_OK
+E   assert 401 == 200
+E    +  where 401 = <Response [401 Unauthorized]>.status_code
+E    +  and   200 = status.HTTP_200_OK
+___________________________ test_listar_pagamentos ____________________________
+app\tests\integracao\test_pagamentos_integration.py:10: in test_listar_pagamentos
+    assert isinstance(response.json(), list)
+E   AssertionError: assert False
+E    +  where False = isinstance({'items': [], 'page': 0, 'pages': 0, 'total': 0}, list)
+E    +    where {'items': [], 'page': 0, 'pages': 0, 'total': 0} = json()
+E    +      where json = <Response [200 OK]>.json
+_______________________ test_registrar_pagamento_fluxo ________________________
+app\tests\integracao\test_pagamentos_integration.py:31: in test_registrar_pagamento_fluxo
+    pagamento_id = pagamentos[0]["id"]
+                   ^^^^^^^^^^^^^
+E   KeyError: 0
+__________________________ test_atualizar_pagamento ___________________________
+app\tests\integracao\test_pagamentos_integration.py:62: in test_atualizar_pagamento
+    pagamento_id = next(p["id"] for p in pagamentos if p["producerName"] == "Maria Pagadora")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app\tests\integracao\test_pagamentos_integration.py:62: in <genexpr>
+    pagamento_id = next(p["id"] for p in pagamentos if p["producerName"] == "Maria Pagadora")
+                                                       ^^^^^^^^^^^^^^^^^
+E   TypeError: string indices must be integers, not 'str'
+__________________________ test_partial_payment_flow __________________________
+app\tests\integracao\test_partial_payments.py:23: in test_partial_payment_flow
+    pagamento = next(p for p in pagamentos if p["producerName"] == "JoÒo Parcial")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app\tests\integracao\test_partial_payments.py:23: in <genexpr>
+    pagamento = next(p for p in pagamentos if p["producerName"] == "JoÒo Parcial")
+                                              ^^^^^^^^^^^^^^^^^
+E   TypeError: string indices must be integers, not 'str'
+____________________________ test_payment_overpay _____________________________
+app\tests\integracao\test_partial_payments.py:76: in test_payment_overpay
+    pagamento = next(p for p in pagamentos if p["producerName"] == "Maria Rica")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app\tests\integracao\test_partial_payments.py:76: in <genexpr>
+    pagamento = next(p for p in pagamentos if p["producerName"] == "Maria Rica")
+                                              ^^^^^^^^^^^^^^^^^
+E   TypeError: string indices must be integers, not 'str'
+_____________________________ test_criar_produtor _____________________________
+app\tests\integracao\test_produtores_integration.py:15: in test_criar_produtor
+    assert response.status_code == status.HTTP_200_OK
+E   assert 401 == 200
+E    +  where 401 = <Response [401 Unauthorized]>.status_code
+E    +  and   200 = status.HTTP_200_OK
+___________________________ test_listar_produtores ____________________________
+app\tests\integracao\test_produtores_integration.py:40: in test_listar_produtores
+    assert len(data["items"]) >= 1
+E   assert 0 >= 1
+E    +  where 0 = len([])
+_____________________________ test_obter_produtor _____________________________
+app\tests\integracao\test_produtores_integration.py:53: in test_obter_produtor
+    produtor_id = create_res.json()["id"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'id'
+___________________________ test_atualizar_produtor ___________________________
+app\tests\integracao\test_produtores_integration.py:72: in test_atualizar_produtor
+    produtor_id = create_res.json()["id"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'id'
+____________________________ test_deletar_produtor ____________________________
+app\tests\integracao\test_produtores_integration.py:92: in test_deletar_produtor
+    produtor_id = create_res.json()["id"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'id'
+_______________________ test_reativar_produtor_excluido _______________________
+app\tests\integracao\test_produtores_integration.py:113: in test_reativar_produtor_excluido
+    produtor_id = create_res.json()["id"]
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'id'
+________________________ test_erro_cpf_duplicado_ativo ________________________
+app\tests\integracao\test_produtores_integration.py:144: in test_erro_cpf_duplicado_ativo
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+E   assert 401 == 400
+E    +  where 401 = <Response [401 Unauthorized]>.status_code
+E    +  and   400 = status.HTTP_400_BAD_REQUEST
+_____________________________ test_criar_servico ______________________________
+app\tests\integracao\test_servicos_integration.py:13: in test_criar_servico
+    assert response.status_code == status.HTTP_200_OK
+E   assert 401 == 200
+E    +  where 401 = <Response [401 Unauthorized]>.status_code
+E    +  and   200 = status.HTTP_200_OK
+____________________________ test_listar_servicos _____________________________
+app\tests\integracao\test_servicos_integration.py:31: in test_listar_servicos
+    assert isinstance(data, list)
+E   AssertionError: assert False
+E    +  where False = isinstance({'items': [], 'total': 0}, list)
+_____________________________ test_obter_servico ______________________________
+app\tests\integracao\test_servicos_integration.py:43: in test_obter_servico
+    servico_id = create_res.json()["id"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'id'
+___________________________ test_atualizar_servico ____________________________
+app\tests\integracao\test_servicos_integration.py:59: in test_atualizar_servico
+    servico_id = create_res.json()["id"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'id'
+____________________________ test_deletar_servico _____________________________
+app\tests\integracao\test_servicos_integration.py:76: in test_deletar_servico
+    servico_id = create_res.json()["id"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'id'
+_____________________________ test_login_usuario ______________________________
+app\tests\integracao\test_usuarios_integration.py:36: in test_login_usuario
+    assert data["email"] == "login@teste.com"
+           ^^^^^^^^^^^^^
+E   KeyError: 'email'
+_________________________ test_criar_produtor_com_log _________________________
+app\tests\unitario\application\use_cases\test_produtor_use_cases.py:24: in test_criar_produtor_com_log
+    assert result == produtor_mock
+E   AssertionError: assert <MagicMock na...525366618976'> == <MagicMock na...525366615952'>
+E     
+E     Use -v to get more diff
+_______________________ test_atualizar_produtor_com_log _______________________
+app\tests\unitario\application\use_cases\test_produtor_use_cases.py:58: in test_atualizar_produtor_com_log
+    dados_anteriores=ANY,
+                     ^^^
+E   NameError: name 'ANY' is not defined
+_________________________ test_criar_servico_com_log __________________________
+app\tests\unitario\application\use_cases\test_servico_use_cases.py:33: in test_criar_servico_com_log
+    dados_novos=ANY
+                ^^^
+E   NameError: name 'ANY' is not defined
+_____________________________ test_criar_produtor _____________________________
+app\tests\unitario\domain\entities\test_produtor_entity.py:5: in test_criar_produtor
+    produtor = Produtor(
+E   TypeError: Produtor.__init__() got an unexpected keyword argument 'totalArea'
+_____________________ test_produtor_repository_interface ______________________
+app\tests\unitario\domain\repositories\test_produtor_repository.py:9: in test_produtor_repository_interface
+    produtor_esperado = Produtor(
+E   TypeError: Produtor.__init__() got an unexpected keyword argument 'totalArea'
+________________________ test_produtor_model_to_entity ________________________
+app\tests\unitario\infrastructure\models\test_produtor_model.py:6: in test_produtor_model_to_entity
+    model = ProdutorModel(
+<string>:4: in __init__
+    ???
+.venv\Lib\site-packages\sqlalchemy\orm\state.py:596: in _initialize_instance
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py:121: in __exit__
+    raise exc_value.with_traceback(exc_tb)
+.venv\Lib\site-packages\sqlalchemy\orm\state.py:594: in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+.venv\Lib\site-packages\sqlalchemy\orm\decl_base.py:2179: in _declarative_constructor
+    raise TypeError(
+E   TypeError: 'totalArea' is an invalid keyword argument for ProdutorModel
+__________________ test_produtor_repository_get_by_cpf_cnpj ___________________
+app\tests\unitario\infrastructure\repositories\test_produtor_repository.py:14: in test_produtor_repository_get_by_cpf_cnpj
+    entidade_mock = Produtor(id="1", name="JoÒo", cpfCnpj="123", property="A", totalArea=10, status="A")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   TypeError: Produtor.__init__() got an unexpected keyword argument 'totalArea'
+____________________________ test_listar_execucoes ____________________________
+app\tests\unitario\presentation\routers\test_execucoes_router.py:20: in test_listar_execucoes
+    assert response.json() == [{"id": "1", "status": "Pendente"}]
+E   AssertionError: assert {'items': [{'..., 'total': {}} == [{'id': '1', ...: 'Pendente'}]
+E     
+E     Use -v to get more diff
+______________________________ test_listar_logs _______________________________
+app\tests\unitario\presentation\routers\test_logs_router.py:19: in test_listar_logs
+    assert response.status_code == 200
+E   assert 401 == 200
+E    +  where 401 = <Response [401 Unauthorized]>.status_code
+___________________________ test_listar_pagamentos ____________________________
+app\tests\unitario\presentation\routers\test_pagamentos_router.py:18: in test_listar_pagamentos
+    response = client.get("/pagamentos/")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:473: in get
+    return super().get(
+.venv\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+.venv\Lib\site-packages\fastapi\routing.py:296: in serialize_response
+    raise ResponseValidationError(
+E   fastapi.exceptions.ResponseValidationError: 5 validation errors:
+E     {'type': 'missing', 'loc': ('response', 'items', 0, 'executionId'), 'msg': 'Field required', 'input': {'id': '1', 'amount': 100}}
+E     {'type': 'missing', 'loc': ('response', 'items', 0, 'producerName'), 'msg': 'Field required', 'input': {'id': '1', 'amount': 100}}
+E     {'type': 'missing', 'loc': ('response', 'items', 0, 'serviceName'), 'msg': 'Field required', 'input': {'id': '1', 'amount': 100}}
+E     {'type': 'missing', 'loc': ('response', 'items', 0, 'dueDate'), 'msg': 'Field required', 'input': {'id': '1', 'amount': 100}}
+E     {'type': 'missing', 'loc': ('response', 'items', 0, 'status'), 'msg': 'Field required', 'input': {'id': '1', 'amount': 100}}
+E   
+E     File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\pagamentos.py", line 21, in listar_pagamentos
+E       GET /pagamentos/
+___________________________ test_listar_produtores ____________________________
+app\tests\unitario\presentation\routers\test_produtores_router.py:20: in test_listar_produtores
+    response = client.get("/produtores/")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:473: in get
+    return super().get(
+.venv\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+.venv\Lib\site-packages\fastapi\routing.py:296: in serialize_response
+    raise ResponseValidationError(
+E   fastapi.exceptions.ResponseValidationError: 1 validation error:
+E     {'type': 'model_attributes_type', 'loc': ('response',), 'msg': 'Input should be a valid dictionary or object to extract fields from', 'input': [{'id': '1', 'name': 'JoÒo'}]}
+E   
+E     File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\produtores.py", line 19, in listar_produtores
+E       GET /produtores/
+_____________________________ test_obter_produtor _____________________________
+app\tests\unitario\presentation\routers\test_produtores_router.py:26: in test_obter_produtor
+    response = client.get("/produtores/1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:473: in get
+    return super().get(
+.venv\Lib\site-packages\httpx\_client.py:1053: in get
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+.venv\Lib\site-packages\fastapi\routing.py:296: in serialize_response
+    raise ResponseValidationError(
+E   fastapi.exceptions.ResponseValidationError: 4 validation errors:
+E     {'type': 'missing', 'loc': ('response', 'cpfCnpj'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'JoÒo'}}
+E     {'type': 'missing', 'loc': ('response', 'property'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'JoÒo'}}
+E     {'type': 'missing', 'loc': ('response', 'status'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'JoÒo'}}
+E     {'type': 'missing', 'loc': ('response', 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'JoÒo'}}
+E   
+E     File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\produtores.py", line 29, in obter_produtor
+E       GET /produtores/{produtor_id}
+_____________________________ test_criar_produtor _____________________________
+app\tests\unitario\presentation\routers\test_produtores_router.py:38: in test_criar_produtor
+    assert response.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+__________________________ test_criar_produtor_erro ___________________________
+app\tests\unitario\presentation\routers\test_produtores_router.py:46: in test_criar_produtor_erro
+    assert response.status_code == 400
+E   assert 422 == 400
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+___________________________ test_atualizar_produtor ___________________________
+app\tests\unitario\presentation\routers\test_produtores_router.py:50: in test_atualizar_produtor
+    response = client.put("/produtores/1", json={"name": "Novo"})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:577: in put
+    return super().put(
+.venv\Lib\site-packages\httpx\_client.py:1181: in put
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:691: in app
+    content = await serialize_response(
+.venv\Lib\site-packages\fastapi\routing.py:296: in serialize_response
+    raise ResponseValidationError(
+E   fastapi.exceptions.ResponseValidationError: 4 validation errors:
+E     {'type': 'missing', 'loc': ('response', 'cpfCnpj'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}
+E     {'type': 'missing', 'loc': ('response', 'property'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}
+E     {'type': 'missing', 'loc': ('response', 'status'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}
+E     {'type': 'missing', 'loc': ('response', 'is_deleted'), 'msg': 'Field required', 'input': {'id': '1', 'name': 'Novo'}}
+E   
+E     File "E:\Projetos\AgendamentosAgricultura\app\presentation\routers\produtores.py", line 43, in atualizar_produtor
+E       PUT /produtores/{produtor_id}
+_________________________________ test_login __________________________________
+app\tests\unitario\presentation\routers\test_usuarios_router.py:34: in test_login
+    response = client.post("/usuarios/login", json={"email": "admin@ex.com", "password": "123"})
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:546: in post
+    return super().post(
+.venv\Lib\site-packages\httpx\_client.py:1144: in post
+    return self.request(
+.venv\Lib\site-packages\starlette\testclient.py:445: in request
+    return super().request(
+.venv\Lib\site-packages\httpx\_client.py:825: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:914: in send
+    response = self._send_handling_auth(
+.venv\Lib\site-packages\httpx\_client.py:942: in _send_handling_auth
+    response = self._send_handling_redirects(
+.venv\Lib\site-packages\httpx\_client.py:979: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\httpx\_client.py:1014: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\testclient.py:348: in handle_request
+    raise exc
+.venv\Lib\site-packages\starlette\testclient.py:345: in handle_request
+    portal.call(self.app, scope, receive, send)
+.venv\Lib\site-packages\anyio\from_thread.py:334: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:450: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\matheus\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+.venv\Lib\site-packages\anyio\from_thread.py:259: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\applications.py:1160: in __call__
+    await super().__call__(scope, receive, send)
+.venv\Lib\site-packages\starlette\applications.py:107: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+.venv\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+.venv\Lib\site-packages\starlette\middleware\cors.py:87: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:716: in __call__
+    await self.middleware_stack(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:736: in app
+    await route.handle(scope, receive, send)
+.venv\Lib\site-packages\starlette\routing.py:290: in handle
+    await self.app(scope, receive, send)
+.venv\Lib\site-packages\fastapi\routing.py:130: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+.venv\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+.venv\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+.venv\Lib\site-packages\fastapi\routing.py:116: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\fastapi\routing.py:670: in app
+    raw_response = await run_endpoint_function(
+.venv\Lib\site-packages\fastapi\routing.py:326: in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\starlette\concurrency.py:32: in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\anyio\to_thread.py:63: in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+.venv\Lib\site-packages\anyio\_backends\_asyncio.py:2502: in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+.venv\Lib\site-packages\anyio\_backends\_asyncio.py:986: in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+app\presentation\routers\usuarios.py:37: in login
+    access_token = create_access_token(data={"sub": str(user_dict["id"])})
+                                                        ^^^^^^^^^^^^^^^
+E   KeyError: 'id'
+_____________________ test_produtor_create_schema_valido ______________________
+app\tests\unitario\presentation\schemas\test_produtor_schema.py:15: in test_produtor_create_schema_valido
+    assert schema.totalArea == 50.5
+           ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pydantic\main.py:1026: in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+E   AttributeError: 'ProdutorCreate' object has no attribute 'totalArea'
+=========================== short test summary info ===========================
+FAILED app/tests/integracao/test_logs_integration.py::test_listar_logs_vazio
+FAILED app/tests/integracao/test_logs_integration.py::test_geracao_log_automatica
+FAILED app/tests/integracao/test_pagamentos_integration.py::test_listar_pagamentos
+FAILED app/tests/integracao/test_pagamentos_integration.py::test_registrar_pagamento_fluxo
+FAILED app/tests/integracao/test_pagamentos_integration.py::test_atualizar_pagamento
+FAILED app/tests/integracao/test_partial_payments.py::test_partial_payment_flow
+FAILED app/tests/integracao/test_partial_payments.py::test_payment_overpay - ...
+FAILED app/tests/integracao/test_produtores_integration.py::test_criar_produtor
+FAILED app/tests/integracao/test_produtores_integration.py::test_listar_produtores
+FAILED app/tests/integracao/test_produtores_integration.py::test_obter_produtor
+FAILED app/tests/integracao/test_produtores_integration.py::test_atualizar_produtor
+FAILED app/tests/integracao/test_produtores_integration.py::test_deletar_produtor
+FAILED app/tests/integracao/test_produtores_integration.py::test_reativar_produtor_excluido
+FAILED app/tests/integracao/test_produtores_integration.py::test_erro_cpf_duplicado_ativo
+FAILED app/tests/integracao/test_servicos_integration.py::test_criar_servico
+FAILED app/tests/integracao/test_servicos_integration.py::test_listar_servicos
+FAILED app/tests/integracao/test_servicos_integration.py::test_obter_servico
+FAILED app/tests/integracao/test_servicos_integration.py::test_atualizar_servico
+FAILED app/tests/integracao/test_servicos_integration.py::test_deletar_servico
+FAILED app/tests/integracao/test_usuarios_integration.py::test_login_usuario
+FAILED app/tests/unitario/application/use_cases/test_produtor_use_cases.py::test_criar_produtor_com_log
+FAILED app/tests/unitario/application/use_cases/test_produtor_use_cases.py::test_atualizar_produtor_com_log
+FAILED app/tests/unitario/application/use_cases/test_servico_use_cases.py::test_criar_servico_com_log
+FAILED app/tests/unitario/domain/entities/test_produtor_entity.py::test_criar_produtor
+FAILED app/tests/unitario/domain/repositories/test_produtor_repository.py::test_produtor_repository_interface
+FAILED app/tests/unitario/infrastructure/models/test_produtor_model.py::test_produtor_model_to_entity
+FAILED app/tests/unitario/infrastructure/repositories/test_produtor_repository.py::test_produtor_repository_get_by_cpf_cnpj
+FAILED app/tests/unitario/presentation/routers/test_execucoes_router.py::test_listar_execucoes
+FAILED app/tests/unitario/presentation/routers/test_logs_router.py::test_listar_logs
+FAILED app/tests/unitario/presentation/routers/test_pagamentos_router.py::test_listar_pagamentos
+FAILED app/tests/unitario/presentation/routers/test_produtores_router.py::test_listar_produtores
+FAILED app/tests/unitario/presentation/routers/test_produtores_router.py::test_obter_produtor
+FAILED app/tests/unitario/presentation/routers/test_produtores_router.py::test_criar_produtor
+FAILED app/tests/unitario/presentation/routers/test_produtores_router.py::test_criar_produtor_erro
+FAILED app/tests/unitario/presentation/routers/test_produtores_router.py::test_atualizar_produtor
+FAILED app/tests/unitario/presentation/routers/test_usuarios_router.py::test_login
+FAILED app/tests/unitario/presentation/schemas/test_produtor_schema.py::test_produtor_create_schema_valido
+37 failed, 130 passed in 6.96s

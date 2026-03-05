@@ -5,8 +5,19 @@ class ProdutorUseCases:
         self.produtor_repository = produtor_repository
         self.log_use_cases = log_use_cases
 
-    def listar_produtores(self) -> List[Any]:
-        return self.produtor_repository.get_all()
+    def listar_produtores(self, page: int = 1, size: int = 10, sort_by: str = "name", order: str = "asc") -> Dict[str, Any]:
+        skip = (page - 1) * size
+        items = self.produtor_repository.get_all_paginated(skip=skip, limit=size, sort_by=sort_by, order=order)
+        total = self.produtor_repository.count_active()
+        pages = (total + size - 1) // size
+        
+        return {
+            "items": items,
+            "total": total,
+            "page": page,
+            "size": size,
+            "pages": pages
+        }
 
     def obter_produtor(self, produtor_id: str) -> Any:
         produtor = self.produtor_repository.get_by_id(produtor_id)
@@ -16,19 +27,40 @@ class ProdutorUseCases:
 
     def criar_produtor(self, data: Dict[str, Any], usuario_logado: dict = None) -> Any:
         # Regra de negócio: Validar se CPF/CNPJ já existe no banco
-        # if self.produtor_repository.get_by_cpf_cnpj(data.get("cpfCnpj")):
-        #     raise ValueError("CPF/CNPJ já cadastrado para outro produtor")
+        existente = self.produtor_repository.get_model_by_cpf_cnpj(data.get("cpfCnpj"))
+        
+        if existente:
+            if not existente.is_deleted:
+                raise ValueError("Este CPF/CNPJ já está cadastrado para outro produtor.")
             
-        novo_produtor = self.produtor_repository.create(data)
+            # Reativar produtor que foi excluído
+            produtor_id = existente.id
+            data["is_deleted"] = False
+            novo_produtor = self.produtor_repository.update(produtor_id, data)
+        else:
+            novo_produtor = self.produtor_repository.create(data)
         
         # Integração com Logs: Registrar a ação de criação
         if self.log_use_cases and usuario_logado:
+            import json
+            # Helper function to convert mapped objects to dict
+            def to_dict(obj):
+                if hasattr(obj, 'model_dump'):
+                    return obj.model_dump()
+                if hasattr(obj, '__dict__'):
+                    d = obj.__dict__.copy()
+                    d.pop('_sa_instance_state', None)
+                    return d
+                return obj
+            
             self.log_use_cases.registrar_acao(
                 user_id=usuario_logado.get("id"),
                 user_name=usuario_logado.get("name"),
                 action="CRIAR",
                 entity="Produtor",
-                details=f"Criou o produtor '{data.get('name')}'"
+                details=f"Criou o produtor '{data.get('name')}'",
+                dados_anteriores=None,
+                dados_novos=json.dumps(to_dict(novo_produtor), default=str)
             )
             
         return novo_produtor
@@ -39,12 +71,24 @@ class ProdutorUseCases:
         
         # Integração com Logs: Registrar a ação de edição
         if self.log_use_cases and usuario_logado:
+            import json
+            def to_dict(obj):
+                if hasattr(obj, 'model_dump'):
+                    return obj.model_dump()
+                if hasattr(obj, '__dict__'):
+                    d = obj.__dict__.copy()
+                    d.pop('_sa_instance_state', None)
+                    return d
+                return obj
+            
             self.log_use_cases.registrar_acao(
                 user_id=usuario_logado.get("id"),
                 user_name=usuario_logado.get("name"),
                 action="EDITAR",
                 entity="Produtor",
-                details=f"Atualizou os dados do produtor '{produtor_atual.name}'"
+                details=f"Atualizou os dados do produtor '{produtor_atual.name}'",
+                dados_anteriores=json.dumps(to_dict(produtor_atual), default=str),
+                dados_novos=json.dumps(to_dict(produtor_atualizado), default=str)
             )
             
         return produtor_atualizado
@@ -60,12 +104,24 @@ class ProdutorUseCases:
         
         # Integração com Logs: Registrar a ação de exclusão
         if sucesso and self.log_use_cases and usuario_logado:
+            import json
+            def to_dict(obj):
+                if hasattr(obj, 'model_dump'):
+                    return obj.model_dump()
+                if hasattr(obj, '__dict__'):
+                    d = obj.__dict__.copy()
+                    d.pop('_sa_instance_state', None)
+                    return d
+                return obj
+
             self.log_use_cases.registrar_acao(
                 user_id=usuario_logado.get("id"),
                 user_name=usuario_logado.get("name"),
                 action="EXCLUIR",
                 entity="Produtor",
-                details=f"Excluiu o produtor '{produtor_atual.name}'"
+                details=f"Excluiu o produtor '{produtor_atual.name}'",
+                dados_anteriores=json.dumps(to_dict(produtor_atual), default=str),
+                dados_novos=None
             )
             
         return sucesso

@@ -9,4 +9,5 @@ export interface Execution {
   unit: string;
   totalValue: number;
   status: "Agendado" | "Em Andamento" | "Concluído" | "Cancelado";
+  is_deleted?: boolean;
 }

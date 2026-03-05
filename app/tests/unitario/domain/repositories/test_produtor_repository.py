@@ -8,7 +8,7 @@ def test_produtor_repository_interface():
     
     produtor_esperado = Produtor(
         id="p1", name="João", cpfCnpj="123", property="Fazenda",
-        totalArea=50.5, status="Ativo"
+        regiao_referencia="R", telefone_contato="1", apelido_produtor="A", status="Ativo"
     )
     
     repo_mock.get_all.return_value = [produtor_esperado]

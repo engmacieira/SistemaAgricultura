@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Float, Date, ForeignKey
+from sqlalchemy import Column, String, Float, Date, ForeignKey, Boolean
 from app.core.database import Base
 from app.domain.entities.execucao_entity import Execucao
 import uuid
@@ -16,6 +16,7 @@ class ExecucaoModel(Base):
     unit = Column(String, nullable=False)
     totalValue = Column(Float, nullable=False)
     status = Column(String, default="Pendente")
+    is_deleted = Column(Boolean, default=False)
 
     def to_entity(self) -> Execucao:
         return Execucao(
@@ -28,5 +29,6 @@ class ExecucaoModel(Base):
             quantity=self.quantity,
             unit=self.unit,
             totalValue=self.totalValue,
-            status=self.status
+            status=self.status,
+            is_deleted=self.is_deleted
         )

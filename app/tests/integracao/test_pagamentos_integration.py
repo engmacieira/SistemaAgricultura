@@ -7,7 +7,7 @@ def test_listar_pagamentos(client):
     # mas vamos assumir que podemos listar mesmo que vazio no início
     response = client.get("/pagamentos/")
     assert response.status_code == status.HTTP_200_OK
-    assert isinstance(response.json(), list)
+    assert isinstance(response.json()["items"], list)
 
 def test_registrar_pagamento_fluxo(client):
     # 1. Criar uma execução (que deve gerar um pagamento via logic do sistema)
@@ -26,7 +26,7 @@ def test_registrar_pagamento_fluxo(client):
     
     # 2. Listar pagamentos para pegar o ID
     list_res = client.get("/pagamentos/")
-    pagamentos = list_res.json()
+    pagamentos = list_res.json().get("items", [])
     assert len(pagamentos) >= 1
     pagamento_id = pagamentos[0]["id"]
     
@@ -36,8 +36,8 @@ def test_registrar_pagamento_fluxo(client):
     assert get_res.json()["id"] == pagamento_id
     
     # 4. Registrar o pagamento (pagar)
-    pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar")
-    assert pay_res.status_code == status.HTTP_200_OK
+    pay_res = client.post(f"/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 1000.0})
+    assert pay_res.status_code == status.HTTP_201_CREATED
     assert pay_res.json()["status"] == "Pago"
     assert pay_res.json()["paymentDate"] is not None
 
@@ -58,7 +58,7 @@ def test_atualizar_pagamento(client):
     
     # 2. Listar pagamentos para pegar o ID
     list_res = client.get("/pagamentos/")
-    pagamentos = list_res.json()
+    pagamentos = list_res.json().get("items", [])
     pagamento_id = next(p["id"] for p in pagamentos if p["producerName"] == "Maria Pagadora")
     
     # 3. Atualizar o pagamento via PUT (como o frontend faz)

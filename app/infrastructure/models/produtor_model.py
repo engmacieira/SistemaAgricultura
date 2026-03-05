@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Float
+from sqlalchemy import Column, String, Float, Boolean
 from app.core.database import Base
 from app.domain.entities.produtor_entity import Produtor
 import uuid
@@ -10,8 +10,11 @@ class ProdutorModel(Base):
     name = Column(String, nullable=False)
     cpfCnpj = Column(String, unique=True, nullable=False)
     property = Column(String, nullable=False)
-    totalArea = Column(Float, nullable=False)
+    regiao_referencia = Column(String, nullable=True)
+    telefone_contato = Column(String, nullable=True)
+    apelido_produtor = Column(String, nullable=True)
     status = Column(String, default="Ativo")
+    is_deleted = Column(Boolean, default=False)
 
     def to_entity(self) -> Produtor:
         return Produtor(
@@ -19,6 +22,9 @@ class ProdutorModel(Base):
             name=self.name,
             cpfCnpj=self.cpfCnpj,
             property=self.property,
-            totalArea=self.totalArea,
-            status=self.status
+            regiao_referencia=self.regiao_referencia,
+            telefone_contato=self.telefone_contato,
+            apelido_produtor=self.apelido_produtor,
+            status=self.status,
+            is_deleted=self.is_deleted
         )

@@ -12,6 +12,7 @@ class ServicoModel(Base):
     unit = Column(String, nullable=False)
     basePrice = Column(Float, nullable=False)
     active = Column(Boolean, default=True)
+    is_deleted = Column(Boolean, default=False)
 
     def to_entity(self) -> Servico:
         return Servico(
@@ -20,5 +21,6 @@ class ServicoModel(Base):
             description=self.description,
             unit=self.unit,
             basePrice=self.basePrice,
-            active=self.active
+            active=self.active,
+            is_deleted=self.is_deleted
         )

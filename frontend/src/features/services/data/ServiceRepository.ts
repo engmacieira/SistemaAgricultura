@@ -4,8 +4,14 @@ import { apiFetch } from "../../../core/api";
 const PATH = "/servicos";
 
 export class ServiceRepository {
-  async getServices(): Promise<AgriculturalService[]> {
-    return apiFetch(PATH);
+  async getServices(
+    page: number = 0,
+    limit: number = 10,
+    sortBy: string = "name",
+    order: string = "asc"
+  ): Promise<{ items: AgriculturalService[]; total: number }> {
+    const skip = page * limit;
+    return apiFetch(`${PATH}/?skip=${skip}&limit=${limit}&sort_by=${sortBy}&order=${order}`);
   }
 
   async getServiceById(id: string): Promise<AgriculturalService | undefined> {
@@ -17,7 +23,7 @@ export class ServiceRepository {
   }
 
   async addService(service: Omit<AgriculturalService, "id">): Promise<AgriculturalService> {
-    return apiFetch(PATH, {
+    return apiFetch(`${PATH}/`, {
       method: "POST",
       body: JSON.stringify(service),
     });
