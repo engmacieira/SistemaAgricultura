@@ -1,4 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+import time
+import logging      
+from app.core.logging_config import setup_logging
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.logging_config import setup_logging
 from contextlib import asynccontextmanager
@@ -7,8 +10,10 @@ from alembic.config import Config
 from alembic import command
 import os
 
-# Inicialização do logging
 setup_logging()
+
+# Inicialização do logging
+acesso_logger = logging.getLogger("sistema.acesso")
 
 # Importando os routers
 from app.presentation.routers import (
@@ -46,10 +51,20 @@ def run_migrations():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Gera/Atualiza as tabelas do banco de dados local da máquina
+    # 1. Gera/Atualiza as tabelas do banco de dados local da máquina
     run_migrations()
 
-    # Startup Backup
+    # 2. --- DÍVIDA TÉCNICA RESOLVIDA: SEED DO CLIENTE FINAL ---
+    # Garante que o usuário Master existe logo no primeiro segundo de vida do app
+    from app.scripts.create_master_admin import create_master_admin
+    try:
+        print("Verificando credenciais do Master Admin...")
+        create_master_admin()
+    except Exception as e:
+        print(f"Aviso: Não foi possível rodar o seed do admin: {e}")
+    # ----------------------------------------------------------
+
+    # 3. Startup Backup
     from app.infrastructure.services.backup_service import BackupService
     backup_service = BackupService()
     try:
@@ -66,10 +81,28 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+@app.middleware("http")
+async def log_requests_middleware(request: Request, call_next):
+    start_time = time.time()
+    
+    # Processa a requisição e gera a resposta
+    response = await call_next(request)
+    
+    process_time = time.time() - start_time
+    
+    # Filtro de Arquiteto: Ignoramos os arquivos .js e .css do React para não poluir o log,
+    # focando apenas nas chamadas da API e navegação principal.
+    if not request.url.path.startswith("/assets"):
+        acesso_logger.info(f"[{request.method}] {request.url.path} - Status: {response.status_code} - Tempo: {process_time:.4f}s")
+        
+    return response
+
 # Configuração de CORS (permitindo o frontend se conectar)
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://localhost:8000",   # Adicionado para a versão desktop
+    "http://127.0.0.1:8000",   # Adicionado para a versão desktop
     "http://localhost:5173", # Adicionado para o Vite Dev
 ]
 
