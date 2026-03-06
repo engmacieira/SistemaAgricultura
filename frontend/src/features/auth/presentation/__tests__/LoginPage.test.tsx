@@ -48,9 +48,9 @@ describe('LoginPage Integration', () => {
 
     it('renders login form correctly', () => {
         renderLoginPage();
-        expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-        expect(screen.getByLabelText(/senha/i)).toBeInTheDocument();
-        expect(screen.getByRole('button', { name: /entrar no sistema/i })).toBeInTheDocument();
+        expect(screen.getByLabelText(/e-mail institucional/i)).toBeInTheDocument();
+        expect(screen.getByLabelText(/senha de acesso/i)).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /acessar painel/i })).toBeInTheDocument();
     });
 
     it('successfully logs in and navigates to dashboard', async () => {
@@ -61,9 +61,9 @@ describe('LoginPage Integration', () => {
 
         renderLoginPage();
 
-        fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'admin@sistema.com' } });
-        fireEvent.change(screen.getByLabelText(/senha/i), { target: { value: '123456' } });
-        fireEvent.click(screen.getByRole('button', { name: /entrar no sistema/i }));
+        fireEvent.change(screen.getByLabelText(/e-mail institucional/i), { target: { value: 'admin@sistema.com' } });
+        fireEvent.change(screen.getByLabelText(/senha de acesso/i), { target: { value: '123456' } });
+        fireEvent.click(screen.getByRole('button', { name: /acessar painel/i }));
 
         await waitFor(() => {
             expect(authRepository.login).toHaveBeenCalledWith('admin@sistema.com', '123456');
@@ -76,12 +76,12 @@ describe('LoginPage Integration', () => {
 
         renderLoginPage();
 
-        fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'wrong@sistema.com' } });
-        fireEvent.change(screen.getByLabelText(/senha/i), { target: { value: 'wrongpass' } });
-        fireEvent.click(screen.getByRole('button', { name: /entrar no sistema/i }));
+        fireEvent.change(screen.getByLabelText(/e-mail institucional/i), { target: { value: 'wrong@sistema.com' } });
+        fireEvent.change(screen.getByLabelText(/senha de acesso/i), { target: { value: 'wrongpass' } });
+        fireEvent.click(screen.getByRole('button', { name: /acessar painel/i }));
 
         await waitFor(() => {
-            expect(screen.getByText(/credenciais inválidas/i)).toBeInTheDocument();
+            expect(screen.getByText(/e-mail ou senha incorretos/i)).toBeInTheDocument();
         });
     });
 });
