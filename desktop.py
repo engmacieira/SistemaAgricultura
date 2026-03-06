@@ -43,4 +43,4 @@ if __name__ == '__main__':
             min_size=(800, 600)
         )
         
-        webview.start(private_mode=False)
+        webview.start(private_mode=True)

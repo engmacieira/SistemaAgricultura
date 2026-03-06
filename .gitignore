@@ -1,16 +1,56 @@
-
+# =========================
+# 🐍 Python & Ambiente Virtual
+# =========================
 __pycache__/
 *.py[cod]
 *$py.class
-.env
-.venv
-env/
+.venv/
 venv/
-.idea/
-.vscode/
-dist/
-node_modules/
-txt/
-Checklist.md
+env/
+
+# =========================
+# ⚛️ Frontend (Node / React / Vite)
+# =========================
+frontend/node_modules/
+frontend/dist/
+.npm/
+
+# =========================
+# 📦 Compilação Desktop (Nuitka)
+# =========================
+*.exe
+*.build/
+*.dist/
+*.onefile-build/
+
+# =========================
+# 🗄️ Banco de Dados & Logs
+# =========================
 *.db
+*.sqlite
 *.sqlite3
+app.db
+logs/
+*.log
+
+# =========================
+# 🔐 Segurança (Variáveis de Ambiente)
+# =========================
+.env
+.env.local
+
+# =========================
+# 🖥️ Sistema Operacional / IDEs
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =========================
+# Documentação Local
+# =========================
+txt/    
+Checklist.md
+backups/
+logs/
