@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel
 from typing import List
 from sqlalchemy.orm import Session
 from app.core.database import get_db
@@ -79,4 +80,18 @@ def deletar_usuario(usuario_id: str, uc: UsuarioUseCases = Depends(get_use_case)
             raise HTTPException(status_code=404, detail="Usuário não encontrado")
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
+
+# Crie esse schema simples para não vazar a senha no endpoint público
+class UsuarioSelect(BaseModel):
+    name: str
+    email: str
+
+# ⚠️ ATENÇÃO: Essa rota NÃO pode ter o Depends(get_current_user)
+@router.get("/public/lista", response_model=List[UsuarioSelect])
+def listar_usuarios_para_login(db: Session = Depends(get_db)):
+    """Rota pública para alimentar o Select da tela de Login"""
+    from app.infrastructure.models.usuario_model import UsuarioModel # Ajuste o import se necessário
+    
+    usuarios = db.query(UsuarioModel).filter(UsuarioModel.is_deleted == False).all()
+    return [{"name": u.name, "email": u.email} for u in usuarios]
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Users, ClipboardList, AlertCircle, TrendingUp, DollarSign, ArrowUpRight, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Users, ClipboardList, AlertCircle, TrendingUp, DollarSign, ArrowUpRight, Calendar, CheckCircle } from "lucide-react";
 import { DashboardRepository } from "../data/DashboardRepository";
 import { DashboardData } from "../domain/DashboardData";
 
@@ -27,20 +27,20 @@ export const DashboardPage: React.FC = () => {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-full">
+            <div className="flex items-center justify-center min-h-screen">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
             </div>
         );
     }
 
-    if (!data) return <div>Erro ao carregar dados.</div>;
+    if (!data) return <div className="p-6 text-red-500 font-bold">Erro ao carregar dados.</div>;
 
     return (
         <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
             <header className="flex justify-between items-center mb-8">
                 <div>
                     <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
-                    <p className="text-gray-500">Bem-vindo de volta! Aqui está o resumo do seu sistema.</p>
+                    <p className="text-gray-500">Bem-vindo de volta! Aqui está o resumo operacional do sistema.</p>
                 </div>
                 <div className="bg-white p-2 rounded-lg shadow-sm border border-gray-100 flex items-center gap-2">
                     <Calendar size={20} className="text-green-600" />
@@ -56,31 +56,31 @@ export const DashboardPage: React.FC = () => {
                     title="Total Produtores"
                     value={data.summary.totalProducers}
                     icon={<Users className="text-blue-600" />}
-                    trend="+5% este mês"
+                    trend="Base de clientes"
                     color="blue"
                     to="/produtores"
                 />
                 <SummaryCard
-                    title="Serviços Ativos"
+                    title="Catálogo de Serviços"
                     value={data.summary.totalServices}
                     icon={<ClipboardList className="text-green-600" />}
-                    trend="Estável"
+                    trend="Serviços ofertados"
                     color="green"
                     to="/servicos"
                 />
                 <SummaryCard
-                    title="Pendências"
+                    title="Fila de Espera" // ✅ MUDANÇA CONCEITUAL: Antes era Pendências
                     value={data.summary.pendingExecutions}
                     icon={<AlertCircle className="text-orange-600" />}
-                    trend={`${data.summary.pendingExecutions} aguardando`}
+                    trend={`${data.summary.pendingExecutions} aguardando trator`}
                     color="orange"
-                    to="/execucoes"
+                    to="/agendamentos" // ✅ Aponta para o Kanban de Fila de Espera
                 />
                 <SummaryCard
                     title="Total Recebido"
                     value={`R$ ${data.summary.totalPaidAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`}
                     icon={<DollarSign className="text-purple-600" />}
-                    trend="Crescimento constante"
+                    trend="Faturamento do caixa"
                     color="purple"
                     to="/pagamentos"
                 />
@@ -94,11 +94,11 @@ export const DashboardPage: React.FC = () => {
                         <div className="flex gap-4">
                             <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                                <span className="text-xs text-gray-500 font-medium">Pago</span>
+                                <span className="text-xs text-gray-500 font-medium">Recebido</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <div className="w-3 h-3 rounded-full bg-orange-400"></div>
-                                <span className="text-xs text-gray-500 font-medium">Pendente</span>
+                                <span className="text-xs text-gray-500 font-medium">A Receber</span>
                             </div>
                         </div>
                     </div>
@@ -116,12 +116,12 @@ export const DashboardPage: React.FC = () => {
                                             <div
                                                 className="w-full bg-orange-400 rounded-t-sm transition-all duration-300 group-hover:opacity-80"
                                                 style={{ height: `${pendingHeight}%` }}
-                                                title={`Pendente: R$ ${item.pending}`}
+                                                title={`A Receber: R$ ${item.pending.toFixed(2)}`}
                                             ></div>
                                             <div
                                                 className="w-full bg-green-500 rounded-b-sm transition-all duration-300 group-hover:opacity-80"
                                                 style={{ height: `${paidHeight}%` }}
-                                                title={`Pago: R$ ${item.paid}`}
+                                                title={`Recebido: R$ ${item.paid.toFixed(2)}`}
                                             ></div>
                                         </div>
                                         <span className="text-[10px] text-gray-400 font-medium uppercase">{item.month}</span>
@@ -140,21 +140,21 @@ export const DashboardPage: React.FC = () => {
                 </div>
 
                 {/* Recent Activities */}
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <h2 className="text-xl font-bold text-gray-800 mb-6">Atividades Recentes</h2>
-                    <div className="space-y-4">
+                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col">
+                    <h2 className="text-xl font-bold text-gray-800 mb-6">Serviços Faturados Recentes</h2>
+                    <div className="space-y-4 flex-grow">
                         {data.recentActivities.length > 0 ? (
                             data.recentActivities.map((activity) => (
                                 <div key={activity.id} className="flex gap-4 p-3 hover:bg-gray-50 rounded-xl transition-colors">
-                                    <div className={`p-2 rounded-lg shrink-0 ${activity.type === 'Agendamento' ? 'bg-blue-50 text-blue-600' : 'bg-green-50 text-green-600'
+                                    <div className={`p-2 rounded-lg shrink-0 ${activity.type === 'Serviço Realizado' || activity.type === 'Agendamento' ? 'bg-blue-50 text-blue-600' : 'bg-green-50 text-green-600'
                                         }`}>
-                                        {activity.type === 'Agendamento' ? <ClipboardList size={20} /> : <DollarSign size={20} />}
+                                        {activity.type === 'Serviço Realizado' || activity.type === 'Agendamento' ? <CheckCircle size={20} /> : <DollarSign size={20} />}
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className="text-sm font-semibold text-gray-800 truncate">{activity.description}</p>
                                         <div className="flex items-center gap-2 mt-0.5">
                                             <span className="text-xs text-gray-400">{new Date(activity.date).toLocaleDateString('pt-BR')}</span>
-                                            <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${activity.status === 'Pendente' ? 'bg-orange-50 text-orange-600' : 'bg-green-50 text-green-600'
+                                            <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${activity.status === 'Pendente' || activity.status === 'REGISTRADA' ? 'bg-orange-50 text-orange-600' : 'bg-green-50 text-green-600'
                                                 }`}>
                                                 {activity.status}
                                             </span>
@@ -168,28 +168,29 @@ export const DashboardPage: React.FC = () => {
                                 </div>
                             ))
                         ) : (
-                            <div className="text-center py-8 text-gray-400 italic">Nenhuma atividade recente encontrada</div>
+                            <div className="text-center py-8 text-gray-400 italic">Nenhum serviço registrado recentemente</div>
                         )}
                     </div>
+                    {/* ✅ MUDANÇA CONCEITUAL: O Histórico de atividades agora vive nas Execuções */}
                     <Link
-                        to="/agendamentos"
+                        to="/execucoes"
                         className="block w-full mt-6 py-2.5 text-center text-sm font-semibold text-green-600 bg-green-50 rounded-xl hover:bg-green-100 transition-colors"
                     >
-                        Ver todas as atividades
+                        Ver histórico completo
                     </Link>
                 </div>
             </div>
 
             {/* Service Distribution */}
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <h2 className="text-xl font-bold text-gray-800 mb-6">Distribuição por Serviço</h2>
+                <h2 className="text-xl font-bold text-gray-800 mb-6">Distribuição de Serviços Prestados</h2>
                 <div className="flex flex-wrap gap-4">
                     {data.serviceDistribution.length > 0 ? (
                         data.serviceDistribution.map((service, index) => (
                             <div key={index} className="flex-1 min-w-[200px] p-4 bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-between">
                                 <div>
                                     <p className="text-sm text-gray-500 font-medium mb-1">{service.name}</p>
-                                    <p className="text-2xl font-bold text-gray-800">{service.value}</p>
+                                    <p className="text-2xl font-bold text-gray-800">{service.value} <span className="text-xs text-gray-400 font-normal">execuções</span></p>
                                 </div>
                                 <div className="p-3 bg-white rounded-full shadow-sm">
                                     <TrendingUp size={24} className="text-green-500" />

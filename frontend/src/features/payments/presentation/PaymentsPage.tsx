@@ -379,10 +379,6 @@ export function PaymentsPage() {
             Relatório de Débitos
             {isReportOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
           </Button>
-          <Button size="lg" className="shrink-0 gap-2">
-            <DollarSign className="h-5 w-5" />
-            Novo Recebimento
-          </Button>
         </div>
       </div>
 

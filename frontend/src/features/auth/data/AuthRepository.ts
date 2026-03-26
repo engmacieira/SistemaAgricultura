@@ -23,6 +23,19 @@ export class AuthRepository {
     }
   }
 
+  // ✅ NOVA FUNÇÃO ADICIONADA: Busca os usuários para o select
+  async getPublicUsers(): Promise<{ name: string, email: string }[]> {
+    try {
+      // Fazemos o fetch direto para evitar que o interceptador exija token
+      const response = await fetch("http://127.0.0.1:8000/api/usuarios/public/lista");
+      if (!response.ok) return [];
+      return await response.json();
+    } catch (error) {
+      console.error("Erro ao buscar lista de usuários:", error);
+      return [];
+    }
+  }
+
   async logout(): Promise<void> {
     // Backend logout not implemented or not needed for now
   }

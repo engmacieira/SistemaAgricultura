@@ -8,7 +8,7 @@ import { Layout } from "./shared/components/Layout";
 import { ProducersPage } from "./features/producers/presentation/ProducersPage";
 import { ServicesPage } from "./features/services/presentation/ServicesPage";
 import { ExecutionsPage } from "./features/executions/presentation/ExecutionsPage";
-import { SchedulesPage } from "./features/executions/presentation/SchedulesPage";
+import { RequestsPage } from "./features/requests/presentation/RequestsPage";
 import { PaymentsPage } from "./features/payments/presentation/PaymentsPage";
 import { ReportsPage } from "./features/reports/presentation/ReportsPage";
 import { SettingsPage } from "./features/settings/presentation/SettingsPage";
@@ -36,7 +36,7 @@ export default function App() {
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="produtores" element={<ProducersPage />} />
             <Route path="servicos" element={<ServicesPage />} />
-            <Route path="agendamentos" element={<SchedulesPage />} />
+            <Route path="agendamentos" element={<RequestsPage />} />
             <Route path="execucoes" element={<ExecutionsPage />} />
             <Route path="pagamentos" element={<PaymentsPage />} />
             <Route path="relatorios" element={<ReportsPage />} />

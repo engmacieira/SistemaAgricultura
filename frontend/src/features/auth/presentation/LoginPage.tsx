@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../core/context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Tractor, Lock, Mail, Loader2 } from "lucide-react";
+import { Tractor, Lock, Users, Loader2 } from "lucide-react"; // Troquei Mail por Users
 import { Button } from "../../../shared/components/Button";
+import { authRepository } from "../data/AuthRepository"; // Importamos o repositório
 
 export function LoginPage() {
   const { login } = useAuth();
@@ -11,6 +12,23 @@ export function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // ✅ NOVOS ESTADOS PARA O SELECT
+  const [usuariosLista, setUsuariosLista] = useState<{ name: string, email: string }[]>([]);
+  const [loadingUsers, setLoadingUsers] = useState(true);
+
+  // ✅ BUSCA OS USUÁRIOS AO ABRIR A TELA
+  useEffect(() => {
+    const fetchUsuarios = async () => {
+      const lista = await authRepository.getPublicUsers();
+      setUsuariosLista(lista);
+      if (lista.length > 0) {
+        setEmail(lista[0].email); // Já deixa o primeiro selecionado
+      }
+      setLoadingUsers(false);
+    };
+    fetchUsuarios();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +40,7 @@ export function LoginPage() {
       if (success) {
         navigate("/dashboard");
       } else {
-        setError("E-mail ou senha incorretos.");
+        setError("Senha incorreta."); // Ajustei a mensagem, já que o usuário é fixo
       }
     } catch (err) {
       setError("Sistema temporariamente indisponível. Tente mais tarde.");
@@ -36,7 +54,6 @@ export function LoginPage() {
       <div className="w-full max-w-md space-y-8 rounded-2xl bg-white p-10 shadow-xl border border-gray-100">
 
         <div className="flex flex-col items-center text-center">
-          {/* Ícone atualizado para o azul do sistema */}
           <div className="rounded-2xl bg-blue-600 p-4 mb-6 shadow-lg shadow-blue-100">
             <Tractor className="h-10 w-10 text-white" />
           </div>
@@ -50,27 +67,40 @@ export function LoginPage() {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-5">
+            {/* ✅ CAMPO DE E-MAIL TRANSFORMADO EM SELECT */}
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-gray-700 ml-1">
-                E-mail Institucional
+                Selecione seu Perfil
               </label>
               <div className="relative mt-1.5">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <Mail className="h-5 w-5 text-gray-400" />
+                  <Users className="h-5 w-5 text-gray-400" />
                 </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full rounded-xl border border-gray-200 pl-10 py-3.5 text-gray-900 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 sm:text-sm"
-                  placeholder="seu@email.com"
-                />
+                {loadingUsers ? (
+                  <div className="block w-full rounded-xl border border-gray-200 pl-10 py-3.5 bg-gray-50 text-gray-500 sm:text-sm animate-pulse">
+                    Carregando perfis...
+                  </div>
+                ) : (
+                  <select
+                    id="email"
+                    name="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="block w-full rounded-xl border border-gray-200 pl-10 py-3.5 text-gray-900 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 sm:text-sm appearance-none bg-white"
+                  >
+                    <option value="" disabled>Selecione quem você é...</option>
+                    {usuariosLista.map((user, idx) => (
+                      <option key={idx} value={user.email}>
+                        {user.name}
+                      </option>
+                    ))}
+                  </select>
+                )}
               </div>
             </div>
 
+            {/* CAMPO DE SENHA INTACTO */}
             <div>
               <label htmlFor="password" className="block text-sm font-semibold text-gray-700 ml-1">
                 Senha de Acesso
@@ -100,11 +130,10 @@ export function LoginPage() {
             </div>
           )}
 
-          {/* Botão de ação com a cor azul consistente */}
           <Button
             type="submit"
             className="w-full justify-center py-4 text-lg font-bold bg-blue-600 hover:bg-blue-700 rounded-xl transition-all shadow-lg shadow-blue-100"
-            disabled={loading}
+            disabled={loading || loadingUsers || !email}
           >
             {loading ? (
               <>
