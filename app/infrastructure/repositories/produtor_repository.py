@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from .base_repository import BaseRepository
 from ..models.produtor_model import ProdutorModel
+from ..models.solicitacao_model import SolicitacaoModel
 from ..models.execucao_model import ExecucaoModel
 from app.domain.entities.produtor_entity import Produtor
 
@@ -60,5 +61,8 @@ class ProdutorRepository(BaseRepository[ProdutorModel, Produtor]):
         return [m.to_entity() for m in models]
 
     def has_execucoes(self, produtor_id: str) -> bool:
-        count = self.db.query(ExecucaoModel).filter(ExecucaoModel.producerId == produtor_id).count()
+        count = self.db.query(ExecucaoModel).join(SolicitacaoModel).filter(
+            SolicitacaoModel.producerId == produtor_id,
+            ExecucaoModel.is_deleted == False
+        ).count()
         return count > 0

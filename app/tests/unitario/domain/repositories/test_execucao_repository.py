@@ -8,9 +8,9 @@ def test_execucao_repository_interface():
     repo_mock = Mock(spec=IExecucaoRepository)
     
     execucao_esperada = Execucao(
-        id="1", producerId="p1", producerName="João", serviceId="s1",
+        id="1", solicitacaoId="solic-1", serviceId="s1",
         serviceName="Aração", date=date.today(), quantity=10, unit="ha",
-        totalValue=1500.0, status="Pendente"
+        valor_unitario=150.0, totalValue=1500.0, status="REGISTRADA"
     )
     
     repo_mock.get_all.return_value = [execucao_esperada]
@@ -21,12 +21,12 @@ def test_execucao_repository_interface():
     
     assert repo_mock.get_all() == [execucao_esperada]
     assert repo_mock.get_by_id("1") == execucao_esperada
-    assert repo_mock.create({"status": "Pendente"}) == execucao_esperada
-    assert repo_mock.update("1", {"status": "Concluído"}) == execucao_esperada
+    assert repo_mock.create({"status": "REGISTRADA"}) == execucao_esperada
+    assert repo_mock.update("1", {"status": "FATURADA"}) == execucao_esperada
     assert repo_mock.delete("1") is True
     
     repo_mock.get_all.assert_called_once()
     repo_mock.get_by_id.assert_called_once_with("1")
-    repo_mock.create.assert_called_once_with({"status": "Pendente"})
-    repo_mock.update.assert_called_once_with("1", {"status": "Concluído"})
+    repo_mock.create.assert_called_once_with({"status": "REGISTRADA"})
+    repo_mock.update.assert_called_once_with("1", {"status": "FATURADA"})
     repo_mock.delete.assert_called_once_with("1")

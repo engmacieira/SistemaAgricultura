@@ -5,3 +5,4 @@ from .pagamento_model import PagamentoModel
 from .produtor_model import ProdutorModel
 from .servico_model import ServicoModel
 from .usuario_model import UsuarioModel
+from .solicitacao_model import SolicitacaoModel

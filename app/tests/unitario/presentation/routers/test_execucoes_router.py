@@ -18,23 +18,24 @@ def mock_uc():
 
 execucao_mock = {
     "id": "1",
-    "producerId": "p1",
-    "producerName": "P1",
+    "solicitacaoId": "sol-1",
     "serviceId": "s1",
     "serviceName": "S1",
     "date": "2026-03-03",
     "quantity": 10.0,
     "unit": "H",
+    "valor_unitario": 10.0,
     "totalValue": 100.0,
-    "status": "Pendente",
+    "status": "REGISTRADA",
 }
 
 def test_listar_execucoes(mock_uc):
     mock_uc.listar_execucoes.return_value = [execucao_mock]
-    mock_uc.contar_execucoes.return_value = 1
     response = client.get("/api/execucoes/")
     assert response.status_code == 200
-    assert response.json()["items"][0]["id"] == "1"
+    data = response.json()
+    assert isinstance(data, list)
+    assert data[0]["id"] == "1"
 
 def test_obter_execucao(mock_uc):
     mock_uc.obter_execucao.return_value = execucao_mock
@@ -51,36 +52,39 @@ def test_obter_execucao_nao_encontrado(mock_uc):
 def test_registrar_execucao(mock_uc):
     from datetime import date
     payload = {
-        "producerId": "p1",
-        "producerName": "Produtor 1",
+        "solicitacaoId": "sol-1",
         "serviceId": "s1",
         "serviceName": "Servico 1",
         "date": "2026-03-03",
         "quantity": 10.0,
         "unit": "Hectare",
+        "valor_unitario": 100.0,
         "totalValue": 1000.0,
-        "status": "Pendente"
+        "status": "REGISTRADA"
     }
     # O Pydantic converte a string para date object no model_dump()
     expected_payload = payload.copy()
     expected_payload["date"] = date(2026, 3, 3)
     
-    mock_uc.criar_execucao.return_value = {"id": "1", **payload}
+    # Adiciona campos opcionais padroes que o schema pode ter (operador_maquina: None)
+    expected_payload["operador_maquina"] = None
+    
+    mock_uc.criar_execucao.return_value = {"id": "1", **payload, "operador_maquina": None}
     response = client.post("/api/execucoes/", json=payload)
     assert response.status_code == 201
     assert response.json()["id"] == "1"
     mock_uc.criar_execucao.assert_called_once_with(expected_payload, ANY)
 
 def test_atualizar_execucao(mock_uc):
-    mock_uc.atualizar_execucao.return_value = {**execucao_mock, "status": "Cancelado"}
-    response = client.put("/api/execucoes/1", json={"status": "Cancelado"})
+    mock_uc.atualizar_execucao.return_value = {**execucao_mock, "status": "FATURADA"}
+    response = client.put("/api/execucoes/1", json={"status": "FATURADA"})
     assert response.status_code == 200
     assert response.json()["id"] == "1"
-    mock_uc.atualizar_execucao.assert_called_once_with("1", {"status": "Cancelado"}, {"id": "1", "name": "Admin Test", "email": "admin@teste.com", "role": "admin"})
+    mock_uc.atualizar_execucao.assert_called_once_with("1", {"status": "FATURADA"}, {"id": "1", "name": "Admin Test", "email": "admin@teste.com", "role": "admin"})
 
 def test_atualizar_execucao_erro(mock_uc):
     mock_uc.atualizar_execucao.side_effect = ValueError("Nao encontrado")
-    response = client.put("/api/execucoes/1", json={"status": "Cancelado"})
+    response = client.put("/api/execucoes/1", json={"status": "FATURADA"})
     assert response.status_code == 404
 
 def test_deletar_execucao(mock_uc):
@@ -89,6 +93,6 @@ def test_deletar_execucao(mock_uc):
     assert response.status_code == 204
 
 def test_deletar_execucao_falha(mock_uc):
-    mock_uc.deletar_execucao.return_value = False
+    mock_uc.deletar_execucao.side_effect = ValueError("Execução não encontrada")
     response = client.delete("/api/execucoes/1")
     assert response.status_code == 404

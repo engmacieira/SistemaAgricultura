@@ -1,0 +1,25 @@
+version: 1.0
+project:
+  name: "Sistema Agricultura"
+  description: "Plataforma local/offline para gestão de serviços agrícolas."
+  stack: 
+    - "Python 3.10+"
+    - "FastAPI"
+    - "SQLAlchemy"
+    - "Alembic"
+    - "React"
+    - "TypeScript"
+  architecture: "Domain-Driven Design (DDD)"
+
+context:
+  business_rules:
+    - "O fluxo principal não é agendamento de clínica, é ordem de serviço: Fila de Espera (Solicitação) -> Execução em Campo -> Faturamento (Pagamento)."
+    - "Uma Solicitação tem relação 1:N com Execuções."
+  infrastructure:
+    - "O sistema roda localmente. O banco de dados é SQLite."
+    - "Devido às limitações do SQLite com chaves estrangeiras, migrações do Alembic DEVEM usar 'render_as_batch=True'."
+
+guidelines:
+  - "NÃO adivinhe código. Se uma dependência não estiver no escopo, não a invente (Zero Guessing Policy)."
+  - "Mantenha a separação estrita: Domain (Regras/Entidades) -> Application (Use Cases) -> Infrastructure (Repositories) -> Presentation (Routers/Schemas)."
+  - "Todas as novas lógicas de negócio devem ser cobertas por testes no Pytest antes de serem aprovadas."

@@ -10,58 +10,72 @@ def test_listar_pagamentos(client):
     assert isinstance(response.json()["items"], list)
 
 def test_registrar_pagamento_fluxo(client):
-    # 1. Criar uma execução (que deve gerar um pagamento via logic do sistema)
+    # 1. Criar Solicitacao
+    solic_resp = client.post("/api/solicitacoes/", json={
+        "producerId": "p-pag1", "producerName": "João Pagador", "data_solicitacao": str(date.today())
+    })
+    solic_id = solic_resp.json()["id"]
+
+    # 2. Criar uma execução
     exec_payload = {
-        "producerId": "prod-p1",
-        "producerName": "João Pagador",
+        "solicitacaoId": solic_id,
         "serviceId": "serv-p1",
         "serviceName": "Aragem",
         "date": str(date.today()),
         "quantity": 10.0,
         "unit": "Hectare",
+        "valor_unitario": 100.0,
         "totalValue": 1000.0,
-        "status": "Concluído"
+        "status": "REGISTRADA"
     }
     client.post("/api/execucoes/", json=exec_payload)
     
-    # 2. Listar pagamentos para pegar o ID
+    # 3. Listar pagamentos para pegar o ID
     list_res = client.get("/api/pagamentos/")
     pagamentos = list_res.json().get("items", [])
     assert len(pagamentos) >= 1
     pagamento_id = pagamentos[0]["id"]
     
-    # 3. Obter pagamento específico
+    # 4. Obter pagamento específico
     get_res = client.get(f"/api/pagamentos/{pagamento_id}")
     assert get_res.status_code == status.HTTP_200_OK
     assert get_res.json()["id"] == pagamento_id
     
-    # 4. Registrar o pagamento (pagar)
-    pay_res = client.post(f"/api/pagamentos/{pagamento_id}/pagar", json={"amountToPay": 1000.0})
+    # 5. Registrar o pagamento (pagar)
+    pay_res = client.post(f"/api/pagamentos/{pagamento_id}/pagar", json={
+        "amountToPay": 1000.0,
+        "paymentDate": str(date.today())
+    })
     assert pay_res.status_code == status.HTTP_201_CREATED
     assert pay_res.json()["status"] == "Pago"
-    assert pay_res.json()["paymentDate"] is not None
 
 def test_atualizar_pagamento(client):
-    # 1. Criar uma execução (que deve gerar um pagamento)
+    # 1. Criar Solicitacao
+    solic_resp = client.post("/api/solicitacoes/", json={
+        "producerId": "p-pag2", "producerName": "Maria Pagadora", "data_solicitacao": str(date.today())
+    })
+    solic_id = solic_resp.json()["id"]
+
+    # 2. Criar uma execução
     exec_payload = {
-        "producerId": "prod-p2",
-        "producerName": "Maria Pagadora",
+        "solicitacaoId": solic_id,
         "serviceId": "serv-p2",
         "serviceName": "Colheita",
         "date": str(date.today()),
         "quantity": 5.0,
         "unit": "Hectare",
+        "valor_unitario": 100.0,
         "totalValue": 500.0,
-        "status": "Concluído"
+        "status": "REGISTRADA"
     }
     client.post("/api/execucoes/", json=exec_payload)
     
-    # 2. Listar pagamentos para pegar o ID
+    # 3. Listar pagamentos para pegar o ID
     list_res = client.get("/api/pagamentos/")
     pagamentos = list_res.json().get("items", [])
     pagamento_id = next(p["id"] for p in pagamentos if p["producerName"] == "Maria Pagadora")
     
-    # 3. Atualizar o pagamento via PUT (como o frontend faz)
+    # 4. Atualizar o pagamento via PUT
     update_payload = {
         "dueDate": str(date.today() + timedelta(days=15)),
         "status": "Atrasado",

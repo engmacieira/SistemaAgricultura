@@ -5,24 +5,26 @@ from app.presentation.schemas.execucao_schema import ExecucaoCreate, ExecucaoUpd
 
 def test_execucao_create_schema_valido():
     data = {
-        "producerId": "p1",
-        "producerName": "João",
+        "solicitacaoId": "solic-1",
         "serviceId": "s1",
         "serviceName": "Aração",
         "date": "2023-11-01",
         "quantity": 10.5,
         "unit": "ha",
-        "totalValue": 150.0,
-        "status": "Pendente"
+        "valor_unitario": 150.0,
+        "totalValue": 1575.0,
+        "status": "REGISTRADA",
+        "operador_maquina": "João"
     }
     schema = ExecucaoCreate(**data)
-    assert schema.producerId == "p1"
+    assert schema.solicitacaoId == "solic-1"
     assert isinstance(schema.date, date)
     assert schema.quantity == 10.5
+    assert schema.valor_unitario == 150.0
 
 def test_execucao_create_schema_invalido():
     data = {
-        "producerId": "p1"
+        "solicitacaoId": "solic-1"
         # Faltam campos obrigatórios
     }
     with pytest.raises(ValidationError):
@@ -30,7 +32,8 @@ def test_execucao_create_schema_invalido():
 
 def test_execucao_update_schema():
     # Update permite itens opcionais
-    data = {"status": "Concluído"}
+    data = {"status": "FATURADA", "operador_maquina": "Carlos"}
     schema = ExecucaoUpdate(**data)
-    assert schema.status == "Concluído"
-    assert schema.producerId is None
+    assert schema.status == "FATURADA"
+    assert schema.operador_maquina == "Carlos"
+    assert schema.serviceId is None

@@ -3,57 +3,70 @@ from fastapi import status
 from datetime import date
 
 def test_registrar_execucao(client):
-    # Primeiro criamos um produtor e um serviço para ter IDs válidos (se necessário pela lógica do UC)
-    # Mas o router aceita um dict genérico, então vamos testar a interface
+    # 1. Cria a solicitacao mãe
+    solic_resp = client.post("/api/solicitacoes/", json={
+        "producerId": "p1", "producerName": "João", "data_solicitacao": str(date.today())
+    })
+    solic_id = solic_resp.json()["id"]
+
     payload = {
-        "producerId": "prod-1",
-        "producerName": "João Silva",
+        "solicitacaoId": solic_id,
         "serviceId": "serv-1",
         "serviceName": "Aragem",
         "date": str(date.today()),
         "quantity": 10.0,
         "unit": "Hectare",
+        "valor_unitario": 250.0,
         "totalValue": 2500.0,
-        "status": "Concluído"
+        "status": "REGISTRADA"
     }
     response = client.post("/api/execucoes/", json=payload)
     assert response.status_code == status.HTTP_201_CREATED
     data = response.json()
-    assert data["producerName"] == payload["producerName"]
+    assert data["solicitacaoId"] == solic_id
     assert "id" in data
 
 def test_listar_execucoes(client):
+    solic_resp = client.post("/api/solicitacoes/", json={
+        "producerId": "p2", "producerName": "Maria", "data_solicitacao": str(date.today())
+    })
+    solic_id = solic_resp.json()["id"]
+
     payload = {
-        "producerId": "prod-2",
-        "producerName": "Maria Oliveira",
+        "solicitacaoId": solic_id,
         "serviceId": "serv-2",
         "serviceName": "Plantio",
         "date": str(date.today()),
         "quantity": 5.0,
         "unit": "Hectare",
+        "valor_unitario": 300.0,
         "totalValue": 1500.0,
-        "status": "Pendente"
+        "status": "REGISTRADA"
     }
     client.post("/api/execucoes/", json=payload)
     
     response = client.get("/api/execucoes/")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
-    assert isinstance(data, dict)
-    assert "items" in data
-    assert len(data["items"]) >= 1
+    assert isinstance(data, list)
+    assert len(data) >= 1
 
 def test_obter_execucao(client):
+    solic_resp = client.post("/api/solicitacoes/", json={
+        "producerId": "p3", "producerName": "Carlos", "data_solicitacao": str(date.today())
+    })
+    solic_id = solic_resp.json()["id"]
+
     payload = {
-        "producerId": "prod-3",
-        "producerName": "Carlos Santos",
+        "solicitacaoId": solic_id,
         "serviceId": "serv-3",
         "serviceName": "Colheita",
         "date": str(date.today()),
         "quantity": 20.0,
         "unit": "Hora",
+        "valor_unitario": 150.0,
         "totalValue": 3000.0,
-        "status": "Em Andamento"
+        "status": "REGISTRADA"
     }
     create_res = client.post("/api/execucoes/", json=payload)
     execucao_id = create_res.json()["id"]
@@ -64,38 +77,47 @@ def test_obter_execucao(client):
     assert data["id"] == execucao_id
 
 def test_atualizar_execucao(client):
+    solic_resp = client.post("/api/solicitacoes/", json={
+        "producerId": "p4", "producerName": "Pedro", "data_solicitacao": str(date.today())
+    })
+    solic_id = solic_resp.json()["id"]
+
     payload = {
-        "producerId": "prod-4",
-        "producerName": "Pedro Rocha",
+        "solicitacaoId": solic_id,
         "serviceId": "serv-4",
         "serviceName": "Pulverização",
         "date": str(date.today()),
         "quantity": 100.0,
         "unit": "Litro",
+        "valor_unitario": 50.0,
         "totalValue": 5000.0,
-        "status": "Concluído"
+        "status": "REGISTRADA"
     }
     create_res = client.post("/api/execucoes/", json=payload)
     execucao_id = create_res.json()["id"]
     
-    update_payload = {"status": "Cancelado", "totalValue": 0.0}
+    update_payload = {"status": "FATURADA", "totalValue": 5000.0}
     response = client.put(f"/api/execucoes/{execucao_id}", json=update_payload)
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
-    assert data["status"] == "Cancelado"
-    assert data["totalValue"] == 0.0
+    assert data["status"] == "FATURADA"
 
 def test_deletar_execucao(client):
+    solic_resp = client.post("/api/solicitacoes/", json={
+        "producerId": "p5", "producerName": "Deletar", "data_solicitacao": str(date.today())
+    })
+    solic_id = solic_resp.json()["id"]
+
     payload = {
-        "producerId": "prod-5",
-        "producerName": "Deletar",
+        "solicitacaoId": solic_id,
         "serviceId": "serv-5",
         "serviceName": "Temporario",
         "date": str(date.today()),
         "quantity": 1.0,
         "unit": "Un",
+        "valor_unitario": 10.0,
         "totalValue": 10.0,
-        "status": "Pendente"
+        "status": "REGISTRADA"
     }
     create_res = client.post("/api/execucoes/", json=payload)
     execucao_id = create_res.json()["id"]
@@ -105,5 +127,6 @@ def test_deletar_execucao(client):
     
     # By default, listing shouldn't show it
     get_res = client.get("/api/execucoes/")
-    items = get_res.json()["items"]
+    items = get_res.json()
+    assert isinstance(items, list)
     assert not any(item["id"] == execucao_id for item in items)

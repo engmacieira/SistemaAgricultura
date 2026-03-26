@@ -1,11 +1,13 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import func, case
 from datetime import date, datetime
 from typing import List, Dict, Any
+
 from ..models.produtor_model import ProdutorModel
 from ..models.servico_model import ServicoModel
 from ..models.execucao_model import ExecucaoModel
 from ..models.pagamento_model import PagamentoModel
+from ..models.solicitacao_model import SolicitacaoModel  # ✅ NOVO IMPORT
 
 class DashboardRepository:
     def __init__(self, db: Session):
@@ -14,9 +16,11 @@ class DashboardRepository:
     def get_summary_counts(self) -> Dict[str, Any]:
         total_producers = self.db.query(ProdutorModel).filter(ProdutorModel.is_deleted == False).count()
         total_services = self.db.query(ServicoModel).filter(ServicoModel.is_deleted == False).count()
-        pending_executions = self.db.query(ExecucaoModel).filter(
-            ExecucaoModel.status == "Pendente",
-            ExecucaoModel.is_deleted == False
+        
+        # ✅ REFATORAÇÃO: A "Fila de Espera" agora é contabilizada pelas Solicitações Pendentes
+        pending_executions = self.db.query(SolicitacaoModel).filter(
+            SolicitacaoModel.status == "PENDENTE",
+            SolicitacaoModel.is_deleted == False
         ).count()
         
         financials = self.db.query(
@@ -27,18 +31,15 @@ class DashboardRepository:
         return {
             "totalProducers": total_producers,
             "totalServices": total_services,
-            "pendingExecutions": pending_executions,
-            "totalPendingAmount": financials.total_pending or 0.0,
-            "totalPaidAmount": financials.total_paid or 0.0
+            "pendingExecutions": pending_executions, # Mantemos o nome da chave para não quebrar o Frontend
+            "financials": {
+                "totalPending": float(financials.total_pending or 0),
+                "totalPaid": float(financials.total_paid or 0)
+            }
         }
 
-    def get_monthly_financials(self) -> List[Dict[str, Any]]:
-        # Last 6 months
-        # Note: This is a simplified version, ideally we would group by month
-        # Since SQLite is used, we'll use strftime if needed or just python logic
-        # For now, let's get all payments and group them in use cases or here
-        
-        # Simple query for now, might need optimization
+    def get_revenue_by_month(self) -> List[Dict[str, Any]]:
+        # A lógica financeira continua a mesma, pois o PagamentoModel não mudou sua base.
         results = self.db.query(
             func.strftime("%Y-%m", PagamentoModel.dueDate).label("month"),
             func.sum(PagamentoModel.amount - PagamentoModel.paidAmount).label("pending"),
@@ -48,6 +49,7 @@ class DashboardRepository:
         return [{"month": r.month, "pending": r.pending, "paid": r.paid} for r in results]
 
     def get_service_distribution(self) -> List[Dict[str, Any]]:
+        # Continua a buscar na Execucao, pois é lá que sabemos o que realmente foi feito.
         results = self.db.query(
             ExecucaoModel.serviceName,
             func.count(ExecucaoModel.id).label("count")
@@ -56,22 +58,23 @@ class DashboardRepository:
         return [{"name": r.serviceName, "value": r.count} for r in results]
 
     def get_recent_activities(self) -> List[Dict[str, Any]]:
-        # Get last 5 executions
-        executions = self.db.query(ExecucaoModel).filter(
+        # ✅ REFATORAÇÃO: Usamos o `joinedload` para trazer a Solicitação (mãe) junto com a Execução (filha)
+        # de forma otimizada (numa só query), para podermos aceder ao `producerName`.
+        executions = self.db.query(ExecucaoModel).options(joinedload(ExecucaoModel.solicitacao)).filter(
             ExecucaoModel.is_deleted == False
         ).order_by(ExecucaoModel.date.desc()).limit(5).all()
         
         activities = []
         for e in executions:
+            # Pegamos o nome do produtor lá na classe Solicitação
+            producer_name = e.solicitacao.producerName if e.solicitacao else "Desconhecido"
+            
             activities.append({
                 "id": e.id,
-                "type": "Agendamento",
-                "description": f"{e.serviceName} - {e.producerName}",
-                "date": e.date,
-                "status": e.status,
-                "amount": e.totalValue
+                "type": "Serviço Realizado", # Mudei a label de "Agendamento" para refletir o real
+                "description": f"{e.serviceName} - {producer_name}",
+                "date": e.date.isoformat() if hasattr(e.date, 'isoformat') else str(e.date),
+                "status": e.status
             })
             
-        # Sort by date
-        activities.sort(key=lambda x: x["date"], reverse=True)
-        return activities[:5]
+        return activities

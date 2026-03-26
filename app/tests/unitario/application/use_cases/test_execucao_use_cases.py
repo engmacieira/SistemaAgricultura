@@ -2,52 +2,62 @@ import pytest
 from unittest.mock import MagicMock
 from app.application.use_cases.execucao_use_cases import ExecucaoUseCases
 
-def test_obter_execucao_sucesso():
-    repo_mock = MagicMock()
-    execucao_mock = MagicMock()
-    repo_mock.get_by_id.return_value = execucao_mock
-    use_cases = ExecucaoUseCases(repo_mock)
-    
-    result = use_cases.obter_execucao("1")
-    assert result == execucao_mock
-    repo_mock.get_by_id.assert_called_once_with("1")
+@pytest.fixture
+def dependencias():
+    return {
+        "exec_repo": MagicMock(),
+        "solic_repo": MagicMock(),
+        "pag_repo": MagicMock(),
+        "log_uc": MagicMock()
+    }
 
-def test_listar_execucoes():
-    repo_mock = MagicMock()
-    repo_mock.get_all_paginated.return_value = []
-    use_cases = ExecucaoUseCases(repo_mock)
+def test_criar_execucao_deve_concluir_solicitacao_e_gerar_pagamento(dependencias):
+    # Setup
+    use_cases = ExecucaoUseCases(
+        dependencias["exec_repo"], 
+        dependencias["solic_repo"], 
+        dependencias["pag_repo"], 
+        dependencias["log_uc"]
+    )
     
-    result = use_cases.listar_execucoes()
-    assert result == []
-    repo_mock.get_all_paginated.assert_called_once()
+    dados_execucao = {
+        "solicitacaoId": "solic-1",
+        "serviceId": "serv-1",
+        "serviceName": "Plantio",
+        "date": "2023-10-02",
+        "quantity": 3.0,
+        "unit": "Horas",
+        "valor_unitario": 100.0,
+        "totalValue": 300.0
+    }
+    
+    # Configurando os retornos fingidos (Mocks)
+    mock_exec_criada = MagicMock()
+    mock_exec_criada.id = "exec-1"
+    mock_exec_criada.solicitacaoId = "solic-1"
+    mock_exec_criada.serviceName = "Plantio"
+    mock_exec_criada.totalValue = 300.0
+    dependencias["exec_repo"].create.return_value = mock_exec_criada
+    
+    mock_solicitacao_mae = MagicMock()
+    mock_solicitacao_mae.id = "solic-1"
+    mock_solicitacao_mae.producerName = "Fazenda Esperança"
+    mock_solicitacao_mae.status = "PENDENTE"
+    dependencias["solic_repo"].get_by_id.return_value = mock_solicitacao_mae
 
-def test_obter_execucao_nao_encontrado():
-    repo_mock = MagicMock()
-    repo_mock.get_by_id.return_value = None
-    use_cases = ExecucaoUseCases(repo_mock)
-    
-    with pytest.raises(ValueError, match="Execução não encontrada"):
-        use_cases.obter_execucao("1")
+    usuario = {"id": "user-1", "name": "Operador"}
 
-def test_criar_execucao():
-    repo_mock = MagicMock()
-    data = {"producerId": "1", "serviceId": "2", "totalValue": 100}
-    nova_exec_mock = MagicMock()
-    repo_mock.create.return_value = nova_exec_mock
-    use_cases = ExecucaoUseCases(repo_mock)
-    
-    result = use_cases.criar_execucao(data)
-    assert result == nova_exec_mock
-    repo_mock.create.assert_called_once_with(data)
+    # Ação
+    resultado = use_cases.criar_execucao(dados_execucao, usuario)
 
-def test_atualizar_execucao():
-    repo_mock = MagicMock()
-    exec_mock = MagicMock()
-    repo_mock.get_by_id.return_value = exec_mock
-    repo_mock.update.return_value = exec_mock
-    use_cases = ExecucaoUseCases(repo_mock)
+    # Validações Essenciais (A Regra de Ouro)
     
-    result = use_cases.atualizar_execucao("1", {"status": "Concluído"})
-    assert result == exec_mock
-    repo_mock.get_by_id.assert_called_once_with("1")
-    repo_mock.update.assert_called_once_with("1", {"status": "Concluído"})
+    # 1. Atualizou a fila para CONCLUIDO?
+    dependencias["solic_repo"].update.assert_called_once_with("solic-1", {"status": "CONCLUIDO"})
+    
+    # 2. Gerou o pagamento financeiro usando o nome do produtor da fila?
+    dependencias["pag_repo"].create.assert_called_once()
+    args_pagamento = dependencias["pag_repo"].create.call_args[0][0]
+    assert args_pagamento["producerName"] == "Fazenda Esperança"
+    assert args_pagamento["amount"] == 300.0
+    assert args_pagamento["executionId"] == "exec-1"

@@ -1,11 +1,13 @@
 from sqlalchemy.orm import Session
+from typing import List, Optional
 from .base_repository import BaseRepository
 from ..models.execucao_model import ExecucaoModel
 from app.domain.entities.execucao_entity import Execucao
-from typing import List, Optional
+from app.domain.repositories.execucao_repository import IExecucaoRepository
 
-class ExecucaoRepository(BaseRepository[ExecucaoModel, Execucao]):
+class ExecucaoRepository(BaseRepository[ExecucaoModel, Execucao], IExecucaoRepository):
     def __init__(self, db: Session):
+        self.db = db
         super().__init__(db, ExecucaoModel)
 
     def get_all(self) -> List[Execucao]:
@@ -15,6 +17,14 @@ class ExecucaoRepository(BaseRepository[ExecucaoModel, Execucao]):
     def get_by_id(self, id: str) -> Optional[Execucao]:
         model = self.db.query(self.model).filter(self.model.id == id, self.model.is_deleted == False).first()
         return model.to_entity() if model else None
+
+    # ✅ NOVO MÉTODO: Buscar todas as execuções de um pedido específico
+    def get_by_solicitacao_id(self, solicitacao_id: str) -> List[Execucao]:
+        models = self.db.query(self.model).filter(
+            self.model.solicitacaoId == solicitacao_id,
+            self.model.is_deleted == False
+        ).order_by(self.model.date.desc()).all()
+        return [m.to_entity() for m in models]
 
     def get_all_paginated(self, skip: int = 0, limit: int = 10, sort_by: str = "date", order: str = "desc", show_completed: bool = False) -> List[Execucao]:
         query = self.db.query(self.model).filter(self.model.is_deleted == False)
@@ -52,9 +62,5 @@ class ExecucaoRepository(BaseRepository[ExecucaoModel, Execucao]):
         return [m.to_entity() for m in models]
 
     def delete(self, id: str) -> bool:
-        obj = self.db.query(self.model).filter(self.model.id == id).first()
-        if obj:
-            obj.is_deleted = True
-            self.db.commit()
-            return True
-        return False
+        # Assumindo que o delete físico/lógico é tratado pelo base_repository
+        return super().delete(id)

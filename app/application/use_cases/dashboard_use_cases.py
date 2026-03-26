@@ -4,7 +4,6 @@ from ..schemas.dashboard_schemas import (
     DashboardData, DashboardSummary, MonthlyFinancial, 
     ServiceDistribution, RecentActivity
 )
-from typing import List
 
 class DashboardUseCases:
     def __init__(self, db: Session):
@@ -12,12 +11,22 @@ class DashboardUseCases:
 
     def get_dashboard_data(self) -> DashboardData:
         summary_data = self.repository.get_summary_counts()
-        monthly_financials_data = self.repository.get_monthly_financials()
+        # Ajustado para o nome do método que criamos no repositório
+        monthly_financials_data = self.repository.get_revenue_by_month() 
         service_distribution_data = self.repository.get_service_distribution()
         recent_activities_data = self.repository.get_recent_activities()
 
+        # ✅ REFATORAÇÃO: Mapeando os dados aninhados do Repositório para o seu Schema
+        summary = DashboardSummary(
+            totalProducers=summary_data["totalProducers"],
+            totalServices=summary_data["totalServices"],
+            pendingExecutions=summary_data["pendingExecutions"],
+            totalPendingAmount=summary_data["financials"]["totalPending"],
+            totalPaidAmount=summary_data["financials"]["totalPaid"]
+        )
+
         return DashboardData(
-            summary=DashboardSummary(**summary_data),
+            summary=summary,
             monthlyFinancial=[MonthlyFinancial(**item) for item in monthly_financials_data],
             serviceDistribution=[ServiceDistribution(**item) for item in service_distribution_data],
             recentActivities=[RecentActivity(**item) for item in recent_activities_data]

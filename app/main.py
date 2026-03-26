@@ -25,7 +25,8 @@ from app.presentation.routers import (
     logs,
     administrador,
     dashboard,
-    relatorios
+    relatorios,
+    solicitacoes
 )
 
 def run_migrations():
@@ -126,6 +127,7 @@ api_router.include_router(logs.router)
 api_router.include_router(administrador.router)
 api_router.include_router(dashboard.router)
 api_router.include_router(relatorios.router)
+api_router.include_router(solicitacoes.router)
 
 # Registrando os routers na raiz e no prefixo /api para compatibilidade
 app.include_router(api_router)

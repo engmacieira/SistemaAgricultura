@@ -1,8 +1,10 @@
 from typing import List, Dict, Any
 
 class ExecucaoUseCases:
-    def __init__(self, execucao_repository, pagamento_repository=None, log_use_cases=None):
+    # ✅ NOVO: Injetamos o solicitacao_repository para podermos alterar a fila de espera
+    def __init__(self, execucao_repository, solicitacao_repository=None, pagamento_repository=None, log_use_cases=None):
         self.execucao_repository = execucao_repository
+        self.solicitacao_repository = solicitacao_repository 
         self.pagamento_repository = pagamento_repository
         self.log_use_cases = log_use_cases
 
@@ -19,38 +21,43 @@ class ExecucaoUseCases:
         return execucao
 
     def criar_execucao(self, data: Dict[str, Any], usuario_logado: dict = None) -> Any:
+        # 1. Registra a execução real no banco
         nova_execucao = self.execucao_repository.create(data)
         
-        # Regra de negócio: Gerar o pagamento automaticamente se houver repositório
+        # 2. ✅ REGRA DE NEGÓCIO: Se a execução foi feita, a Solicitação da fila deve ser "Concluída"
+        nome_produtor = "Desconhecido"
+        if self.solicitacao_repository:
+            solicitacao = self.solicitacao_repository.get_by_id(nova_execucao.solicitacaoId)
+            if solicitacao:
+                nome_produtor = solicitacao.producerName
+                if solicitacao.status != 'CONCLUIDO':
+                    self.solicitacao_repository.update(solicitacao.id, {"status": "CONCLUIDO"})
+
+        # 3. Gerar o pagamento automaticamente (Faturamento)
         if self.pagamento_repository:
             from datetime import date, timedelta
             pagamento_data = {
                 "executionId": nova_execucao.id,
-                "producerName": nova_execucao.producerName,
+                "producerName": nome_produtor, # Puxamos da solicitação mãe!
                 "serviceName": nova_execucao.serviceName,
-                "amount": nova_execucao.totalValue,
                 "dueDate": date.today() + timedelta(days=30),
-                "status": "Pendente"
+                "amount": nova_execucao.totalValue,
+                "status": "Pendente",
+                "paidAmount": 0.0
             }
             self.pagamento_repository.create(pagamento_data)
-        
+
+        # 4. Log
         if self.log_use_cases and usuario_logado:
             import json
-            def to_dict(obj):
-                if hasattr(obj, 'model_dump'): return obj.model_dump()
-                if hasattr(obj, '__dict__'):
-                    d = obj.__dict__.copy()
-                    d.pop('_sa_instance_state', None)
-                    return d
-                return obj
             self.log_use_cases.registrar_acao(
                 user_id=usuario_logado["id"],
                 user_name=usuario_logado["name"],
                 action="CRIAR",
                 entity="Execução",
-                details=f"Agendou a execução do serviço '{nova_execucao.serviceName}' para '{nova_execucao.producerName}'",
+                details=f"Registrou a execução do serviço '{nova_execucao.serviceName}'",
                 dados_anteriores=None,
-                dados_novos=json.dumps(to_dict(nova_execucao), default=str)
+                dados_novos=json.dumps(data, default=str)
             )
 
         return nova_execucao
@@ -69,14 +76,14 @@ class ExecucaoUseCases:
             
         dados_antigos_dict = to_dict(execucao_antiga)
         execucao_atualizada = self.execucao_repository.update(execucao_id, data)
-        
-        if self.log_use_cases and usuario_logado:
+
+        if execucao_atualizada and self.log_use_cases and usuario_logado:
             self.log_use_cases.registrar_acao(
                 user_id=usuario_logado["id"],
                 user_name=usuario_logado["name"],
-                action="EDITAR",
+                action="ATUALIZAR",
                 entity="Execução",
-                details=f"Atualizou a execução {execucao_id} do serviço '{execucao_atualizada.serviceName}'",
+                details=f"Atualizou a execução do serviço '{execucao_atualizada.serviceName}'",
                 dados_anteriores=json.dumps(dados_antigos_dict, default=str),
                 dados_novos=json.dumps(to_dict(execucao_atualizada), default=str)
             )
@@ -96,8 +103,6 @@ class ExecucaoUseCases:
             return obj
             
         dados_antigos_dict = to_dict(execucao_antiga)
-        
-        # Regra de negócio: Excluir pagamentos atrelados ou impedir exclusão se já estiver pago
         sucesso = self.execucao_repository.delete(execucao_id)
         
         if sucesso and self.log_use_cases and usuario_logado:

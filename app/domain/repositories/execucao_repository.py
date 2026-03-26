@@ -19,6 +19,11 @@ class IExecucaoRepository(ABC):
     def get_by_id(self, id: str) -> Optional[Execucao]:
         pass
 
+    # ✅ NOVO MÉTODO: Buscar as filhas (execuções) de uma mãe (solicitação)
+    @abstractmethod
+    def get_by_solicitacao_id(self, solicitacao_id: str) -> List[Execucao]:
+        pass
+
     @abstractmethod
     def create(self, data: Dict[str, Any]) -> Execucao:
         pass

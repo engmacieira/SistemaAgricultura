@@ -3,18 +3,24 @@ from fastapi import status
 from datetime import date
 
 def test_listar_execucoes_paginacao_filtros(client):
-    # Setup: Create some executions
+    # 1. Criar Solicitacao
+    solic_resp = client.post("/api/solicitacoes/", json={
+        "producerId": "p-gap", "producerName": "Produtor Gap", "data_solicitacao": str(date.today())
+    })
+    solic_id = solic_resp.json()["id"]
+
+    # 2. Setup: Create some executions
     for i in range(3):
         payload = {
-            "producerId": f"prod-ex-{i}",
-            "producerName": f"Produtor Ex {i}",
+            "solicitacaoId": solic_id,
             "serviceId": "serv-1",
-            "serviceName": "Aragem",
+            "serviceName": f"Aragem {i}",
             "date": str(date.today()),
             "quantity": 1.0,
             "unit": "Hectare",
+            "valor_unitario": 100.0,
             "totalValue": 100.0,
-            "status": "Pendente"
+            "status": "REGISTRADA"
         }
         client.post("/api/execucoes/", json=payload)
     
@@ -22,26 +28,32 @@ def test_listar_execucoes_paginacao_filtros(client):
     response = client.get("/api/execucoes/?limit=2")
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
-    assert len(data["items"]) == 2
+    assert isinstance(data, list)
+    assert len(data) == 2
     
     # Test filter completed
     response_comp = client.get("/api/execucoes/?show_completed=true")
-    # Instead of assert 0, we can just ensure it returns a valid response
     assert response_comp.status_code == status.HTTP_200_OK
-    assert isinstance(response_comp.json()["items"], list)
+    assert isinstance(response_comp.json(), list)
 
 def test_soft_delete_execucao(client):
-    # Setup
+    # 1. Criar Solicitacao
+    solic_resp = client.post("/api/solicitacoes/", json={
+        "producerId": "p-del-ex", "producerName": "Produtor Del Ex", "data_solicitacao": str(date.today())
+    })
+    solic_id = solic_resp.json()["id"]
+
+    # 2. Setup
     payload = {
-        "producerId": "prod-del-ex",
-        "producerName": "Produtor Del Ex",
+        "solicitacaoId": solic_id,
         "serviceId": "serv-1",
         "serviceName": "Aragem",
         "date": str(date.today()),
         "quantity": 1.0,
         "unit": "Hectare",
+        "valor_unitario": 100.0,
         "totalValue": 100.0,
-        "status": "Pendente"
+        "status": "REGISTRADA"
     }
     create_res = client.post("/api/execucoes/", json=payload)
     exec_id = create_res.json()["id"]
@@ -52,7 +64,7 @@ def test_soft_delete_execucao(client):
     
     # Verify it's gone from list
     list_res = client.get("/api/execucoes/")
-    assert not any(e["id"] == exec_id for e in list_res.json()["items"])
+    assert not any(e["id"] == exec_id for e in list_res.json())
     
     # Verify it's gone from GET
     get_res = client.get(f"/api/execucoes/{exec_id}")

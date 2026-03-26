@@ -29,6 +29,7 @@ def test_produtor_repository_has_execucoes():
     repo = ProdutorRepository(db_mock)
     
     query_mock = MagicMock()
+    query_mock.join.return_value = query_mock
     query_mock.filter.return_value = query_mock
     query_mock.count.return_value = 5 # possui execuções
     db_mock.query.return_value = query_mock
@@ -36,4 +37,6 @@ def test_produtor_repository_has_execucoes():
     result = repo.has_execucoes("p1")
     
     assert result is True
+    query_mock.join.assert_called_once()
+    query_mock.filter.assert_called_once()
     query_mock.count.assert_called_once()
