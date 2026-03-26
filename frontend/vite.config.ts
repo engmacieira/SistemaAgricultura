@@ -19,6 +19,7 @@ export default defineConfig(({ mode }) => {
       globals: true,
       environment: 'jsdom',
       setupFiles: './vitest.setup.ts',
+      exclude: ['e2e/**', 'node_modules/**'],
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
