@@ -12,12 +12,13 @@ def get_current_user(request: Request, token: str = Depends(oauth2_scheme), db: 
     if not token:
         token = request.query_params.get("token")
         
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Não foi possível validar as credenciais",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
     if not token:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Não foi possível validar as credenciais",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+        raise credentials_exception
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         user_id: str = payload.get("sub")
