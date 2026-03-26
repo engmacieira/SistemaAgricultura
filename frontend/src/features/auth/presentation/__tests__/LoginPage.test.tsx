@@ -11,6 +11,7 @@ vi.mock('lucide-react', () => ({
     Lock: () => <div data-testid="icon-lock" />,
     Mail: () => <div data-testid="icon-mail" />,
     Loader2: () => <div data-testid="icon-loader" />,
+    Users: () => <div data-testid="icon-users" />,
 }));
 
 // Mock useNavigate
@@ -27,6 +28,7 @@ vi.mock('react-router-dom', async () => {
 vi.mock('../../data/AuthRepository', () => ({
     authRepository: {
         login: vi.fn(),
+        getPublicUsers: vi.fn().mockResolvedValue([]),
     },
 }));
 
@@ -46,22 +48,36 @@ describe('LoginPage Integration', () => {
         );
     };
 
-    it('renders login form correctly', () => {
+    it('renders login form correctly', async () => {
         renderLoginPage();
-        expect(screen.getByLabelText(/e-mail institucional/i)).toBeInTheDocument();
+
+        await waitFor(() => {
+            expect(screen.getByLabelText(/selecione seu perfil/i)).toBeInTheDocument();
+        });
+
         expect(screen.getByLabelText(/senha de acesso/i)).toBeInTheDocument();
         expect(screen.getByRole('button', { name: /acessar painel/i })).toBeInTheDocument();
     });
 
-    it('successfully logs in and navigates to dashboard', async () => {
+    it('successfully logs in and navigates to dashboard using select', async () => {
         (authRepository.login as any).mockResolvedValue({
             user: { id: 1, email: 'admin@sistema.com', name: 'Admin' },
             access_token: 'fake-token',
         });
+        (authRepository.getPublicUsers as any).mockResolvedValue([
+            { name: 'Admin', email: 'admin@sistema.com' },
+            { name: 'User', email: 'user@sistema.com' }
+        ]);
 
         renderLoginPage();
 
-        fireEvent.change(screen.getByLabelText(/e-mail institucional/i), { target: { value: 'admin@sistema.com' } });
+        // Wait for users to load
+        await waitFor(() => {
+            expect(screen.getByLabelText(/selecione seu perfil/i)).toBeInTheDocument();
+        });
+
+        const selectElement = screen.getByLabelText(/selecione seu perfil/i);
+        fireEvent.change(selectElement, { target: { value: 'admin@sistema.com' } });
         fireEvent.change(screen.getByLabelText(/senha de acesso/i), { target: { value: '123456' } });
         fireEvent.click(screen.getByRole('button', { name: /acessar painel/i }));
 
@@ -71,17 +87,25 @@ describe('LoginPage Integration', () => {
         });
     });
 
-    it('shows error message on failed login', async () => {
+    it('shows error message on failed login using select', async () => {
         (authRepository.login as any).mockResolvedValue(null);
+        (authRepository.getPublicUsers as any).mockResolvedValue([
+            { name: 'Admin', email: 'admin@sistema.com' }
+        ]);
 
         renderLoginPage();
 
-        fireEvent.change(screen.getByLabelText(/e-mail institucional/i), { target: { value: 'wrong@sistema.com' } });
+        // Wait for users to load
+        await waitFor(() => {
+             expect(screen.getByLabelText(/selecione seu perfil/i)).toBeInTheDocument();
+        });
+
+        fireEvent.change(screen.getByLabelText(/selecione seu perfil/i), { target: { value: 'admin@sistema.com' } });
         fireEvent.change(screen.getByLabelText(/senha de acesso/i), { target: { value: 'wrongpass' } });
         fireEvent.click(screen.getByRole('button', { name: /acessar painel/i }));
 
         await waitFor(() => {
-            expect(screen.getByText(/e-mail ou senha incorretos/i)).toBeInTheDocument();
+            expect(screen.getByText(/senha incorreta\./i)).toBeInTheDocument();
         });
     });
 });
